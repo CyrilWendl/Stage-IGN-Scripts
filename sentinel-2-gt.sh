@@ -13,19 +13,19 @@ for i in BATI_INDIFFERENCIE BATI_INDUSTRIEL BATI_REMARQUABLE CONSTRUCTION_LEGERE
 	echo "ManipVecteur LectureBool tmp$i.shp emprise.ori mask/${i}.tif;rm -rf tmp$i*" >> bashtmp.sh
 done
 
-for i in ROUTE SURFACE_ROUTE ; do 
+for i in ROUTE SURFACE_ROUTE ; do
 	echo -n "ogr2ogr -s_srs EPSG:2154 -t_srs EPSG:32630 tmp$i.shp $DIR_GT/A_RESEAU_ROUTIER/${i}.SHP;" >> bashtmp.sh
 	echo "ManipVecteur LectureBool tmp$i.shp emprise.ori mask/${i}.tif;rm -rf tmp$i*" >> bashtmp.sh
 done
-for i in SURFACE_EAU ; do 
+for i in SURFACE_EAU ; do
 	echo -n "ogr2ogr -s_srs EPSG:2154 -t_srs EPSG:32630 tmp$i.shp $DIR_GT/D_HYDROGRAPHIE/${i}.SHP;" >> bashtmp.sh
 	echo "ManipVecteur LectureBool tmp$i.shp emprise.ori mask/${i}.tif;rm -rf tmp$i*" >> bashtmp.sh
 done
-for i in AIRE_TRIAGE TRONCON_VOIE_FERREE ; do 
+for i in AIRE_TRIAGE TRONCON_VOIE_FERREE ; do
 	echo -n "ogr2ogr -s_srs EPSG:2154 -t_srs EPSG:32630 tmp$i.shp $DIR_GT/B_VOIES_FERREES_ET_AUTRES/${i}.SHP;" >> bashtmp.sh
 	echo "ManipVecteur LectureBool tmp$i.shp emprise.ori mask/${i}.tif;rm -rf tmp$i*" >> bashtmp.sh
 done
-for i in ZONE_VEGETATION ; do 
+for i in ZONE_VEGETATION ; do
 	echo -n "ogr2ogr -s_srs EPSG:2154 -t_srs EPSG:32630 tmp$i.shp $DIR_GT/F_VEGETATION/${i}.SHP;" >> bashtmp.sh
 	echo "ManipVecteur LectureBool tmp$i.shp emprise.ori mask/${i}.tif;rm -rf tmp$i*" >> bashtmp.sh
 done

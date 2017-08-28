@@ -6,7 +6,7 @@ DIR_EXES=/home/cyrilwendl/DeveloppementBase/exes							# executables directory
 cd $DIR_OUT
 #get file names of bands
 BANDS=""
-for i in */; do
+for i in 20*/; do
 	cd $DIR_OUT/$i
 	for j in 2 3 4 5 6 7 8 8A 11 12; do
 		BANDS="$BANDS${i}B$j.tif,"
@@ -23,3 +23,15 @@ cd $DIR_OUT
 ~/DeveloppementBase/exes/Classifieur EstimateModel -d classification.algorithm=opencv.rf -d classification.train.path=train_50000.vtp -d classification.model.path=model_rf_50000
 
 ~/DeveloppementBase/exes/Classifieur Classify -d classification.model.path=model_rf_50000 -d canaux.path=$BANDS -d classification.output.path=classif_rf_50000.rle -d global.mode_big=true -d global.pas_dallage=2000 -d global.verbose=true -d classification.output.proba.path=appart_rf_50000.tif -d classification.save.proba=true
+
+export DIR_RAM=/home/cyrilwendl/Documents/tmp # Temporary directory for work in RAM
+sudo umount $DIR_RAM # allocate RAM memory
+rm -Rf $DIR_RAM
+mkdir $DIR_RAM
+sudo mount -t tmpfs -o size=4g tmpfs $DIR_RAM # allocate RAM memory
+for file in appart_rf_50000.tif appart_rf_50000.tfw;do
+	cp  $file $DIR_RAM/$file
+done
+gdalwarp -multi -s_srs EPSG:32630 -t_srs EPSG:2154 $DIR_RAM/appart_rf_50000.tif $DIR_RAM/appart_rf_50000_L93.tif
+
+
