@@ -1,0 +1,6 @@
+bati 1 255 0 0
+vegetation_foret 2 0 255 0
+eau 3 0 0 255
+vegetation_autre 4 255 255 0
+route 5 150 150 155
+bati_dilat 6 0 255 255

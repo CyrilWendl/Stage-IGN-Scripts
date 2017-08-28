@@ -1,0 +1,12 @@
+TO DO
+
+Fusion:
+- Fill in gaps in ground truth for fusion by classification
+- Test different probability threshold distances for second fusion
+
+Code:
+- Clean up, optimize
+- Document
+- Python, functional
+
+Envoyer emprise à Anne

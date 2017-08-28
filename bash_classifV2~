@@ -1,0 +1,5 @@
+~/DeveloppementBase/exes/Classifieur EstimateModel -d classification.train.datatype=labelimage -d classification.train.path=train_tout.rle -d selectvtp.nbechantillonsmax=1000 -d canaux.path=proba_S2.tif,proba_SPOT6.tif -d classification.algorithm=opencv.rf -d classification.model.path=model_rf
+
+
+~/DeveloppementBase/exes/Classifieur Classify -d classification.model.path=model_rf -d canaux.path=proba_S2.tif,proba_SPOT6.tif -d classification.output.path=classif_rf.rle -d global.verbose=true -d classification.output.proba.path=appart_rf.tif -d classification.save.proba=true
+

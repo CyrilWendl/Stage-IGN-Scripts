@@ -1,0 +1,7 @@
+#Selection de 10000 pixels a partir de 5 dalles  im_39000_40000,im_39000_42000,im_41000_30000,im_41000_40000,im_41000_42000 et apprentissage
+
+~/DeveloppementBase/exes/Classifieur EstimateModel --cc im_39000_40000,im_39000_42000,im_41000_30000,im_41000_40000,im_41000_42000 -d classification.train.datatype=labelimage -d classification.train.path=%s-train.rle -d selectvtp.nbechantillonsmax=10000 -d canaux.path=%s-proba_S2.tif,%s-proba_SPOT6.tif -d classification.algorithm=opencv.rf -d classification.model.path=model_rf
+
+
+#Classification des images
+ for i in im_39000_40000 im_39000_42000 im_41000_30000 im_41000_40000 im_41000_42000 ; do ~/DeveloppementBase/exes/Classifieur Classify -d classification.model.path=model_rf -d canaux.path=${i}-proba_S2.tif,${i}-proba_SPOT6.tif -d classification.output.path=${i}-classif_rf.rle -d global.verbose=true -d classification.output.proba.path=${i}-appart_rf.tif -d classification.save.proba=true ; Legende label2RVB ../${i}/legende.txt ${i}-classif_rf.rle ${i}-classif_rf.visu.tif ; cp ../${i}/proba_SPOT6.tfw ${i}-classif_rf.visu.tfw ;  done
