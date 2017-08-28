@@ -5,7 +5,7 @@
 # gironde: 38500_32500									
 
 # Global variables
-export REGION=gironde
+export REGION=finistere
 
 # Paths
 export DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
@@ -17,7 +17,7 @@ export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$1 # target
 export DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data
 export DIR_PROBA_SPOT6=$DIR_DATA/SPOT6_$REGION/proba/test_$1/classification_results/preds # probability SPOT6
 export DIR_PROBA_S2=$DIR_DATA/S2_$REGION # probability S2
-export DIR_GT=$DIR_DATA/BDTOPO # Grond truth directory
+export DIR_GT=$DIR_DATA/GT/BDTOPO # Grond truth directory
 export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170618 # image S2
 
 export IM_SPOT6=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data/SPOT6_$REGION/image/tile_$1.tif # image SPOT6 (for reference)
@@ -30,7 +30,7 @@ normal=$(tput sgr0)
 # extract probabilities from SPOT6, crop S2 and move both to target directory
 echo "${bold}I. FUSION PREPARATION${normal}"
 bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 # $3=redo, $4=crop, $5, $6, $7, $8 = x y dx dy
-
+exit
 echo ""; echo "${bold}II. COPY IMAGES ${normal}"
 if [ "$4" = "crop" ]; then
 	bash $DIR_BASH/copy_images.sh crop $5 $6 $7 $8 # Copy orinal probabilities (HDD: ~35s, RAM:  ~15s)
@@ -66,6 +66,6 @@ echo ""; echo "${bold}VII. EVALUATION ${normal}"
 bash $DIR_BASH/eval.sh AA bat # params (d) (AA) (OA) (Fmoy) (K)
 
 echo ""; echo "${bold}VIII. URBAN FOOTPRINT ${normal}" 
-bash $DIR_BASH/fusion_regul/master.sh $TILE_SPOT6
+#bash $DIR_BASH/fusion_regul/master.sh $TILE_SPOT6 # TODO adapt to new data structure
 #bash $DIR_BASH/binary.sh $TILE_SPOT6
 #bash $DIR_BASH/eval_bin.sh $TILE_SPOT6 AA bat
