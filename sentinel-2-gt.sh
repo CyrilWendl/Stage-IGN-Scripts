@@ -1,7 +1,7 @@
 DIR_OUT=/media/cyrilwendl/15BA65E227EC1B23/gironde/Data/Classif_Sentinel-2	# classification directory
 DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts 						# bash scripts directory
 DIR_GT=/media/cyrilwendl/15BA65E227EC1B23/gironde/Data/BDTOPO				# ground truth directory
-DIR_EXES=/home/cyrilwendl/DeveloppementBase/exes											# executables directory
+DIR_EXES=/home/cyrilwendl/DeveloppementBase/exes							# executables directory
 
 cd $DIR_OUT
 mkdir -p mask
