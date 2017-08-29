@@ -13,7 +13,7 @@ rm -rf ./Regul; mkdir -p ./Regul
 
 # lissage gaussien
 SIGMA=2;GAUSS="_G$SIGMA"
-~/DeveloppementBase/exes/Ech_noif Gaussf Im_SPOT6.tif Im_SPOT6_G$SIGMA.tif $SIGMA 3
+$DIR_EXES/Ech_noif Gaussf Im_SPOT6.tif Im_SPOT6_G$SIGMA.tif $SIGMA 3
 cp Im_SPOT6.tfw Im_SPOT6_G$SIGMA.tfw
 
 # split rasters
@@ -59,10 +59,10 @@ for FUSION_PROB in "Fusion_all_weighted/proba_Fusion_Min_weighted"; do
 			CROP="crop_${x}_${y}"
 			#regularize
 			IM_HR=$DIR_SAVE/Im_SPOT6_G${SIGMA}_$CROP.tif # HR image
-			echo -n "~/DeveloppementBase/qpbo_classif_fusion_net/build/Regul ${FUSION_PROB}_$CROP.tif ${FUSION_PROB}_$CROP.tif $IM_HR $DIR_SAVE/Regul/regul_$FUSION_NAME$CROP $lambda 0 $gamma $epsilon 5 5 $option_modele $option_lissage $option_multiplicatif; " >> bashtmp.sh
+			echo -n "$DIR_EXES/Regul ${FUSION_PROB}_$CROP.tif ${FUSION_PROB}_$CROP.tif $IM_HR $DIR_SAVE/Regul/regul_$FUSION_NAME$CROP $lambda 0 $gamma $epsilon 5 5 $option_modele $option_lissage $option_multiplicatif; " >> bashtmp.sh
 			# visualization
 			FILENAME=regul_$FUSION_NAME$CROP\_100_$lambda\_100_0_100\_$gamma\_100\_$epsilon\_$option_modele\_$option_lissage\_$option_multiplicatif
-			echo -n "~/DeveloppementBase/exes/Legende label2RVB legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif;" >> bashtmp.sh
+			echo -n "$DIR_EXES/Legende label2RVB legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif;" >> bashtmp.sh
 			echo -n "cp ${FUSION_PROB}_$CROP.tfw Regul/$FILENAME.tfw ; " >> bashtmp.sh
 			echo "cp ${FUSION_PROB}_$CROP.tfw Regul/$FILENAME.visu.tfw " >> bashtmp.sh
 			FILENAMES_CROP=$FILENAMES_CROP$FILENAME".tif "

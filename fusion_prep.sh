@@ -36,9 +36,9 @@ then
 	fi
 fi 
 cp proba.tif $DIR_SAVE/proba_SPOT6.tif # copy to target directory
-cd $DIR_DATA/SPOT6_$REGION/proba/visu
-listgeo -tfw classif_test_$TILE_SPOT6.tif
-cp classif_test_$TILE_SPOT6.tfw $DIR_SAVE/proba_SPOT6.tfw # copy tfw to target directory
+cd $DIR_DATA/SPOT6_$REGION/image
+listgeo -tfw tile_$TILE_SPOT6.tif
+cp tile_$TILE_SPOT6.tfw $DIR_SAVE/proba_SPOT6.tfw # copy tfw to target directory
 
 cd $DIR_SAVE
 
@@ -54,6 +54,5 @@ fi
 $DIR_EXES/convert_ori tfw2ori proba_SPOT6.tfw proba_SPOT6.ori
 
 echo "${bold}Crop and resize S2 probability to SPOT6 probability${normal}"
-echo "bash $DIR_BASH/raster_crop_resize.sh $DIR_PROBA_S2/$TILE_S2.tif $DIR_SAVE"
 bash $DIR_BASH/raster_crop_resize.sh $DIR_PROBA_S2/$TILE_S2.tif $DIR_SAVE/proba_SPOT6.tif $DIR_SAVE/proba_S2.tif
 cp proba_SPOT6.tfw proba_S2.tfw

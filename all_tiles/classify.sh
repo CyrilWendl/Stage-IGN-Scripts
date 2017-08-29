@@ -1,15 +1,6 @@
-# input: tile number 
-
-if [ $# -lt 1 ] 
-  then
-    return "At least one  argument expected: tile number" 
-fi
-RAMDIR="/home/cyrilwendl/Documents/tmp/"
-BDIR="/media/cyrilwendl/15BA65E227EC1B23/fusion/im_$1"
-
 # classify original probabilities (SPOT6, S2)
-echo "Target directory: "$RAMDIR
-cd $RAMDIR/im_$1
+echo "Target directory: "$DIR_RAM
+cd $DIR_RAM/im_$1
 
 rm -rf ./Classified
 mkdir ./Classified

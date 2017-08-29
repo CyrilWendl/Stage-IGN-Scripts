@@ -28,6 +28,10 @@ if [ "$CASE" = 1 ]; then # URBAIN
 	~/DeveloppementBase/ExempleCode_souche/build/Exemple $DIR_SAVE/proba_S2.tif $OUTDIR/proba_S2_urbain.tif 1
 elif [ "$CASE" = 2 ]; then # ARTIFICIALISE
 	# case 2: P(U) = P(b) + P(r)
+	gdal_calc.py -A $DIR_SAVE/proba_S2.tif --A_band=1 -B $DIR_SAVE/proba_S2.tif --B_band=5 --outfile=tmp1.tif --calc="(B+A)"
+	gdal_calc.py -A tmp1.tif --outfile=tmp2.tif --calc="1-A"
+	gdal_merge.py -separate tmp1.tif tmp2.tif -o $OUTDIR/proba_S2_urbain.tif
+	rm -rf *tmp*
 	~/DeveloppementBase/ExempleCode_souche/build/Exemple $DIR_SAVE/proba_S2.tif $OUTDIR/proba_S2_urbain.tif 2 
 fi
 # TODO consider other variant: if P(r)>P(b)>P(any other class), take P(r) and if P(b)>P(r)>P(any other class), take P(b)
@@ -35,7 +39,7 @@ fi
 cd $OUTDIR
 for file in proba_S2_urbain proba_regul_urbain; do
 	cp ../Im_S2.tfw $file.tfw
-	bash $DIR_BASH/raster-resize.sh $file.tif ../Im_S2.tif $file-resized.tif
+	bash $DIR_BASH/../raster_resize.sh $file.tif ../Im_S2.tif $file-resized.tif
 	mv $file-resized.tif $file.tif
 	listgeo $file.tif -tfw
 done

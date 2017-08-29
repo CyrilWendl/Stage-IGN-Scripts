@@ -20,9 +20,8 @@ do
 		cd $BASEDIR
 		FUSION_NAME=${FUSION_PROB##*/}
 		IM_HR=$DIR_SAVE/Im_S2.tif # regularization image
-		echo "~/DeveloppementBase/qpbo_classif_fusion_net/build/Regul ${FUSION_PROB}.tif ${FUSION_PROB}.tif $IM_HR $BASEDIR/Regul/regul_$FUSION_NAME $lambda 0 $gamma $epsilon 5 5 $option_modele $option_lissage $option_multiplicatif"
-	
-		~/DeveloppementBase/qpbo_classif_fusion_net/build/Regul ${FUSION_PROB}.tif ${FUSION_PROB}.tif $IM_HR $BASEDIR/Regul/regul_$FUSION_NAME $lambda 0 $gamma $epsilon 5 5 $option_modele $option_lissage $option_multiplicatif
+		$DIR_EXES/Regul ${FUSION_PROB}.tif ${FUSION_PROB}.tif $IM_HR $BASEDIR/Regul/regul_$FUSION_NAME $lambda 0 $gamma $epsilon 5 5 $option_modele $option_lissage $option_multiplicatif
+		
 		# visualization
 		FILENAME=regul_$FUSION_NAME\_100_$lambda\_100_0_100\_$gamma\_100\_$epsilon\_$option_modele\_$option_lissage\_$option_multiplicatif
 		$DIR_EXES/Legende label2RVB ../legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif

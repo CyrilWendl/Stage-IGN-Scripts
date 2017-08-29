@@ -1,28 +1,13 @@
-#!bin/bash
-bold=$(tput bold)
-normal=$(tput sgr0)
-
-if [ $# -lt 2 ]
-  then
-    return "At least two arguments expected"
-fi
-
 # get two input files and copy them to a target directory for fusion
-C1NAME=$1 # SPOT6 tile name (p. ex. "41000_30000")
-C2NAME=$2 # S2 tile name (p. ex. "proba_L93")
-RAMDIR="/home/cyrilwendl/Documents/tmp"
+DIR_TMP="$DIR_RAM/im_$TILE_SPOT6" # target directory
 
-C1DIR="/home/cyrilwendl/finistere1/test_$C1NAME/classification_results/preds" # classification file SPOT6
-C2DIR="/media/cyrilwendl/Data/Images_S2_finistere" # classification directory S2
-DNAME="$RAMDIR/im_$C1NAME" # target directory
+mkdir $DIR_RAM/im_$TILE_SPOT6
+cd $DIR_TMP
 
-mkdir $RAMDIR/im_$C1NAME
-cd $DNAME
-
-cp ~/DeveloppementBase/Scripts/legende.txt $RAMDIR/im_$C1NAME/legende.txt # copy legend
+cp $DIR_BASH/legende.txt $DIR_RAM/im_$TILE_SPOT6/legende.txt # copy legend
 
 echo "${bold}Extract files and obtain probabilities (SPOT 6)${normal}"
-cd $C1DIR
+cd $DIR_PROBA_SPOT6
 count=`ls -1 *.csv 2>/dev/null | wc -l`
 if ([ $count = 0 ] || [ "$3" = "redo" ])
 then 
@@ -39,14 +24,17 @@ then
 			tar -jxvf pixelwiseListFiles.csv.tar.bz2
 			tar -jxvf pixelwiseListLabels.csv.tar.bz2
 		fi
-		~/DeveloppementBase/exes/Ech_noif ClassifTristanCSV2TIF pixelwiseListFiles.csv pixelwiseListLabels.csv proba.tif > /dev/null # extract probabilities (silent)
+		$DIR_EXES/Ech_noif ClassifTristanCSV2TIF pixelwiseListFiles.csv pixelwiseListLabels.csv proba.tif > /dev/null # extract probabilities (silent)
 	fi
 fi 
 
-cp proba.tif $DNAME/proba_SPOT6.tif # copy to target directory
-cp ../../../verifavancement/classif_test_$C1NAME.visu.tfw $DNAME/proba_SPOT6.tfw # copy tfw to target directory
-cd $DNAME
+cp proba.tif $DIR_TMP/proba_SPOT6.tif # copy to target directory
+cd $DIR_DATA/SPOT6_$REGION/image
+listgeo -tfw tile_$TILE_SPOT6.tif
+cp tile_$TILE_SPOT6.tfw $DIR_TMP/proba_SPOT6.tfw # copy tfw to target directory
+
+cd $DIR_TMP
 
 echo "${bold}Crop S2 probability${normal}"
-bash ~/DeveloppementBase/Scripts/raster_crop_resize.sh $C2DIR/$C2NAME.tif $DNAME/proba_SPOT6.tif $DNAME/proba_S2.tif
+bash ~/DeveloppementBase/Scripts/raster_crop_resize.sh $DIR_PROBA_S2/$TILE_S2.tif $DIR_TMP/proba_SPOT6.tif $DIR_TMP/proba_S2.tif
 cp proba_SPOT6.tfw proba_S2.tfw
