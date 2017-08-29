@@ -1,5 +1,6 @@
-#!bin/bash
 # Convert big TIFs to JPEGs
+DIR=/media/cyrilwendl/15BA65E227EC1B23/finistere/all
+DIR_EXES=~/DeveloppementBase/exes # Executables directory
 
 function gdal_size() {
 	SIZE=$(gdalinfo $1 |\
@@ -9,7 +10,7 @@ function gdal_size() {
 	echo -n "$SIZE"
 }
 
-DIR=/media/cyrilwendl/15BA65E227EC1B23
+
 cd $DIR
 # Save in folder /JPEG
 rm -rf JPEG/*
@@ -36,8 +37,7 @@ for file in all_classif_Fusion_Min all_regul_Min_l1000_g30_e500_0_0_0 $SEG ; do
 	echo -n "convert  ${file}_o.jpg -resize ${CROP}% ${file}_overlay.jpg;" >> bashtmp.sh
 	echo "rm ${file}_o.jpg ${file}.jpg" >> bashtmp.sh
 done
-
-~/DeveloppementBase/exes/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
+$DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
 x=$(free -m | awk 'FNR == 2 {print $7}') # get amount of free memory [mb]
 rampercore=1 # how much ram one core task needs
 cores=$(expr $x / 1024 / $rampercore) # how many cores can be allocated
@@ -51,12 +51,10 @@ touch bashtmp.sh
 for file in all_regul_Min_weighted_G2_l1000_g70_e500_0_0_0 all_classif_SPOT6 all_classif_Fusion_Min_weighted all_classif_S2; do
 	echo "convert $DIR/$file.tif -resize 10% $file.jpg" >> bashtmp.sh
 done
-~/DeveloppementBase/exes/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
+$DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
 x=$(free -m | awk 'FNR == 2 {print $7}') # get amount of free memory [mb]
 rampercore=2 # how much ram one core task needs
 cores=$(expr $x / 1024 / $rampercore) # how many cores can be allocated
 echo "Available cores: $cores"
 make -f makefiletmp -j $cores
 rm makefiletmp bashtmp.sh
-
-

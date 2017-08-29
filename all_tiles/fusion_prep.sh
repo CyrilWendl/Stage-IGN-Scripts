@@ -8,25 +8,22 @@ cp $DIR_BASH/legende.txt $DIR_RAM/im_$TILE_SPOT6/legende.txt # copy legend
 
 echo "${bold}Extract files and obtain probabilities (SPOT 6)${normal}"
 cd $DIR_PROBA_SPOT6
-count=`ls -1 *.csv 2>/dev/null | wc -l`
-if ([ $count = 0 ] || [ "$3" = "redo" ])
-then 
-	if [ -f "proba.tif" ] # check if probabilities already extracted
+
+if [ -f "proba.tif" ] # check if probabilities already extracted
+	then
+	echo "Proba file exists. Will copy to new directory."
+else
+	ls
+	if [ -f "pixelwiseListLabels.csv" ]
 		then
-		echo "Proba file exists. Will copy to new directory."
+		echo "CSV exists. Will produce proba"
 	else
-		ls
-		if [ -f "pixelwiseListLabels.csv" ]
-			then
-			echo "CSV exists. Will produce proba"
-		else
-			echo "Extracting files..."
-			tar -jxvf pixelwiseListFiles.csv.tar.bz2
-			tar -jxvf pixelwiseListLabels.csv.tar.bz2
-		fi
-		$DIR_EXES/Ech_noif ClassifTristanCSV2TIF pixelwiseListFiles.csv pixelwiseListLabels.csv proba.tif > /dev/null # extract probabilities (silent)
+		echo "Extracting files..."
+		tar -jxvf pixelwiseListFiles.csv.tar.bz2
+		tar -jxvf pixelwiseListLabels.csv.tar.bz2
 	fi
-fi 
+	$DIR_EXES/Ech_noif ClassifTristanCSV2TIF pixelwiseListFiles.csv pixelwiseListLabels.csv proba.tif > /dev/null # extract probabilities (silent)
+fi
 
 cp proba.tif $DIR_TMP/proba_SPOT6.tif # copy to target directory
 cd $DIR_DATA/SPOT6_$REGION/image

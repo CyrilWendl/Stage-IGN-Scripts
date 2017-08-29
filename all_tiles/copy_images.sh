@@ -19,7 +19,3 @@ gdal_merge.py -separate $BANDS -o $DIR_RAM/im_$TILE_SPOT6/Im_S2.tif # merge band
 for b in 2 3 4 8;do
 	rm -rf $DIR_RAM/B*.tif
 done
-
-
-
-

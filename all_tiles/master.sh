@@ -5,19 +5,19 @@
 
 # global variables
 # input
-export REGION=finistere
+export REGION=gironde
 export TILE_S2=${@: -1:1}
 
 export DIR_BASH=~/DeveloppementBase/Scripts/all_tiles # Script directory (where master.sh is located)
-export DIR_EXES=~/DeveloppementBase/exes # Executables directory
+export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
 export DIR_RAM=/home/cyrilwendl/Documents/tmp # Temporary directory for work in RAM
-export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/all_test
+export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/all/tiles
 
 # data
 export DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data
 export bold=$(tput bold)
 export normal=$(tput sgr0)
-rm -Rf $DIR_SAVE
+#rm -Rf $DIR_SAVE
 mkdir -p $DIR_SAVE
 
 # allocate RAM memory
@@ -35,7 +35,7 @@ for TILE_SPOT6 in ${@:1:$#-1}; do
 DNAME="$DIR_RAM/im_$TILE_SPOT6" # target directory
 	export TILE_SPOT6=$TILE_SPOT6
 	export TILE_S2=$TILE_S2
-	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170412 # image S2
+	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170419 # image S2
 	export IM_SPOT6=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data/SPOT6_$REGION/image/tile_$TILE_SPOT6.tif # image SPOT6 (for reference) 
 
 	# do fusion
@@ -44,7 +44,7 @@ DNAME="$DIR_RAM/im_$TILE_SPOT6" # target directory
 	echo $TILE_SPOT6
 	bash $DIR_BASH/fusion_prep.sh # extract probabilities from SPOT6 and S2, move both to target directory
 	
-	echo ""; echo "${bold}II. COPY IMAGES ${normal}"
+ec	echo ""; echo "${bold}II. COPY IMAGES ${normal}"
 	bash $DIR_BASH/copy_images_prep.sh $TILE_SPOT6
 	bash $DIR_BASH/copy_images.sh $TILE_SPOT6
 
@@ -56,7 +56,7 @@ DNAME="$DIR_RAM/im_$TILE_SPOT6" # target directory
 
 	echo ""; echo "${bold}VI. REGULARIZATION ${normal}" 
 	
-	bash $DIR_BASH/regularize.sh $TILE_SPOT6 # Regularize
+	timeout 120s bash $DIR_BASH/regularize.sh $TILE_SPOT6 # Regularize
 	rm -Rf $DIR_SAVE/im_$TILE_SPOT6/
 	mkdir $DIR_SAVE/im_$TILE_SPOT6/
 
