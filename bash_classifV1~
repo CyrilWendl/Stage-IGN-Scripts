@@ -1,9 +1,0 @@
-#Selection de 1000 echantillons (pixels) depuis la verite
-~/DeveloppementBase/exes/Classifieur SelectVTP -d classification.train.datatype=labelimage -d classification.train.path=train_tout.rle -d selectvtp.nbechantillonsmax=1000 -d canaux.path=proba_S2.tif,proba_SPOT6.tif -d selectvtp.output.path=train.vtp
-
-#Calcul du modele a partir de ces echantillons
-~/DeveloppementBase/exes/Classifieur EstimateModel -d classification.algorithm=opencv.rf -d classification.train.path=train.vtp -d classification.model.path=model_rf
-
-#Classification 
-~/DeveloppementBase/exes/Classifieur Classify -d classification.model.path=model_rf -d canaux.path=proba_S2.tif,proba_SPOT6.tif -d classification.output.path=classif_rf.rle -d global.verbose=true -d classification.output.proba.path=appart_rf.tif -d classification.save.proba=true
-
