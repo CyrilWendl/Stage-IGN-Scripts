@@ -1,6 +1,6 @@
 # Convert big TIFs to JPEGs
 DIR=/media/cyrilwendl/15BA65E227EC1B23/finistere/all
-DIR_EXES=~/DeveloppementBase/exes # Executables directory
+DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
 
 function gdal_size() {
 	SIZE=$(gdalinfo $1 |\

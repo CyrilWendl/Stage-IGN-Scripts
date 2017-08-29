@@ -1,19 +1,18 @@
 # Main script to use for fusion, regularization and evalueation
-# to be called as: sh master.sh [TILE_SPOT6] [TILE_S2] ([redo]) ([crop window])
-# 	e.g.		   sh master.sh 41000_40000 appart_rf_50000_L93 redo
-# time for TILE in 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000; do time bash ~/DeveloppementBase/Scripts/master.sh ${TILE} appart_rf_50000_L93 redo ; done																																								
-# gironde: 38500_32500									
-
+# to be called as: sh master.sh [TILE_SPOT6] ([redo]) ([crop window])
+# 	e.g.		   sh master.sh 41000_40000 redo
+# for TILE in 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000; do time bash master.sh $TILE redo ; done
+# tile gironde: 38500_32500
 
 # Global variables
 # Input
-export REGION=$1
-export TILE_SPOT6=$2 # from command line
-export TILE_S2=$3 # from command line
+export REGION=$1 # command line
+export TILE_SPOT6=$2
+export TILE_S2=appart_rf_50000_L93 # name of S2
 
 # Paths
 export DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
-export DIR_EXES=~/DeveloppementBase/exes # Executables directory
+export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
 export DIR_RAM=/home/cyrilwendl/Documents/tmp # Temporary directory for work in RAM
 export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6 # target directory to save S2 and SPOT6 probabilities of tile
 
@@ -22,7 +21,16 @@ export DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data
 export DIR_PROBA_SPOT6=$DIR_DATA/SPOT6_$REGION/proba/test_$TILE_SPOT6/classification_results/preds # probability SPOT6
 export DIR_PROBA_S2=$DIR_DATA/S2_$REGION # probability S2
 export DIR_GT=$DIR_DATA/GT/BDTOPO # Grond truth directory
-export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170419 # image S2
+if [ $REGION = "finistere" ];
+	then
+	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170525 # image S2
+elif [ $REGION = "gironde" ];
+	then
+	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170618 # image S2
+else
+	echo "first argument has to be region (gironde or finistere)"
+	exit
+fi
 
 export IM_SPOT6=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data/SPOT6_$REGION/image/tile_$TILE_SPOT6.tif # image SPOT6 (for reference)
 
@@ -32,7 +40,7 @@ normal=$(tput sgr0)
 
 # extract probabilities from SPOT6, crop S2 and move both to target directory
 echo "${bold}I. FUSION PREPARATION${normal}"
-bash $DIR_BASH/fusion_prep.sh $4 $5 $6 $7 $8 $9 # $3=redo, $4=crop, $5, $6, $7, $8 = x y dx dy
+bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # $3=redo, $4=crop, $5, $6, $7, $8 = x y dx dy
 
 echo ""; echo "${bold}II. COPY IMAGES ${normal}"
 if [ "$4" = "crop" ]; then
