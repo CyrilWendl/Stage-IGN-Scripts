@@ -27,16 +27,12 @@ if [ $REGION = "finistere" ];
 elif [ $REGION = "gironde" ];
 	then
 	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170618 # image S2
-else
-	echo "first argument has to be region (gironde or finistere)"
-	exit
 fi
 
 export IM_SPOT6=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data/SPOT6_$REGION/image/tile_$TILE_SPOT6.tif # image SPOT6 (for reference)
 
-
-bold=$(tput bold)
-normal=$(tput sgr0)
+export bold=$(tput bold)
+export normal=$(tput sgr0)
 
 # extract probabilities from SPOT6, crop S2 and move both to target directory
 echo "${bold}I. FUSION PREPARATION${normal}"

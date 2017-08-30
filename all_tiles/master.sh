@@ -58,7 +58,7 @@ ec	echo ""; echo "${bold}II. COPY IMAGES ${normal}"
 	
 	timeout 120s bash $DIR_BASH/regularize.sh $TILE_SPOT6 # Regularize
 	rm -Rf $DIR_SAVE/im_$TILE_SPOT6/
-	mkdir $DIR_SAVE/im_$TILE_SPOT6/
+	mkdir -p $DIR_SAVE/im_$TILE_SPOT6/
 
 	for filename in Classified/classif_SPOT6 Classified/classif_S2 Fusion_all_weighted/classif_Fusion_Min_weighted Regul/regul_Min_weighted_G2_l1000_g70_e500_0_0_0; do
 		cp $DIR_RAM/im_$TILE_SPOT6/$filename.visu.tif $DIR_SAVE/im_$TILE_SPOT6/$(basename $filename).visu.tif

@@ -1,10 +1,4 @@
-#!bin/bash
-bold=$(tput bold)
-normal=$(tput sgr0)
-
-# TODO get all paths from main script
-# get two input files and copy them to a target directory for fusion
-
+# get input probabilities and copy them to a target directory for fusion
 if [ "$1" = "redo" ]; 
   then
   echo "${bold}Prepare directory${normal}"

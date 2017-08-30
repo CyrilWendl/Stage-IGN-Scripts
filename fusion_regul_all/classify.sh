@@ -1,5 +1,5 @@
 # input: Fusion base directory
-BDIR="$1/Regul_Fusion"
+BDIR=$DIR_FUSION/im_$TILE_SPOT6/Regul_Fusion
 
 for DNAME in "$BDIR" "$BDIR/Fusion";do 
 	# target directory 
@@ -13,8 +13,8 @@ for DNAME in "$BDIR" "$BDIR/Fusion";do
 	for i in $DNAME/*.tif ; do
 		methode=${i%.tif}
 		methode=${methode##*/proba_}
-		~/DeveloppementBase/exes/Pleiades Classer $i $DNAME/Classified/classif_$methode.rle
-		~/DeveloppementBase/exes/Legende label2RVB ~/DeveloppementBase/Scripts/legende.txt $DNAME/Classified/classif_$methode.rle $DNAME/Classified/classif_$methode.visu.tif
+		$DIR_EXES/Pleiades Classer $i $DNAME/Classified/classif_$methode.rle
+		$DIR_EXES/Legende label2RVB $DIR_BASH/legende.txt $DNAME/Classified/classif_$methode.rle $DNAME/Classified/classif_$methode.visu.tif
 		cp $BDIR/proba_S2_urbain.tfw $DNAME/Classified/classif_$methode.visu.tfw
 	done 
 done

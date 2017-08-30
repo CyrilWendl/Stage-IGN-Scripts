@@ -1,16 +1,16 @@
+REGION=gironde
 DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
+DIR_RAM=/media/cyrilwendl/15BA65E227EC1B23/tmp
+DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/all
+DIR_TILES=/media/cyrilwendl/15BA65E227EC1B23/$REGION/all/tiles
+DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
 
-. $DIR_BASH/param.sh
 sudo umount -l $DIR_RAM # allocate RAM memory
 rm -Rf $DIR_RAM
 mkdir $DIR_RAM
 sudo mount -t tmpfs -o size=4g tmpfs $DIR_RAM # allocate RAM memory
-# $REGION
-cd /media/cyrilwendl/15BA65E227EC1B23/$REGION/data/SPOT6_$REGION/proba
-tiles=($(ls | awk '(substr($1, 6, 5) >= 30000) && (substr($1, 12, 5) > 20000) && (substr($1, 6, 5) < 43000)' | awk '{print substr($0,6,11)}' | grep -E '[0-9]{2}[0]{3}'))
-# gironde
-#tiles=$($DIR_BASH/overlapping_tiles.sh)
 
+tiles=($(bash $DIR_BASH/overlapping_tiles.sh $REGION))
 lambda=1000	# divisé par  100
 gamma=30		# divisé par  100
 epsilon=500		# divisé par  100
@@ -23,6 +23,8 @@ res=1000 # resolution
 cd $DIR_TILES
 for ((i=${#tiles[@]}-1; i>=0; i--)); do
 	tile=${tiles[i]}
+	ls $DIR_TILES/im_$tile/Im_SPOT6_resized.visu.tif
+	continue
 	if [ ! -f "$DIR_TILES/im_$tile/Im_SPOT6_resized.visu.tif" ] 
 		then
 		WORK_DIR=$DIR_TILES/im_$tile
@@ -31,6 +33,8 @@ for ((i=${#tiles[@]}-1; i>=0; i--)); do
 		listgeo -tfw $WORK_DIR/Im_SPOT6_resized.visu.tif		
 	fi
 done
+
+exit
 
 # merge smaller tiles
 rm -rf makefiletmp bashtmp.sh

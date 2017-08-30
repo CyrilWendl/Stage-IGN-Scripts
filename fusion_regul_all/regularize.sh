@@ -32,11 +32,11 @@ do
 		mv Regul/$FILENAME.tif Regul/$NEWFILENAME.tif
 		FILENAME=$NEWFILENAME
 	
-		~/DeveloppementBase/exes/Legende label2RVB ~/DeveloppementBase/Scripts/legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif
+		$DIR_EXES/Legende label2RVB $DIR_BASH/legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif
 		COUNTER=$((COUNTER + 1))
 		echo "Iteration $COUNTER ($(basename $1))"
 		cp ${FUSION_PROB}.tfw Regul/$FILENAME.visu.tfw
 	done
-	converge=$(bash ~/DeveloppementBase/Scripts/gdalminmax.sh $1)
+	converge=$(bash $DIR_BASH/../gdalminmax.sh $1)
 	echo "Converged: $converge"
 done
