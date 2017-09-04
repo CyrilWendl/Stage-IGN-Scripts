@@ -1,4 +1,4 @@
-# segmentation gui: sxs (usage?)
+# segmentation gui: sxsus
 
 REGUL_DIR=$DIR_SAVE/Regul_Fusion
 cd $REGUL_DIR
@@ -33,5 +33,4 @@ for seg_cut in ${seg_cuts[@]};do
 	$DIR_EXES/Legende label2RVB $DIR_SAVE/legende.txt regul_seg_maj_$seg_cut.tif regul_seg_maj_$seg_cut.visu.tif;
 done
 
-#convert regul_seg_maj.tif regul_seg_maj.jpg
 cp $REGUL_FUSION regul.tif

@@ -1,4 +1,5 @@
 TILE=$1
+
 REGUL_DIR=/media/cyrilwendl/15BA65E227EC1B23/fusion/im_$TILE/Regul_Fusion
 cd $REGUL_DIR
  
