@@ -1,6 +1,5 @@
-# $1: tile number
-# Saves evaluation numbers of all classifications in ./Eval 
-# time for TILE in 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000 ; do sh ~/DeveloppementBase/Scripts/eval.sh ${TILE} ; done	
+# Saves evaluation numbers of all classifications in ./Eval
+# bash eval.sh [tile] ; done	
 bold=$(tput bold)
 normal=$(tput sgr0)
 cd $DIR_SAVE
@@ -13,7 +12,7 @@ FNAME=./Eval/eval.txt
 rm -rf $FNAME
 # per-tile evaluation
 
-if [ "$2" = "d" ]; then
+if [ "$1" = "d" ]; then
 	GT="train_dilat.rle"
 	echo "Evaluation with ${bold}dilated${normal} ground truth"
 else

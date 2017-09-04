@@ -8,7 +8,8 @@ export REGION=$1
 export TILE_SPOT6=$2 # from command line
 
 export DIR_BASH=~/DeveloppementBase/Scripts/fusion_regul
-export DIR_EXES=~/DeveloppementBase/exes # Executables directory
+export DIR_BASH_TOOLS=~/DeveloppementBase/Scripts/tools # tools directory
+export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
 export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6 # target directory to save S2 and SPOT6 probabilities of tile
 
 

@@ -27,6 +27,6 @@ do
 		$DIR_EXES/Legende label2RVB ../legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif
 		cp ${FUSION_PROB}.tfw Regul/$FILENAME.visu.tfw
 	done
-	converge=$(bash ~/DeveloppementBase/Scripts/gdalminmax.sh $DIR_SAVE)
+	converge=$(bash $DIR_BASH_TOOLS/gdalminmax.sh $DIR_SAVE)
 	echo "Converged: $converge"
 done

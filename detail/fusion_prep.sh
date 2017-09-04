@@ -6,7 +6,7 @@ if [ "$1" = "redo" ];
   mkdir $DIR_SAVE
 fi
 
-cp $DIR_BASH/../legende.txt $DIR_SAVE/../legende.txt # copy legend
+cp $DIR_BASH/../legende.txt $DIR_SAVE/legende.txt # copy legend
 
 echo "${bold}Extract files and obtain probabilities (SPOT 6)${normal}"
 cd $DIR_PROBA_SPOT6
@@ -34,10 +34,10 @@ cp tile_$TILE_SPOT6.tfw $DIR_SAVE/proba_SPOT6.tfw # copy tfw to target directory
 
 cd $DIR_SAVE
 
-if [ "$1" = "crop" ]; 
+if [ "$2" = "crop" ]; 
 	then
 	echo "Crop SPOT6 probabilities to ${3} * ${4} window" # Crop SPOT6 probability
-	gdal_translate -srcwin ${5} ${6} ${7} ${8} proba_SPOT6.tif proba_SPOT6_crop.tif
+	gdal_translate -srcwin ${3} ${4} ${5} ${6} proba_SPOT6.tif proba_SPOT6_crop.tif
 	mv proba_SPOT6_crop.tif proba_SPOT6.tif
 	listgeo proba_SPOT6.tif -tfw
 fi

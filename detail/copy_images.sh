@@ -1,16 +1,16 @@
 # Crop and copy S2 and SPOT6 images to target directory
-# S2 image: reproject to Lambert-93, crop, combine bands
-# S6 image: crop
+# SPOT-6 image: crop
+# S-2 image: reproject to Lambert-93, crop, combine bands
+
 cd $DIR_SAVE
 
 # SPOT6
-cp $IM_SPOT6 $DIR_SAVE/Im_SPOT6.tif
-cp proba_SPOT6.tfw Im_SPOT6.tfw
-
-# Crop SPOT6
-if [ "$8" = "crop" ]; then
-	gdal_translate -srcwin $9 ${10} ${11} ${12} $IM_SPOT6 $DIR_SAVE/Im_SPOT6.tif
+if [ "$1" = "crop" ]; then
+	gdal_translate -srcwin $2 $3 $4 $5 $IM_SPOT6 $DIR_SAVE/Im_SPOT6.tif
 	listgeo $DIR_SAVE/Im_SPOT6.tif -tfw
+else
+	cp $IM_SPOT6 $DIR_SAVE/Im_SPOT6.tif
+	cp proba_SPOT6.tfw Im_SPOT6.tfw
 fi
 
 # For S2, take bands corresponding to RGB, NIR (bands 2, 3, 4, 8)

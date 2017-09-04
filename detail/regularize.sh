@@ -1,4 +1,3 @@
-#!bin/bash
 # Regularization parameters
 lambda=1000		# divisé par  100
 gamma=70		# divisé par  100

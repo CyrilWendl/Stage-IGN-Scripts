@@ -1,33 +1,15 @@
-#!bin/bash
 CASE=$1
 cd $DIR_SAVE
 
 echo "Bands preparation"
 WEIGHTED=""
-# case 1: P(U) = P(b), P(¬U) = 1 - P(b)
-#TODO remove case 1 and 2 if not needed
-if [ "$CASE" = 1 ]; then # URBAIN
-	echo "Case 1: buildings (bat)"
-	~/DeveloppementBase/ExempleCode_souche/build/Exemple $DIR_SAVE/$P1NAME $DIR_SAVE/proba_SPOT6_bat.tif 1
-	~/DeveloppementBase/ExempleCode_souche/build/Exemple $DIR_SAVE/$P2NAME $DIR_SAVE/proba_S2_bat.tif 1
-	P1NAME="../proba_SPOT6_bat.tif"
-	P2NAME="../proba_S2_bat.tif"
-	OUTDIR="./Fusion_bat"
-elif [ "$CASE" = 2 ]; then # ARTIFICIALISE
-	# case 2: P(U) = P(b) + P(r)
-	echo "Case 2: artificial (art)"
-	~/DeveloppementBase/ExempleCode_souche/build/Exemple $DIR_SAVE/$P1NAME $DIR_SAVE/proba_SPOT6_art.tif 2
-	~/DeveloppementBase/ExempleCode_souche/build/Exemple $DIR_SAVE/$P2NAME $DIR_SAVE/proba_S2_art.tif 2
-	P1NAME="../proba_SPOT6_art.tif"
-	P2NAME="../proba_S2_art.tif"
-	OUTDIR="./Fusion_art"
-elif [ "$CASE" = 3 ]; then # ALL
-	echo "Case 3: all bands (all)"
+if [ "$CASE" = 1 ]; then # ALL
+	echo "Case 1: all bands (all)"
 	P1NAME="$DIR_SAVE/proba_SPOT6.tif"
 	P2NAME="$DIR_SAVE/proba_S2.tif"
 	OUTDIR="$DIR_SAVE/Fusion_all"
-elif [ "$CASE" = 4 ]; then # ALL (WEIGHTED)
-	echo "Case 4: all bands weighted (all_weighted)"
+elif [ "$CASE" = 2 ]; then # ALL (WEIGHTED)
+	echo "Case 2: all bands weighted (all_weighted)"
 	$DIR_EXES/FusProb PointWise proba_SPOT6.tif proba_S2.tif proba_SPOT6_weighted.tif proba_S2_weighted.tif
 	cp proba_SPOT6.tfw proba_SPOT6_weighted.tfw
 	cp proba_S2.tfw proba_S2_weighted.tfw
@@ -71,6 +53,7 @@ for methode in Min Max Compromis CompromisWO Prior1 Prior1-inv Prior2 Prior2-inv
   cp ../proba_SPOT6.tfw proba_Fusion_$methode$WEIGHTED.tfw
 done
 
+# remove composite classes
 touch bashtmp.sh # parallelize: bash file with commands
 for methode in DS_MasseSomme DS_MasseV1 DS_MasseV2;do
 	echo -n "gdal_translate -b 1 -b 2 -b 3 -b 4 -b 5 proba_Fusion_$methode$WEIGHTED.tif tmp.tif;" >> bashtmp.sh # keep only 5 first classes 
