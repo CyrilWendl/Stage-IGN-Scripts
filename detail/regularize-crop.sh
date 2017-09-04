@@ -1,6 +1,4 @@
 # Regularization script to test different parameters on a small zone
-FUSIONDIR="Fusion_all_weighted"
-
 # methode pour trouver paramètres optimaux :
 # - trouver lambda_max [0, infty[ avec un Potts model (gamma=0 et beta=infty OU gamma=1 et eps=0)
 # testé: 0 10 50(y) 100 500 1000
@@ -16,7 +14,6 @@ FUSIONDIR="Fusion_all_weighted"
 # meilleurs paramètres pour modèle de contraste 0: l1000 g70 e500
 # meilleurs paramètres pour modèle de contraste 3: l750  g96
 
-# methodes de fusion
 lambda=1000		# divisé par  100 (fixé)
 gamma=70		# divisé par  100
 epsilon=500	# divisé par  100
@@ -35,14 +32,15 @@ touch bashtmp.sh
 
 # lissage gaussien
 SIGMA=2
-$DIR_EXES/Ech_noif Gaussf ../Im_SPOT6.tif ../Im_SPOT6_Gauss_$SIGMA.tif $SIGMA 3
-cp ../Im_SPOT6.tfw ../Im_SPOT6_Gauss_$SIGMA.tfw
+$DIR_EXES/Ech_noif Gaussf Im_SPOT6.tif Im_SPOT6_Gauss_$SIGMA.tif $SIGMA 3
+cp Im_SPOT6.tfw Im_SPOT6_Gauss_$SIGMA.tfw
 GAUSS="_G$SIGMA"
 
+FUSIONDIR="Fusion_all_weighted"
 #regularize
-for FUSION_PROB in $FUSIONDIR/proba_Fusion_Min_weighted ../proba_SPOT6 ; do
+for FUSION_PROB in $FUSIONDIR/proba_Fusion_Min_weighted proba_SPOT6 ; do
 	FUSION_NAME=${FUSION_PROB##*/}
-	echo -n "$DIR_EXES/Regul $FUSION_PROB.tif $FUSION_PROB.tif $DIR_SAVE/Im_SPOT6_Gauss_$SIGMA.tif $DIR_SAVE/Regul/regul_$FUSION_NAME$GAUSS $lambda 0 $gamma $epsilon 5 5 $option_modele $option_lissage 0; " >> bashtmp.sh
+	echo -n "$DIR_EXES/Regul $FUSION_PROB.tif $FUSION_PROB.tif Im_SPOT6_Gauss_$SIGMA.tif Regul/regul_$FUSION_NAME$GAUSS $lambda 0 $gamma $epsilon 5 5 $option_modele $option_lissage 0; " >> bashtmp.sh
 	echo -n "echo regul done ; " >> bashtmp.sh
 	# visualization
 	FILENAME=regul_$FUSION_NAME$GAUSS\_100_$lambda\_100_0_100\_$gamma\_100\_$epsilon\_$option_modele\_$option_lissage\_0
@@ -51,11 +49,11 @@ for FUSION_PROB in $FUSIONDIR/proba_Fusion_Min_weighted ../proba_SPOT6 ; do
 	echo -n "mv Regul/$FILENAME.tif Regul/$FILENAME_NEW.tif ; " >> bashtmp.sh
 	FILENAME=$FILENAME_NEW
 	echo -n "$DIR_EXES/Ech_noif Format Regul/$FILENAME.tif Regul/$FILENAME.rle ; " >> bashtmp.sh # RLE for Eval
-	echo -n "$DIR_EXES/Legende label2RVB $DIR_BASH/legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif; " >> bashtmp.sh
+	echo -n "$DIR_EXES/Legende label2RVB $DIR_BASH/../legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif; " >> bashtmp.sh
 	echo -n "echo visualisation done ; "  >> bashtmp.sh
 	# coordinates
-	echo -n "cp $FUSION_PROB.tfw ./Regul/$FILENAME.tfw; " >> bashtmp.sh
-	echo "cp $FUSION_PROB.tfw ./Regul/$FILENAME.visu.tfw" >> bashtmp.sh
+	echo -n "cp $FUSION_PROB.tfw Regul/$FILENAME.tfw; " >> bashtmp.sh
+	echo "cp $FUSION_PROB.tfw Regul/$FILENAME.visu.tfw" >> bashtmp.sh
 done
 $DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation 
 make -f makefiletmp -j 10
