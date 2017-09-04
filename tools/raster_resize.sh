@@ -1,4 +1,4 @@
-# Do the same thing as Fsuperposable with gdal only
+# Resize a GTiff raster to resolution of a second GTiff raster
 # resize_crop_raster.sh [raster_to_resize] [raster] [out_raster]
 
 if [ $# -lt 3 ]
@@ -17,5 +17,5 @@ function gdal_size() {
 	echo -n "$SIZE"
 }
 
-# crop and resize big raster
+# resize big raster
 gdalwarp -ts $(gdal_size $RASTER) -r bilinear $RASTER_TO_RESIZE $OUT_RASTER

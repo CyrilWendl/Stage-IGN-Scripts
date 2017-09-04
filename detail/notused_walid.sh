@@ -1,3 +1,5 @@
+# importing fusion results from Walid's R code
+
 TILE=$1
 DEST=~/fusion/im_$TILE/Walid
 rm -Rf $DEST $DEST/Classified/

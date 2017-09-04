@@ -1,4 +1,4 @@
-# Do the same thing as Fsuperposable with gdal only
+# Crop resize a GTiff raster to the extent and resolution of a second GTiff raster
 # resize_crop_raster.sh [big_raster] [small_raster] [out_raster]
 
 if [ $# -lt 3 ]

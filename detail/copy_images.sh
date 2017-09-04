@@ -37,7 +37,7 @@ echo "DONE"
 
 BANDS=""
 for b in 2 3 4 8;do
-	bash $DIR_BASH/crop_raster.sh $DIR_RAM/B$b.tif $DIR_SAVE/Im_SPOT6.tif $DIR_RAM/B$b-$b.tif
+	bash $DIR_BASH_TOOLS/raster_crop.sh $DIR_RAM/B$b.tif $DIR_SAVE/Im_SPOT6.tif $DIR_RAM/B$b-$b.tif
 	BANDS=$BANDS$DIR_RAM/"B$b-$b.tif " #names of band files for fusion
 done
 

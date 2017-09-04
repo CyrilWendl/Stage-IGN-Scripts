@@ -11,7 +11,9 @@ export TILE_SPOT6=$2
 export TILE_S2=appart_rf_50000_L93 # name of S2
 
 # Paths
-export DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
+export DIR_BASH=~/DeveloppementBase/Scripts/detail # Script directory (where master.sh is located)
+
+export DIR_BASH_TOOLS=~/DeveloppementBase/Scripts/tools # Script directory (where master.sh is located)
 export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
 export DIR_RAM=/home/cyrilwendl/Documents/tmp # Temporary directory for work in RAM
 export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6 # target directory to save S2 and SPOT6 probabilities of tile
@@ -53,7 +55,6 @@ echo ""; echo "${bold}IV. FUSION${normal}"
 bash $DIR_BASH/fusion.sh 3 # Fusion (all)
 bash $DIR_BASH/fusion.sh 4 # Fusion (all weighted)
 
-
 echo ""; echo "${bold}V. CLASSIFICATION ${normal}"
 bash $DIR_BASH/classify.sh # Classify fusion probabilities
 
@@ -63,7 +64,7 @@ bash $DIR_BASH/classify.sh # Classify fusion probabilities
  
 echo ""; echo "${bold}VI. REGULARIZATION ${normal}"
 if [ "$4" = "crop" ]; then
-	bash $DIR_BASH/regularize-test.sh # Regularize
+	bash $DIR_BASH/regularize-crop.sh # Regularize
 else
 	bash $DIR_BASH/regularize.sh # Regularize
 fi
@@ -72,6 +73,6 @@ echo ""; echo "${bold}VII. EVALUATION ${normal}"
 bash $DIR_BASH/eval.sh AA bat # params (d) (AA) (OA) (Fmoy) (K)
 
 echo ""; echo "${bold}VIII. URBAN FOOTPRINT ${normal}" 
-bash $DIR_BASH/fusion_regul/master.sh $REGION $TILE_SPOT6 # TODO adapt to new data structure
+bash $DIR_BASH/../fusion_regul/master.sh $REGION $TILE_SPOT6 # TODO adapt to new data structure
 #bash $DIR_BASH/binary.sh $TILE_SPOT6
 #bash $DIR_BASH/eval_bin.sh $TILE_SPOT6 AA bat

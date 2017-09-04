@@ -2,11 +2,11 @@
 if [ "$1" = "redo" ]; 
   then
   echo "${bold}Prepare directory${normal}"
-  rm -Rf $DIR_SAVE
+  rm -rf $DIR_SAVE
   mkdir $DIR_SAVE
 fi
 
-cp $DIR_BASH/legende.txt $DIR_SAVE/legende.txt # copy legend
+cp $DIR_BASH/../legende.txt $DIR_SAVE/../legende.txt # copy legend
 
 echo "${bold}Extract files and obtain probabilities (SPOT 6)${normal}"
 cd $DIR_PROBA_SPOT6
@@ -46,5 +46,5 @@ fi
 $DIR_EXES/convert_ori tfw2ori proba_SPOT6.tfw proba_SPOT6.ori
 
 echo "${bold}Crop and resize S2 probability to SPOT6 probability${normal}"
-bash $DIR_BASH/raster_crop_resize.sh $DIR_PROBA_S2/$TILE_S2.tif $DIR_SAVE/proba_SPOT6.tif $DIR_SAVE/proba_S2.tif
+bash $DIR_BASH_TOOLS/raster_crop_resize.sh $DIR_PROBA_S2/$TILE_S2.tif $DIR_SAVE/proba_SPOT6.tif $DIR_SAVE/proba_S2.tif
 cp proba_SPOT6.tfw proba_S2.tfw

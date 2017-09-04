@@ -23,17 +23,17 @@ elif [ "$CASE" = 2 ]; then # ARTIFICIALISE
 	OUTDIR="./Fusion_art"
 elif [ "$CASE" = 3 ]; then # ALL
 	echo "Case 3: all bands (all)"
-	P1NAME="../proba_SPOT6.tif"
-	P2NAME="../proba_S2.tif"
-	OUTDIR="./Fusion_all"
+	P1NAME="$DIR_SAVE/proba_SPOT6.tif"
+	P2NAME="$DIR_SAVE/proba_S2.tif"
+	OUTDIR="$DIR_SAVE/Fusion_all"
 elif [ "$CASE" = 4 ]; then # ALL (WEIGHTED)
 	echo "Case 4: all bands weighted (all_weighted)"
 	$DIR_EXES/FusProb PointWise proba_SPOT6.tif proba_S2.tif proba_SPOT6_weighted.tif proba_S2_weighted.tif
 	cp proba_SPOT6.tfw proba_SPOT6_weighted.tfw
 	cp proba_S2.tfw proba_S2_weighted.tfw
-	P1NAME="../proba_SPOT6_weighted.tif"
-	P2NAME="../proba_S2_weighted.tif"
-	OUTDIR="./Fusion_all_weighted"
+	P1NAME="$DIR_SAVE/proba_SPOT6_weighted.tif"
+	P2NAME="$DIR_SAVE/proba_S2_weighted.tif"
+	OUTDIR="$DIR_SAVE/Fusion_all_weighted"
 	WEIGHTED="_weighted"
 fi
 
@@ -44,7 +44,7 @@ cd $OUTDIR
 pwd
 
 echo "Fusion"
-touch bashtmp.sh # parallelize: bash file with commands
+touch bashtmp.sh # parallelize
 
 echo "$DIR_EXES/FusProb Fusion:Min $P1NAME $P2NAME proba_Fusion_Min$WEIGHTED.tif" >> bashtmp.sh
 echo "$DIR_EXES/FusProb Fusion:Max $P1NAME $P2NAME proba_Fusion_Max$WEIGHTED.tif" >> bashtmp.sh

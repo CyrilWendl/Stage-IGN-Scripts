@@ -1,3 +1,5 @@
+# get overlapping tile numbers (visually based) and save shp file of extent
+
 REGION=$1
 cd /media/cyrilwendl/15BA65E227EC1B23/$REGION/data/SPOT6_$REGION/proba
 if [ $REGION = "gironde" ];
