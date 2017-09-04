@@ -1,4 +1,3 @@
-#!bin/bash
 CASE=$1
 INDIR=$DIR_SAVE/Regul
 OUTDIR=$DIR_SAVE/Regul_Fusion
@@ -7,12 +6,14 @@ rm -Rf $OUTDIR
 mkdir -p $OUTDIR
 
 # Proba preparation
-# Bati
-Legende label2masqueunique $DIR_BASH/legende.txt  regul_Min_weighted_G2_l1000_g70_e500_0_0_0.rle 1 bati.tif # get binary mask of regulation (buildings)
+# extraire bati
+$DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt  regul_Min_weighted_G2_l1000_g70_e500_0_0_0.rle 1 bati.tif # get binary mask of regulation (buildings)
 
+# dilater
 #Ech_noif Gaussf bati.tif bati_gauss_10.tif 10 3  # autre alternative?
-Ech_noif Chamfrein bati.tif dist.tif
-Pleiades PriorProb:f:c dist.tif 0 1 200 0 $OUTDIR/proba_regul_urbain.tif
+$DIR_EXES/Ech_noif Chamfrein bati.tif dist.tif
+$DIR_EXES/Pleiades PriorProb:f:c dist.tif 0 1 200 0 $OUTDIR/proba_regul_urbain.tif
+rm -rf bati.tif dist.tif
 
 # SENTINEL2
 # case 1: P(U) = P(b), P(¬U) = 1 - P(b)
