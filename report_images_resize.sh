@@ -24,7 +24,7 @@ convert $DIR_SAVE/Im_SPOT6.jpg -crop ${DX}"X"${DY}+${X}+${Y} $DIR_SAVE/web/Im_SP
 # Resize SPOT6 image 
 convert $DIR_SAVE/Im_SPOT6.jpg -resize 1000X1000 $DIR_SAVE/web/Im_SPOT6_resized.jpg
 # Draw red rectangle
-convert $DIR_SAVE/Im_SPOT6.jpg -fill red -stroke red -strokewidth 3 -draw "fill-opacity 0.3 rectangle ${X}, ${Y}, $(expr ${X} + ${DX}), $(expr ${Y} + ${DX})" $DIR_SAVE/web/Im_SPOT6.jpg  # copy and crop original image [widthXXwidthY+startposx+startposy]
+convert $DIR_SAVE/Im_SPOT6.jpg -fill red -stroke red -strokewidth 3 -draw "fill-opacity 0.3 rectangle ${X}, ${Y}, $(expr ${X} + ${DX}), $(expr ${Y} + ${DY})" $DIR_SAVE/web/Im_SPOT6.jpg  # copy and crop original image [widthXXwidthY+startposx+startposy]
 
 for subdir in "./Classified" "./Fusion_all_weighted/Classified" "./Regul" ; do #"./Regul_Fusion"
 	cd $DIR_SAVE/$subdir
@@ -56,3 +56,12 @@ for n in 3 8 15 20 30; do
 	composite -blend 50% $DIR_SAVE/web/Im_SPOT6_resized.jpg $DIR_SAVE/web/T${TILE_SPOT6}_regul_seg_maj_$n.jpg overlay_regul_seg_maj_$n.jpg
 	mv overlay_regul_seg_maj_$n.jpg $DIR_SAVE/web/T${TILE_SPOT6}_regul_seg_maj_$n.jpg
 done
+
+# ground truth
+for method in bdtopo_dilat oso osm; do
+	convert $DIR_SAVE/gt/train_$method.jpg -resize 1000X1000 $DIR_SAVE/web/T${TILE_SPOT6}_gt_$method.jpg
+	#overlay map
+	composite -blend 50% $DIR_SAVE/web/Im_SPOT6_resized.jpg $DIR_SAVE/web/T${TILE_SPOT6}_gt_$method.jpg overlay_T${TILE_SPOT6}_gt_$method.jpg
+	mv overlay_T${TILE_SPOT6}_gt_$method.jpg $DIR_SAVE/web/T${TILE_SPOT6}_gt_$method.jpg
+done
+
