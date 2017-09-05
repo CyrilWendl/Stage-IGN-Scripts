@@ -58,7 +58,7 @@ for n in 3 8 15 20 30; do
 done
 
 # ground truth
-for method in bdtopo_dilat oso osm; do
+for method in bdtopo oso osm; do
 	convert $DIR_SAVE/gt/train_$method.jpg -resize 1000X1000 $DIR_SAVE/web/T${TILE_SPOT6}_gt_$method.jpg
 	#overlay map
 	composite -blend 50% $DIR_SAVE/web/Im_SPOT6_resized.jpg $DIR_SAVE/web/T${TILE_SPOT6}_gt_$method.jpg overlay_T${TILE_SPOT6}_gt_$method.jpg

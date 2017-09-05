@@ -10,16 +10,20 @@ DIR_EXES=$DIR_BASH/exes
 mkdir -p $DIR_SAVE
 cd $DIR_SAVE
 
-$DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt ../train_tout.rle 1 bati.tif # get binary mask of regulation (buildings)
+$DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt ../train_tout.rle 1 train_bdtopo.tif # get binary mask of regulation (buildings)
 
 # dilate
-$DIR_EXES/Ech_noif Dilat bati.tif 20 train_bdtopo_dilat.tif 
-#Ech_noif Chamfrein bati.tif dist.tif
-#Pleiades PriorProb:f:c dist.tif 0 1 200 0 $DIR_OUT/proba_regul_urbain.tif
+SE_SIZE_DILAT=12
+SE_SIZE_EROD=9
+#$DIR_EXES/Ech_noif Dilat train_bdtopo.tif 20 train_bdtopo.tif
+for i in {1..9}; do
+	$DIR_EXES/Ech_noif Dilat train_bdtopo.tif $SE_SIZE_DILAT train_bdtopo.tif
+	$DIR_EXES/Ech_noif Erod train_bdtopo.tif $SE_SIZE_EROD train_bdtopo.tif
+done
+$DIR_EXES/Ech_noif Dilat train_bdtopo.tif $SE_SIZE_DILAT train_bdtopo.tif
 
-cp ../train.visu.tfw train_bdtopo_dilat.tfw
-gdal_translate -of JPEG -scale -co worldfile=yes train_bdtopo_dilat.tif train_bdtopo_dilat.jpg
-#rm -rf bati.tif
+cp ../train.visu.tfw train_bdtopo.tfw
+gdal_translate -of JPEG -ot Byte -scale -co worldfile=yes train_bdtopo.tif train_bdtopo.jpg
 
-rm -rf *.log *.xml log.txt
+rm -rf *.log *.xml log.txt *.wld
 
