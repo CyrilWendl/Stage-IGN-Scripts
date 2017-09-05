@@ -22,6 +22,6 @@ function gdal_size() {
 gdaltindex -t_srs EPSG:2154 -src_srs_name src_srs $TMPDIR/tmp.shp $SMALL_RASTER
 
 # crop and resize big raster
-gdalwarp -cutline $TMPDIR/tmp.shp -crop_to_cutline -multi -r bilinear $BIG_RASTER $OUT_RASTER
+gdalwarp -cutline $TMPDIR/tmp.shp -crop_to_cutline -dstnodata 0 $BIG_RASTER $OUT_RASTER
 
 rm -rf $TMPDIR/tmp*

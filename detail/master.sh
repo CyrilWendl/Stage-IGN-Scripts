@@ -68,7 +68,7 @@ echo ""; echo "${bold}VII. EVALUATION ${normal}"
 bash $DIR_BASH/eval.sh AA bat # params (d) (AA) (OA) (Fmoy) (K)
 
 #echo ""; echo "${bold}VIII. URBAN FOOTPRINT ${normal}" 
-#bash $DIR_BASH/../fusion_regul/master.sh $REGION $TILE_SPOT6
+bash $DIR_BASH/../fusion_regul/master.sh $REGION $TILE_SPOT6
 
 #bash $DIR_BASH/binary.sh $TILE_SPOT6
 #bash $DIR_BASH/eval_bin.sh $TILE_SPOT6 AA bat

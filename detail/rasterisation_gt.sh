@@ -42,7 +42,7 @@ mv mask/SURFACE_EAU.tif mask/eau.tif
 mv mask/culture.tif mask/vegetation_autre.tif
 
 # buffer autour des batiments
-# $DIR_EXES/Ech_noif Dilat mask/bati.tif 10 mask/bati_dilat.tif
+$DIR_EXES/Ech_noif Dilat mask/bati.tif 10 mask/bati_dilat.tif
 
 # fusionner tout
 $DIR_EXES/Legende masques2label $DIR_BASH/../legende_gt.txt mask/ train_tout.rle

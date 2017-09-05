@@ -6,23 +6,27 @@ DATA=/media/cyrilwendl/15BA65E227EC1B23/data/bdparcelaire/dpsg2017-08-00247/BDPA
 EMPRISE=$DIR_SAVE/emprise.ori
 
 subfolder=bdparcellaire
-cd $DIR_SAVE
-rm -rf $subfolder; mkdir -p $subfolder; cd $subfolder
+rm -Rf $DIR_SAVE/$subfolder
+mkdir -p $DIR_SAVE/$subfolder
+cd $DIR_SAVE/$subfolder
 
-# Proba preparation
-# Bati
+## proba preparation
+# bati
 $DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt  ../Regul/regul_Min_weighted_G2_l1000_g70_e500_0_0_0.rle 1 bati.tif # binary classification
-
 # dilate
 $DIR_EXES/Ech_noif Chamfrein bati.tif dist.tif
 $DIR_EXES/Pleiades PriorProb:f:c dist.tif 0 1 200 0 proba_regul_urbain.tif
+cp $DIR_SAVE/Regul/regul_Min_weighted_G2_l1000_g70_e500_0_0_0.tfw  proba_regul_urbain.tfw
 rm -rf bati.tif dist.tif
+# classify
+$DIR_EXES/Pleiades Classer proba_regul_urbain.tif classif_regul_urbain.tif
 
+## bdparcellaire
 # rasteriser fichier
-ManipVecteur LectureGenerale $DATA $EMPRISE bdparcellaire.tif
-
+$DIR_EXES/ManipVecteur LectureGenerale $DATA $EMPRISE bdparcellaire.tif
 # vote majoritaire
-# majority voting (labels of regulation within segmentation)
-$DIR_EXES/Pleiades VoteRegion maj bdparcellaire.tif proba_regul_urbain.tif bdparcellaire-vote.tif
+$DIR_EXES/Pleiades VoteRegion maj bdparcellaire.tif classif_regul_urbain.tif bdparcellaire-vote.tif
 # create visu.tif
 $DIR_EXES/Legende label2RVB $DIR_BASH/legende.txt bdparcellaire-vote.tif bdparcellaire-vote.visu.tif
+
+cp proba_regul_urbain.tfw bdparcellaire-vote.visu.tfw
