@@ -8,7 +8,7 @@ import qgis
 root = QgsProject.instance().layerTreeRoot()
 
 # global parametersc
-base_dirs = '/home/cyrilwendl/fusion/'
+base_dirs = '/media/cyrilwendl/15BA65E227EC1B23/finistere/detail/'
 im_dirs = ["41000_30000"]
 #im_dirs = ["im_41000_30000", "im_39000_40000","im_39000_42000", "im_41000_40000", "im_41000_42000"]
 

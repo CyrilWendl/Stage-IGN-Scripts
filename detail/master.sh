@@ -38,25 +38,24 @@ export bold=$(tput bold)
 export normal=$(tput sgr0)
 
 echo "${bold}I. FUSION PREPARATION${normal}"
-bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # [redo] [crop] [x y dx dy]
+#bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # [redo] [crop] [x y dx dy]
 
 echo ""; echo "${bold}II. COPY IMAGES ${normal}"
-bash $DIR_BASH/copy_images.sh $4 $5 $6 $7 $8 # [crop] [x y dx dy]
+#bash $DIR_BASH/copy_images.sh $4 $5 $6 $7 $8 # [crop] [x y dx dy]
 
 echo ""; echo "${bold}III. GROUND TRUTH ${normal}" 
-bash $DIR_BASH/rasterisation_gt.sh
+#bash $DIR_BASH/rasterisation_gt.sh
 
 echo ""; echo "${bold}IV. FUSION${normal}"
-bash $DIR_BASH/fusion.sh 1 # Fusion (all)
-bash $DIR_BASH/fusion.sh 2 # Fusion (all weighted)
+#bash $DIR_BASH/fusion.sh 1 # Fusion (all)
+#bash $DIR_BASH/fusion.sh 2 # Fusion (all weighted)
 
 echo ""; echo "${bold}V. CLASSIFICATION ${normal}"
-bash $DIR_BASH/classify.sh # Classify fusion probabilities
+#bash $DIR_BASH/classify.sh # Classify fusion probabilities
 
-# Fusion par classification (after model calculated)
-# bash $DIR_BASH/fusion_classification-model.sh # classification model
-# for method in rf svmt2 svmt0; do bash $DIR_BASH/fusion_classification.sh $methode; done
-
+# Fusion par classification
+for METHODE in rf svmt2 svmt0; do bash $DIR_BASH/fusion_classification.sh $METHODE; done
+exit
 echo ""; echo "${bold}VI. REGULARIZATION ${normal}"
 if [ "$4" = "crop" ]; then
 	bash $DIR_BASH/regularize-crop.sh # Regularize

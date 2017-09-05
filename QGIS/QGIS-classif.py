@@ -7,13 +7,10 @@ import os, sys
 import qgis
 root = QgsProject.instance().layerTreeRoot()
 
-# global parametersc
+# global parameters
 fusion_methods=["all_weighted"]
-base_dirs = '/home/cyrilwendl/fusion/'
-im_dirs = ["im_39000_40000"]
-#im_dirs = ["im_41000_30000", "im_39000_40000","im_39000_42000", "im_41000_40000", "im_41000_42000"]
-im_dir_walid = ["im_35000_40000/Walid"]
-Walid=False
+base_dirs = '/media/cyrilwendl/15BA65E227EC1B23/finistere/detail/'
+im_dirs = ["im_41000_30000", "im_39000_40000","im_39000_42000", "im_41000_40000", "im_41000_42000"]
 Fusion_Ouvert=True
 Fusion_Sub_Ouvert=False
 Fusion_Affiche=False
@@ -54,48 +51,6 @@ def showFusion(index):
                     legend.setLayerVisible(rlayer, False)  # hide the layer
                     qgis.utils.iface.mapCanvas().refresh()
                     subsubgroup.setExpanded(False)
-                    
-    if(Walid):
-        for im_dir in natsorted(im_dir_walid):
-            fusion_cl_dir=base_dirs + im_dir + "/Classified"
-            subgroup = group_fus.insertGroup(3, im_dir)
-            subgroup.setExpanded(False)
-            for files in natsorted(os.listdir(fusion_cl_dir)):
-                # load only raster layers
-                if files.endswith(".tif"):
-                    rlayer = QgsRasterLayer(fusion_cl_dir + "/" + files, files)
-                    #rlayer.renderer().setOpacity(0.7) 
-                    
-                    # add layer to the registry
-                    QgsMapLayerRegistry.instance().addMapLayer(rlayer,False)
-                    subgroup.addLayer(rlayer)
-                    
-                    legend = qgis.utils.iface.legendInterface()  # access the legend
-                    legend.setLayerVisible(rlayer, False)  # hide the layer
-                    # original classification
-                
-            cl_dir=base_dirs + im_dir + "/Classified"
-            for files in natsorted(os.listdir(cl_dir)):
-                # load only raster layerssubgroup = group_reg.insertGroup(1, im_dir)
-                if files.endswith(".visu.tif") and classif_method in files:
-                    rlayer = Qg1sRasterLayer(cl_dir + "/" + files, files)
-                    #rlayer.renderer().setOpacity(0.7) 
-                    
-                    # add layer to the registry
-                    QgsMapLayerRegistry.instance().addMapLayer(rlayer,False)
-                    subgroup.addLayer(rlayer)
-                    
-                    legend = qgis.utils.iface.legendInterface()  # access the legend
-                    legend.setLayerVisible(rlayer, False)  # hide the layer
-                
-        # background image (SPOT6)
-        rlayer = QgsRasterLayer(base_dirs + im_dir + "/Im_SPOT6.tif", "Im_SPOT6")
-        QgsMapLayerRegistry.instance().addMapLayer(rlayer,False)
-        subgroup.addLayer(rlayer)
-            
-        legend = qgis.utils.iface.legendInterface()  # access the legend
-        legend.setLayerVisible(rlayer, False)  # hide the layer
-        qgis.utils.iface.mapCanvas().refresh()
     group_fus.setExpanded(Fusion_Ouvert)
     
 def showRegul(index):
@@ -130,8 +85,7 @@ def showRegul(index):
                 qgis.utils.iface.mapCanvas().refresh()
         subgroup.setExpanded(False)
     group_reg.setExpanded(Regul_Ouvert)
-
-    #qgis.utils.iface.mapCanvas().setExtent(group_reg.extent())       
+    
 def showOriginal(index): #Original S2 and S6 classifications
     orig_group = root.insertGroup(index, "Original Classification")
     for im_dir in natsorted(im_dirs):
@@ -178,7 +132,6 @@ def showGT(index):
         
         #legend = qgis.utils.iface.legendInterface()  # access the legend
         #legend.setLayerVisible(rlayer, False)  # hide the layer
-        # original classification
             
         # background image (SPOT6)
         rlayer = QgsRasterLayer(base_dirs + im_dir + "/Im_SPOT6.tif", "Im_SPOT6")
@@ -198,7 +151,7 @@ def main():
     
     # Groups
     root.removeAllChildren () # clean up
-    #showRegul(1)
+    showRegul(1)
     showFusion(2)
     showOriginal(3)
     showGT(4)    
