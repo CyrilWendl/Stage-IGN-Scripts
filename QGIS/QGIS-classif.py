@@ -9,8 +9,10 @@ root = QgsProject.instance().layerTreeRoot()
 
 # global parameters
 fusion_methods=["all_weighted"]
-base_dirs = '/media/cyrilwendl/15BA65E227EC1B23/finistere/detail/'
-im_dirs = ["im_41000_30000", "im_39000_40000","im_39000_42000", "im_41000_40000", "im_41000_42000"]
+base_dirs = '/media/cyrilwendl/15BA65E227EC1B23/gironde/detail/'
+#im_dirs = ["im_41000_30000", "im_39000_40000","im_39000_42000", "im_41000_40000", "im_41000_42000"]
+#im_dirs = ["im_24500_18500,im_26500_18500,im_28500_32500,im_38500_32500,im_10500_34500,im_24500_20500,im_26500_20500,im_30500_30500"]
+im_dirs = ["im_10500_34500"]
 Fusion_Ouvert=True
 Fusion_Sub_Ouvert=False
 Fusion_Affiche=False

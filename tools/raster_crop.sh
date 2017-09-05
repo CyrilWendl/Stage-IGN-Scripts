@@ -1,5 +1,5 @@
 # Crop a GTiff raster to the extent of a second GTiff raster
-# crop_raster.sh [big_raster] [small_raster] [out_raster]
+# raster_crop.sh [big_raster] [small_raster] [out_raster]
 
 if [ $# -lt 3 ]
 	then

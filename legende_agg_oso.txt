@@ -1,5 +1,2 @@
+nonurbain 0 0 255 0
 urbain 1 255 0 0
-nonurbain 2 0 255 0
-nonurbain 3 0 0 255
-nonurbain 4 255 255 0
-urbain 5 150 150 155

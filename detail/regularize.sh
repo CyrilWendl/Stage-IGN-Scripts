@@ -1,3 +1,5 @@
+FUSION_METHOD=svmt2
+
 # Regularization parameters
 lambda=1000		# divisé par  100
 gamma=70		# divisé par  100
@@ -8,7 +10,7 @@ option_multiplicatif=0
 
 # create directory
 cd $DIR_SAVE
-rm -rf ./Regul; mkdir -p ./Regul
+mkdir -p ./Regul
 
 # lissage gaussien
 SIGMA=2;GAUSS="_G$SIGMA"
@@ -25,7 +27,7 @@ let len=$len-1
 
 rm -rf  makefiletmp bashtmp.sh
 touch bashtmp.sh # parallelize
-for FUSION_PROB in "Im_SPOT6_G$SIGMA" "Fusion_all_weighted/proba_Fusion_Min_weighted"; do
+for FUSION_PROB in "Im_SPOT6_G$SIGMA" "Fusion_all_weighted/proba_Fusion_$FUSION_METHOD"; do
 	echo "Splitting $FUSION_PROB"
 	for (( i=0; i<len;i++ )); do
 		for (( j=0; j<len;j++ )); do
@@ -43,7 +45,7 @@ make -f makefiletmp -j 16
 rm makefiletmp bashtmp.sh
 
 # regularize
-for FUSION_PROB in "Fusion_all_weighted/proba_Fusion_Min_weighted"; do
+for FUSION_PROB in "Fusion_all_weighted/proba_Fusion_$FUSION_METHOD"; do
 	cd $DIR_SAVE
 	FUSION_NAME=${FUSION_PROB##*/}
 	rm -rf makefiletmp bashtmp.sh

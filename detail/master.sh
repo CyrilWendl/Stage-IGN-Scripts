@@ -21,7 +21,6 @@ export DIR_PROBA_SPOT6=$DIR_DATA/SPOT6_$REGION/proba/test_$TILE_SPOT6/classifica
 export DIR_PROBA_S2=$DIR_DATA/S2_$REGION # probability S2
 export DIR_GT=$DIR_DATA/GT/BDTOPO # Grond truth directory
 
-
 if [ $REGION = "finistere" ];
 	then
 	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170525 # image S2
@@ -38,24 +37,24 @@ export bold=$(tput bold)
 export normal=$(tput sgr0)
 
 echo "${bold}I. FUSION PREPARATION${normal}"
-#bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # [redo] [crop] [x y dx dy]
+bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # [redo] [crop] [x y dx dy]
 
 echo ""; echo "${bold}II. COPY IMAGES ${normal}"
-#bash $DIR_BASH/copy_images.sh $4 $5 $6 $7 $8 # [crop] [x y dx dy]
+bash $DIR_BASH/copy_images.sh $4 $5 $6 $7 $8 # [crop] [x y dx dy]
 
 echo ""; echo "${bold}III. GROUND TRUTH ${normal}" 
-#bash $DIR_BASH/rasterisation_gt.sh
+bash $DIR_BASH/rasterisation_gt.sh
 
 echo ""; echo "${bold}IV. FUSION${normal}"
-#bash $DIR_BASH/fusion.sh 1 # Fusion (all)
-#bash $DIR_BASH/fusion.sh 2 # Fusion (all weighted)
+bash $DIR_BASH/fusion.sh 1 # Fusion (all)
+bash $DIR_BASH/fusion.sh 2 # Fusion (all weighted)
 
 echo ""; echo "${bold}V. CLASSIFICATION ${normal}"
-#bash $DIR_BASH/classify.sh # Classify fusion probabilities
+bash $DIR_BASH/classify.sh # Classify fusion probabilities
 
 # Fusion par classification
 for METHODE in rf svmt2 svmt0; do bash $DIR_BASH/fusion_classification.sh $METHODE; done
-exit
+
 echo ""; echo "${bold}VI. REGULARIZATION ${normal}"
 if [ "$4" = "crop" ]; then
 	bash $DIR_BASH/regularize-crop.sh # Regularize

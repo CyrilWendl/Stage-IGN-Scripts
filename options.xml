@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<application>
+ <color>
+  <rouge> 0 </rouge>
+  <vert>  0 </vert>
+  <bleu>  0 </bleu>
+ </color>
+ <bgcolor>
+  <rouge> 255 </rouge>
+  <vert>  255 </vert>
+  <bleu>  255 </bleu>
+ </bgcolor>
+ <directory>.</directory>
+ <noconsole>FAUX</noconsole>
+ <nomainframe>FAUX</nomainframe>
+ <molette_retro>FAUX</molette_retro>
+ <maximize>  0 </maximize>
+ <recent>
+   <max> 4 </max>
+ </recent>
+ <userparam>
+ </userparam>
+</application>

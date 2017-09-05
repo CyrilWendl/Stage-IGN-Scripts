@@ -22,10 +22,10 @@ ogr2ogr -sql "SELECT * FROM landuse WHERE fclass = 'residential'" -clipsrc tmp.s
 gdal_rasterize -ot Byte -ts 2069 2069 -burn 1 -l temp temp.shp OSM_residential.tif
 
 # copy to target directory
-cp OSM_residential.tif $DIR_SAVE/
+cp OSM_residential.tif $DIR_SAVE/train_osm.tif
 rm -Rf *temp* *tmp*
 
 # create jpg
 cd $DIR_SAVE
-gdal_translate -of JPEG -scale -co worldfile=yes OSM_residential.tif OSM_residential.jpg
+gdal_translate -of JPEG -scale -co worldfile=yes train_osm.tif train_osm.jpg
 rm -Rf *.aux *.wld *.xml

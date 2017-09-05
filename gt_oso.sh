@@ -1,17 +1,24 @@
 # Convert OSO to GT labels
-TILE_SPOT6=38500_32500
+REGION=$1
+TILE_SPOT6=$2
 
+DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/gt
+DIR_EXTENT=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/
 DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
 DIR_EXES=$DIR_BASH/exes
 DIR_OSO=/media/cyrilwendl/15BA65E227EC1B23/data/OSO
 
+mkdir -p $DIR_SAVE
 cd $DIR_OSO
 rm -rf masktmp
 mkdir -p masktmp
 
-# crop tp toée extemts
+# remove color table
+#gdal_translate -co COMPRESS=LZW -ot Int16 OCS_2016_CESBIO.tif OCS_2016_CESBIO_nocolor2.tif
+
+# crop extent
 rm *crop*
-bash $DIR_BASH/tools/raster_crop_resize.sh OCS_2016_CESBIO.tif ../../gironde/detail/im_$TILE_SPOT6/proba_SPOT6.tif OCS_2016_CESBIO_crop_color.tif
+bash $DIR_BASH/tools/raster_crop_resize.sh OCS_2016_CESBIO_nocolor.tif $DIR_EXTENT/proba_SPOT6.tif OCS_2016_CESBIO_crop_color.tif
 # remove color table
 gdal_calc.py -A OCS_2016_CESBIO_crop_color.tif --outfile=OCS_2016_CESBIO_crop.tif --calc="A*1" --NoDataValue=0
 
@@ -20,7 +27,12 @@ $DIR_EXES/Legende label2masqueunique nomenclature_oso.txt OCS_2016_CESBIO_crop.t
 $DIR_EXES/Legende label2masqueunique nomenclature_oso.txt OCS_2016_CESBIO_crop.tif 11 12 31 32 34 36 45 46 51 53 211 221 222 44 masktmp/nonurbain.tif
 
 # merge labels
-$DIR_EXES/Legende masques2label $DIR_BASH/legende_agg_bin.txt masktmp/ train_oso.rle
+$DIR_EXES/Legende masques2label $DIR_BASH/legende_agg_oso.txt masktmp/ train_oso.tif
 
 # visualize
-$DIR_EXES/Legende label2RVB $DIR_BASH/legende_agg_bin.txt train_oso.rle train_oso.visu.tif
+$DIR_EXES/Legende label2RVB $DIR_BASH/legende_agg_oso.txt train_oso.tif train_oso.visu.tif
+gdal_translate -of JPEG -scale -co worldfile=yes train_oso.tif train_oso.jpg
+
+rm -Rf *.log log.* *.xml *.wld masktmp/ *crop*
+mv train_oso* $DIR_SAVE/
+

@@ -34,10 +34,7 @@ $DIR_EXES/Ech_noif FusMasques mask/bati.tif mask/BATI_REMARQUABLE.tif mask/bati.
 $DIR_EXES/Ech_noif FusMasques mask/bati.tif mask/CONSTRUCTION_LEGERE.tif mask/bati.tif
 $DIR_EXES/Ech_noif FusMasques mask/SURFACE_ROUTE.tif mask/ROUTE.tif mask/route.tif
 $DIR_EXES/Ech_noif FusMasques mask/route.tif mask/TRONCON_VOIE_FERREE.tif mask/route.tif
-for layer in bati route; do
-	$DIR_EXES/Ech_noif InverseBool mask/$layer.tif mask/$layer.tif
-	$DIR_EXES/Ech_noif InverseBool mask/$layer.tif mask/$layer.tif
-done
+
 mv mask/SURFACE_EAU.tif mask/eau.tif
 mv mask/culture.tif mask/vegetation_autre.tif
 
@@ -51,6 +48,6 @@ cp proba_SPOT6.tfw train.visu.tfw
 
 # masque binaire
 $DIR_EXES/Legende aggrege $DIR_BASH/../legende_agg_bin.txt train_tout.rle train_tout_bin.rle
-#rm -Rf ./mask/
+rm -Rf ./mask/
 #$DIR_EXES/Ech_noif InverseBool masque_no_data.tif masque_no_data.tif 
 #$DIR_EXES/Ech_noif AppliqueMasque train_tout.rle masque_no_data.tif train.rle
