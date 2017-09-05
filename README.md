@@ -6,7 +6,7 @@ Folder structure of required files in folder-structure.txt
 1. _Sentinel-2_: scripts for initial classification of Sentinel-2 image using RF
 1. _detail_/master.sh: script to launch for fusion on a tile with all fusion methods
 2. _all_tiles_/master.sh: fusion of all tiles in memory
-3. _fusion_regul/master.sh: second fusion and regulation for artificialized area on tiles produced by _detail_/master.sh
+3. _fusion_regul_/master.sh: second fusion and regulation for artificialized area on tiles produced by _detail_/master.sh
 3. _fusion_regul_all_/master.sh: second fusion and regulation for artificialized area on all tiles
 4. _QGIS_/: scripts for visualization of results of /detail/master.sh
 
