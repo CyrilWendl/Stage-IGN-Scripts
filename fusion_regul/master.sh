@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Main script to use for fusion, regularization and evaluation
 
 bold=$(tput bold)

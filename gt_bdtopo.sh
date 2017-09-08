@@ -1,8 +1,9 @@
+#!/usr/bin/env bash
+
 REGION=$1
 TILE_SPOT6=$2
 
 DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/gt
-
 DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
 DIR_EXES=$DIR_BASH/exes
 
@@ -21,9 +22,9 @@ for i in {1..9}; do
 	$DIR_EXES/Ech_noif Erod train_bdtopo.tif $SE_SIZE_EROD train_bdtopo.tif
 done
 $DIR_EXES/Ech_noif Dilat train_bdtopo.tif $SE_SIZE_DILAT train_bdtopo.tif
-
 cp ../train.visu.tfw train_bdtopo.tfw
+gdal_translate -of GTiff -ot Byte train_bdtopo.tif train_bdtopo2.tif
+mv train_bdtopo2.tif train_bdtopo.tif
 gdal_translate -of JPEG -ot Byte -scale -co worldfile=yes train_bdtopo.tif train_bdtopo.jpg
 
 rm -rf *.log *.xml log.txt *.wld
-

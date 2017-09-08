@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # segmentation gui: sxsus
 
 REGUL_DIR=$DIR_SAVE/Regul_Fusion

@@ -1,5 +1,4 @@
-"""
--Plotting probabilities for a given coordinate and saving as PDF File
+"""-Plotting probabilities for a given coordinate and saving as PDF File
 """
 
 import matplotlib.pyplot as plt

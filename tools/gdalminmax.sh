@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # will yield 0 if regularization has not converged (all values the same) and 1 otherwise.
 
 FILE=$(ls $1/Regul_Fusion/Regul/regul*_0.tif)

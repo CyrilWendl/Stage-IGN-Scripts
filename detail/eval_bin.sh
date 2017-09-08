@@ -3,21 +3,26 @@
 # $2: d (dilated)
 # $3: table representations (sorted by K, OA, AA or Fmoy)
 # Saves evaluation numbers of all classifications in ./Eval 
-cd ~/fusion/im_$1
+REGION=$1
+TILE_SPOT6=$2
+DILATED=$3
+
+DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
+DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
+DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6 # target directory to save S2 and SPOT6 probabilities of tile
 
 bold=$(tput bold)
 normal=$(tput sgr0)
 
+cd $DIR_SAVE
 
-rm -rf ./Eval
-mkdir ./Eval
+mkdir -p Eval
 
-FNAME=./Eval/eval.txt
+FNAME=Eval/eval.txt
 rm -rf $FNAME
+
 # per-tile evaluation
-
-
-if [ "$2" = "d" ]; then
+if [ "$DILATED" = "d" ]; then
 	GT="train_dilat_bin.rle"
 	echo "${bold}Binary${normal} evaluation with ${bold}dilated${normal} ground truth"
 else
@@ -25,18 +30,17 @@ else
 	echo "${bold}Binary${normal} evaluation with ${bold}non-dilated${normal} ground truth"
 fi
 
-LEGENDE=~/DeveloppementBase/Scripts/legende_agg.txt
+LEGENDE=$DIR_BASH/legende_agg.txt
 
 echo "Methode Kappa OA AA Fmoy F_bat" >> $FNAME
-for CLASSIFICATION_DIR in ./Classified/Binary ./Fusion_all/Classified/Binary ./Fusion_all_weighted/Classified/Binary ; do # ./Walid
+for CLASSIFICATION_DIR in ./Classified/Binary ./Fusion_all/Classified/Binary ./Fusion_all_weighted/Classified/Binary ; do
 	for i in $CLASSIFICATION_DIR/*.rle ; do
 		CLASSIF_NAME=${i%.rle}
 		CLASSIF_NAME=${CLASSIF_NAME##*/}
 		echo -n "${CLASSIF_NAME##classif_Fusion_} " >> $FNAME
-		~/DeveloppementBase/exes/Eval $i $GT ./Eval/bm.rle $LEGENDE ./Eval/cf_${CLASSIF_NAME}.txt --Kappa --OA --AA --FScore_moy --FScore_classe 1 >> $FNAME
+		$DIR_EXES/Eval $i $GT ./Eval/bm.rle $LEGENDE ./Eval/cf_${CLASSIF_NAME}.txt --Kappa --OA --AA --FScore_moy --FScore_classe 1 >> $FNAME
 	done
 done
-#echo eval.txt
 
 for a in "$@"
 do

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 CASE=$1
 INDIR=$DIR_SAVE/Regul
 OUTDIR=$DIR_SAVE/Regul_Fusion
