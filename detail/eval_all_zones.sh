@@ -1,5 +1,8 @@
 #bash ~/DeveloppementBase/Scripts/eval_all_zones.sh 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000
 
+DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
+DIR_EXES=$DIR_BASH/exes # Executables directory
+
 bold=$(tput bold)
 normal=$(tput sgr0)
 cd ~/fusion/im_$1

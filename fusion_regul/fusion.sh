@@ -2,12 +2,12 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 
-DIR=$DIR_SAVE/Regul_Fusion
-cd $DIR
+cd $DIR_SAVE
 mkdir -p ./Fusion
 cd ./Fusion
-P1NAME="$DIR/proba_regul_urbain.tif" 
-P2NAME="$DIR/proba_S2_urbain.tif"
+
+P1NAME="$DIR_SAVE/proba_regul_urbain.tif" 
+P2NAME="$DIR_SAVE/proba_S2_urbain.tif"
 
 rm -rf bashtmp.sh makefiletmp.sh
 touch bashtmp.sh # parallelize

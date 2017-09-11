@@ -2,7 +2,7 @@
 if [ "$1" = "redo" ]; 
   then
   echo "${bold}Prepare directory${normal}"
-  rm -rf $DIR_SAVE
+  rm -Rf $DIR_SAVE
   mkdir $DIR_SAVE
 fi
 

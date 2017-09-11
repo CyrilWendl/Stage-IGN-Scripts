@@ -11,7 +11,8 @@ export TILE_SPOT6=$2 # from command line
 export DIR_BASH=~/DeveloppementBase/Scripts/fusion_regul
 export DIR_BASH_TOOLS=~/DeveloppementBase/Scripts/tools # tools directory
 export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
-export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6
+export DIR_IN=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6
+export DIR_SAVE=$DIR_IN/Binary
 
 echo "${bold}I. FUSION PREPARATION${normal}"
 bash $DIR_BASH/fusion_prep.sh 2 # create input probabilities
@@ -22,11 +23,8 @@ bash $DIR_BASH/fusion.sh
 echo ""; echo "${bold}III. CLASSIFICATION ${normal}"
 bash $DIR_BASH/classify.sh # Classify fusion probabilities
 
-# Fusion par classification (in Terminal)
-#for method in rf svmt2 svt0; do bash ~/DeveloppementBase/Scripts/fusion_classification.sh $TILE_SPOT6 method; done
- 
 echo ""; echo "${bold}IV. REGULARIZATION ${normal}"
 bash $DIR_BASH/regularize.sh # Regularize
-
-echo ""; echo "${bold}IV. SEGMENTATION ${normal}"
+exit
+echo ""; echo "${bold}V. SEGMENTATION ${normal}"
 bash $DIR_BASH/segmentation.sh # Regularize

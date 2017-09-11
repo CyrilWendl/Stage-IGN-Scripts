@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# segmentation gui: sxsus
 
-REGUL_DIR=$DIR_SAVE/Regul_Fusion
-cd $REGUL_DIR
- 
+cd $DIR_SAVE
+
 mkdir -p Seg # temporary directory to save files
 cd Seg
 rm -Rf *
