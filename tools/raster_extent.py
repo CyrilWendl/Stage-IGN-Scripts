@@ -1,3 +1,5 @@
+# get raster extent xmin, ymin, xmax, ymax
+
 import sys, gdal
 from gdalconst import GA_ReadOnly
 

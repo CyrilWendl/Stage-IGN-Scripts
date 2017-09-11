@@ -65,3 +65,4 @@ for method in bdtopo oso osm; do
 	mv overlay_T${TILE_SPOT6}_gt_$method.jpg $DIR_SAVE/web/T${TILE_SPOT6}_gt_$method.jpg
 done
 
+
