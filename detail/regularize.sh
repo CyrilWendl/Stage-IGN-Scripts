@@ -36,8 +36,8 @@ for FUSION_PROB in "Im_SPOT6_G$SIGMA" "Fusion_all_weighted/proba_Fusion_$FUSION_
 			y=${vals[$j]}
 			diff_x=$(expr ${vals[$i+1]} - ${vals[$i]})
 			diff_y=$(expr ${vals[$j+1]} - ${vals[$j]})
-			echo -n "gdal_translate -srcwin $x $y $diff_x $diff_y $FUSION_PROB.tif $FUSION_PROB\_crop_${x}_${y}.tif;" >> bashtmp.sh
-			echo "listgeo ${FUSION_PROB}_crop_${x}_${y}.tif -tfw" >> bashtmp.sh
+			echo -n "gdal_translate -srcwin $x $y $diff_x $diff_y $FUSION_PROB.tif ${FUSION_PROB}_crop_${x}_${y}.tif;" >> bashtmp.sh
+			echo "listgeo -tfw ${FUSION_PROB}_crop_${x}_${y}.tif" >> bashtmp.sh
 		done
 	done
 done
@@ -74,7 +74,7 @@ for FUSION_PROB in "Fusion_all_weighted/proba_Fusion_$FUSION_METHOD"; do
 	echo $FILENAMES_CROP
 	echo $FILENAMES_CROP_VISU
 	$DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
-	make -f makefiletmp -j 8
+	make -f makefiletmp -j 16
 	rm makefiletmp bashtmp.sh
 	
 	# merge regularization result and visualization

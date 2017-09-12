@@ -12,11 +12,12 @@ rm -rf bashtmp.sh makefiletmp
 
 # weighted
 OUTDIR="$DIR_SAVE/Fusion_all_weighted"
-rm -Rf $OUTDIR 
+rm -Rf $OUTDIR
 mkdir -p $OUTDIR
 for method in Min Max Compromis CompromisWO Prior1 Prior2 "Marge:Max" "Marge:SommePond" "Marge:BayesPond" "DS:MasseSomme" "DS:MasseV1" "DS:MasseV2" Moyenne Bayes; do
 	savename=$(echo $method|sed 's/:/_/g')
 	echo "$DIR_EXES/FusProb Fusion:$method $DIR_SAVE/proba_SPOT6_weighted.tif $DIR_SAVE/proba_S2_weighted.tif $OUTDIR/proba_Fusion_${savename}_weighted.tif" >> bashtmp.sh
+	cp $DIR_SAVE/proba_SPOT6.tfw $OUTDIR/proba_Fusion_${savename}_weighted.tfw
 done
 
 # original probability
@@ -26,19 +27,16 @@ mkdir -p $OUTDIR
 for method in Min Max Compromis CompromisWO Prior1 Prior2 "Marge:Max" "Marge:SommePond" "Marge:BayesPond" "DS:MasseSomme" "DS:MasseV1" "DS:MasseV2" Moyenne; do
 	savename=$(echo $method|sed 's/:/_/g')
 	echo "$DIR_EXES/FusProb Fusion:$method $DIR_SAVE/proba_SPOT6.tif $DIR_SAVE/proba_S2.tif $OUTDIR/proba_Fusion_$savename.tif" >> bashtmp.sh
+	cp $DIR_SAVE/proba_SPOT6.tfw $OUTDIR/proba_Fusion_$savename.tfw
 done
-
 $DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
 make -f makefiletmp -j 10
 rm makefiletmp bashtmp.sh
 
-# copy tfw files
-for methode in Min Max Compromis CompromisWO Prior1 Prior1-inv Prior2 Prior2-inv Marge_Max Marge_SommePond Marge_BayesPond DS_MasseSomme DS_MasseV1 DS_MasseV2 Moyenne Bayes;do
-  cp ../proba_SPOT6.tfw proba_Fusion_$methode$WEIGHTED.tfw
-done
-
 # remove composite classes
 for methode in DS_MasseSomme DS_MasseV1 DS_MasseV2;do
-	gdal_translate -b 1 -b 2 -b 3 -b 4 -b 5 proba_Fusion_$methode$WEIGHTED.tif tmp.tif # keep only 5 first classes
-	mv tmp.tif proba_Fusion_$methode$WEIGHTED.tif
+	gdal_translate -b 1 -b 2 -b 3 -b 4 -b 5 $OUTDIR/proba_Fusion_$methode.tif $OUTDIR/tmp.tif
+	mv $OUTDIR/tmp.tif $OUTDIR/proba_Fusion_$methode.tif
+	gdal_translate -b 1 -b 2 -b 3 -b 4 -b 5 ${OUTDIR}_weighted/proba_Fusion_${methode}_weighted.tif ${OUTDIR}_weighted/tmp.tif
+	mv ${OUTDIR}_weighted/tmp.tif ${OUTDIR}_weighted/proba_Fusion_${methode}_weighted.tif
 done
