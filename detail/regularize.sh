@@ -1,4 +1,4 @@
-FUSION_METHOD=svmt2
+FUSION_METHOD=$1
 LEGENDE=legende_gt_6cl.txt
 
 # Regularization parameters
@@ -74,7 +74,7 @@ for FUSION_PROB in "Fusion_all_weighted/proba_Fusion_$FUSION_METHOD"; do
 	echo $FILENAMES_CROP
 	echo $FILENAMES_CROP_VISU
 	$DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
-	make -f makefiletmp -j 16
+	make -f makefiletmp -j 8
 	rm makefiletmp bashtmp.sh
 	
 	# merge regularization result and visualization

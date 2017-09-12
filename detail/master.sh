@@ -46,26 +46,26 @@ echo ""; echo "${bold}III. GROUND TRUTH ${normal}"
 bash $DIR_BASH/rasterisation_gt.sh
 
 echo ""; echo "${bold}IV. FUSION${normal}"
-bash $DIR_BASH/fusion.sh 1 # Fusion (all)
-bash $DIR_BASH/fusion.sh 2 # Fusion (all weighted)
+bash $DIR_BASH/fusion.sh # Fusion
 
 echo ""; echo "${bold}V. CLASSIFICATION ${normal}"
 bash $DIR_BASH/classify.sh # Classify fusion probabilities
 
-# Fusion par classification
+echo ""; echo "${bold}VI. CLASSIFICATION FUSION ${normal}"
 for METHODE in rf svmt2 svmt0; do bash $DIR_BASH/fusion_classification.sh $METHODE; done
 
-echo ""; echo "${bold}VI. REGULARIZATION ${normal}"
+echo ""; echo "${bold}VII. REGULARIZATION ${normal}"
 if [ "$4" = "crop" ]; then
 	bash $DIR_BASH/regularize-crop.sh # Regularize
 else
-	bash $DIR_BASH/regularize.sh # Regularize
+	bash $DIR_BASH/regularize.sh svmt2 # Regularize
+	bash $DIR_BASH/regularize.sh Min_weighted # Regularize
 fi
 
-echo ""; echo "${bold}VII. EVALUATION ${normal}" 
+echo ""; echo "${bold}VIII. EVALUATION ${normal}" 
 bash $DIR_BASH/eval.sh AA bat # params (d) (AA) (OA) (Fmoy) (K)
 
-#echo ""; echo "${bold}VIII. URBAN FOOTPRINT ${normal}" 
+echo ""; echo "${bold}IX. URBAN FOOTPRINT ${normal}" 
 bash $DIR_BASH/../fusion_regul/master.sh $REGION $TILE_SPOT6
 
 #bash $DIR_BASH/binary.sh $TILE_SPOT6
