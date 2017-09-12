@@ -10,16 +10,21 @@ mkdir ./Eval
 
 FNAME=./Eval/eval.txt
 rm -rf $FNAME
-# per-tile evaluation
 
-if [ "$1" = "d" ]; then
-	GT="train_dilat.rle"
-	echo "Evaluation with ${bold}dilated${normal} ground truth"
-else
-	GT="train_tout.rle"
-	echo "Evaluation with ${bold}non-dilated${normal} ground truth"
-fi
+GT="train_tout.rle"
 
+# convert rf, svm, svmt0 and GT to 5cl labels
+cd $DIR_SAVE
+BASE=Fusion_all_weighted/Classified/classif_Fusion_
+for file in train_tout ${BASE}rf ${BASE}svmt0 ${BASE}svmt2 Regul/regul_svmt2_G2_l1000_g70_e500_0_0_0; do
+	continue;
+	Ech_noif Format $file.rle $file.tif # create tif for gdal_calc.py
+	gdal_calc.py -A $file.tif --calc="A*(A<6)" --outfile="${file}_5cl.tif" # convert class 6 -> class 0
+	rm $file.tif # create tif for gdal_calc.py
+	Ech_noif Format ${file}_5cl.tif $file.rle # create tif for gdal_calc.py # convert back (overwrite) rle
+done
+
+# Evaluation
 HDR="Methode Kappa OA AA Fmoy F_bat"
 echo $HDR >> $FNAME
 for CLASSIFICATION_DIR in ./Classified ./$SUBFOLDER/Classified ./Fusion_all/Classified ./Regul ; do #./Walid 

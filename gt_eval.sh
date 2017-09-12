@@ -11,7 +11,7 @@ rm -rf * ../*resized*
 
 for compare in Classified/classif_regul_urbain Classified/classif_S2_urbain Fusion/Classified/classif_Fusion_Min Fusion/Classified/classif_Fusion_Bayes Regul/regul_proba_Fusion_Min_100_1000_100_0_100_70_100_200_0_0_0 Seg/regul_seg_maj_3; do
 	mkdir $(basename $compare)
-	FILE_IM=$DIR_SPOT6/Regul_Fusion/$compare
+	FILE_IM=$DIR_SPOT6/Binary/$compare
 	Ech_noif Format $FILE_IM.rle $FILE_IM.tif
 	#resize to resolution of tile
 	gdal_translate -outsize 2069 2069 -of GTiff $FILE_IM.tif $DIR_SPOT6/gt/eval/$(basename $compare)-resized.tif

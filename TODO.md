@@ -17,3 +17,9 @@
 # Rapport
 - BD Parcellaire pour raffiner regularisation
 - Commentaires NC
+
+# Questions
+- Méthodes de fusion: bayesien, marge etc.
+- Structure rapport: séparation méthodologie / mise en oeuvre
+- Segmentation
+- Anne: Artificial area or urban Area? 

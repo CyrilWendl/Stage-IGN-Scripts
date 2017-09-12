@@ -37,17 +37,17 @@ export bold=$(tput bold)
 export normal=$(tput sgr0)
 
 echo "${bold}I. FUSION PREPARATION${normal}"
-#bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # [redo] [crop] [x y dx dy]
+bash $DIR_BASH/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # [redo] [crop] [x y dx dy]
 
 echo ""; echo "${bold}II. COPY IMAGES ${normal}"
-#bash $DIR_BASH/copy_images.sh $4 $5 $6 $7 $8 # [crop] [x y dx dy]
+bash $DIR_BASH/copy_images.sh $4 $5 $6 $7 $8 # [crop] [x y dx dy]
 
 echo ""; echo "${bold}III. GROUND TRUTH ${normal}" 
-#bash $DIR_BASH/rasterisation_gt.sh
+bash $DIR_BASH/rasterisation_gt.sh
 
 echo ""; echo "${bold}IV. FUSION${normal}"
 bash $DIR_BASH/fusion.sh # Fusion
-exit
+
 echo ""; echo "${bold}V. CLASSIFICATION ${normal}"
 bash $DIR_BASH/classify.sh # Classify fusion probabilities
 
@@ -63,7 +63,7 @@ else
 fi
 
 echo ""; echo "${bold}VIII. EVALUATION ${normal}" 
-bash $DIR_BASH/eval.sh AA bat # params (d) (AA) (OA) (Fmoy) (K)
+bash $DIR_BASH/eval.sh AA FBat # params (d) (AA) (OA) (Fmoy) (K)
 
 echo ""; echo "${bold}IX. URBAN FOOTPRINT ${normal}" 
 bash $DIR_BASH/../fusion_regul/master.sh $REGION $TILE_SPOT6

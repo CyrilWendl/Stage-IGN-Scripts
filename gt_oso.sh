@@ -28,10 +28,6 @@ $DIR_EXES/Legende label2masqueunique nomenclature_oso.txt OCS_2016_CESBIO_crop.t
 
 # merge labels
 $DIR_EXES/Legende masques2label $DIR_BASH/legende_agg_oso.txt masktmp/ train_oso.tif
-
-# visualize
-gdal_translate -of JPEG -scale -co worldfile=yes train_oso.tif train_oso.jpg
-
 rm -Rf *.log log.* *.xml *.wld masktmp/ *crop*
 mv train_oso* $DIR_SAVE/
 cp $DIR_SAVE/../Im_SPOT6.tfw train_oso.tfw

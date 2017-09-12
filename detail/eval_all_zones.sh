@@ -1,4 +1,4 @@
-# bash ~/DeveloppementBase/Scripts/eval_all_zones.sh 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000
+# bash ~/DeveloppementBase/Scripts/detail/eval_all_zones.sh 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000
 
 REGION=finistere
 DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
@@ -22,12 +22,11 @@ cd $DIR_SAVE/im_$1
 rm -rf makefiletmp bashtmp.sh
 touch bashtmp.sh
 
-# TODO convert rf, svm, svmt0 and GT to 5cl labels
+# convert rf, svm, svmt0 and GT to 5cl labels
 BASE=Fusion_all_weighted/Classified/classif_Fusion_
 for a in "${@:1:5}"; do # LOOP 5 first input arguments
 	cd $DIR_SAVE/im_$a
 	for file in train_tout ${BASE}rf ${BASE}svmt0 ${BASE}svmt2 Regul/regul_svmt2_G2_l1000_g70_e500_0_0_0; do
-		continue;
 		Ech_noif Format $file.rle $file.tif # create tif for gdal_calc.py
 		gdal_calc.py -A $file.tif --calc="A*(A<6)" --outfile="${file}_5cl.tif" # convert class 6 -> class 0
 		rm $file.tif # create tif for gdal_calc.py

@@ -23,11 +23,5 @@ EXT=$(python $DIR_BASH/tools/raster_extent.py $EXTENT) # get raster extent
 
 gdal_rasterize -ot Byte -ts 2069 2069 -te $EXT -a_srs EPSG:2154 -burn 1 -l temp-landuse-crop temp-landuse-crop.shp $DIR_SAVE/train_osm.tif
 
-# rasterize extent and fill with nodata value
 rm -Rf *temp* *tmp*
-
-# create jpg
-cd $DIR_SAVE
-gdal_translate -of JPEG -scale -co worldfile=yes train_osm.tif train_osm.jpg
-rm -Rf *.aux *.wld *.xml
-cp ../Im_SPOT6.tfw train_osm.tfw
+cp $DIR_SAVE/../Im_SPOT6.tfw $DIR_SAVE/train_osm.tfw

@@ -25,6 +25,6 @@ bash $DIR_BASH/classify.sh # Classify fusion probabilities
 
 echo ""; echo "${bold}IV. REGULARIZATION ${normal}"
 bash $DIR_BASH/regularize.sh # Regularize
-exit
+
 echo ""; echo "${bold}V. SEGMENTATION ${normal}"
 bash $DIR_BASH/segmentation.sh # Regularize

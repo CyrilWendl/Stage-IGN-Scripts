@@ -12,6 +12,7 @@ mkdir -p $DIR_SAVE
 cd $DIR_SAVE
 
 $DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt ../train_tout.rle 1 train_bdtopo.tif # get binary mask of regulation (buildings)
+cp train_bdtopo.tif train_bdtopo_original.tif 
 
 # dilate
 SE_SIZE_DILAT=12
@@ -24,7 +25,5 @@ done
 $DIR_EXES/Ech_noif Dilat train_bdtopo.tif $SE_SIZE_DILAT train_bdtopo.tif
 cp ../train.visu.tfw train_bdtopo.tfw
 gdal_translate -of GTiff -ot Byte train_bdtopo.tif train_bdtopo2.tif
-mv train_bdtopo2.tif train_bdtopo.tif
-gdal_translate -of JPEG -ot Byte -scale -co worldfile=yes train_bdtopo.tif train_bdtopo.jpg
-
+mv train_bdtopo2.tif train_bdtopo_dilat.tif
 rm -rf *.log *.xml log.txt *.wld
