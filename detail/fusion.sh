@@ -30,7 +30,7 @@ for method in Min Max Compromis CompromisWO Prior1 Prior2 "Marge:Max" "Marge:Som
 	cp $DIR_SAVE/proba_SPOT6.tfw $OUTDIR/proba_Fusion_$savename.tfw
 done
 $DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
-make -f makefiletmp -j 10
+make -f makefiletmp -j 16
 rm makefiletmp bashtmp.sh
 
 # remove composite classes for DS

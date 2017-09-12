@@ -4,19 +4,19 @@
 - FScore, Intersection sur l'union (Clément) 
 
 # Evaluation 5 classes
-- Fusion par classification: label 6 -> label 0
-- Evaluation sur la gironde
+x- Evaluation sur la gironde
 
 # Gironde
 - Faire de nouveaux test
 
 # Tâche urbaine
-- En utilisant la méthode rf
+- En utilisant la méthode svmt2
 - Batiments proba moy. après la fusion avec erosion sur le masque
 
 # Rapport
-- BD Parcellaire pour raffiner regularisation
+- Commentaires AB
 - Commentaires NC
+- Commentaires FDM
 
 # Questions
 - Méthodes de fusion: bayesien, marge etc.

@@ -2,7 +2,7 @@
 # create a few ground truth maps for a given tile
 REGION=$1
 TILE_SPOT6=$2
-DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
+DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts/detail
 DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/gt
 
 echo "1. OSM"
