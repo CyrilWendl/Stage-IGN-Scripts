@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # create a few ground truth maps for a given tile
 REGION=$1
 TILE_SPOT6=$2

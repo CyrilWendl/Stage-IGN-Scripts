@@ -1,7 +1,3 @@
-#!/bin/sh
-# $1: tile number
-# $2: d (dilated)
-# $3: table representations (sorted by K, OA, AA or Fmoy)
 # Saves evaluation numbers of all classifications in ./Eval 
 REGION=$1
 TILE_SPOT6=$2
@@ -21,14 +17,7 @@ mkdir -p Eval
 FNAME=Eval/eval.txt
 rm -rf $FNAME
 
-# per-tile evaluation
-if [ "$DILATED" = "d" ]; then
-	GT="train_dilat_bin.rle"
-	echo "${bold}Binary${normal} evaluation with ${bold}dilated${normal} ground truth"
-else
-	GT="train_tout_bin.rle"
-	echo "${bold}Binary${normal} evaluation with ${bold}non-dilated${normal} ground truth"
-fi
+GT="train_tout_bin.rle"
 
 LEGENDE=$DIR_BASH/legende_agg.txt
 

@@ -4,7 +4,7 @@
 - FScore, Intersection sur l'union (Clément) 
 
 # Evaluation 5 classes
-x- Evaluation sur la gironde
+- Evaluation sur la gironde
 
 # Gironde
 - Faire de nouveaux test

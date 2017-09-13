@@ -19,12 +19,45 @@ Background_SPOT_Affiche=False
 Regul_Ouvert=True
 Opacity_Layers=0.7
 
-def showFusion(index):
+def showSegmentationBin(index):
+    group_seg=root.insertGroup(index,"Segmentation")
+    # Fusion Classification
+    # load raster layers
+    for im_dir in natsorted(im_dirs):
+        fusion_cl_dir=base_dirs + "im_" + im_dir +  "/Binary/Seg"
+        for files in natsorted(os.listdir(fusion_cl_dir)):
+            # load only raster layers
+            if files.endswith(".visu.tif"):
+                subgroup = group_seg.insertGroup(2, files)
+                subgroup.setExpanded(Fusion_Sub_Ouvert)
+                rlayer = QgsRasterLayer(fusion_cl_dir + "/" + files, files)
+                rlayer.renderer().setOpacity(Opacity_Layers) 
+                
+                # add layer to the registry
+                QgsMapLayerRegistry.instance().addMapLayer(rlayer,False)
+                subgroup.addLayer(rlayer)
+                
+                legend = qgis.utils.iface.legendInterface()  # access the legend
+                legend.setLayerVisible(rlayer, Fusion_Affiche)  # hide the layer
+                # original classification
+                
+                # bashowSegmentationBinckground image (SPOT6)
+                rlayer = QgsRasterLayer(base_dirs + "im_" + im_dir + "/Im_SPOT6.tif", "Im_SPOT6")
+                QgsMapLayerRegistry.instance().addMapLayer(rlayer,False)
+                subgroup.addLayer(rlayer)
+                legend = qgis.utils.iface.legendInterface()  # access the legend
+                legend.setLayerVisible(rlayer, False)  # hide the layer
+                qgis.utils.iface.mapCanvas().refresh()
+                subgroup.setExpanded(False)
+                    
+    group_seg.setExpanded(Fusion_Ouvert)
+
+def showFusionBin(index):
     group_fus=root.insertGroup(index,"Fusion")
     # Fusion Classification
     # load raster layers
     for im_dir in natsorted(im_dirs):
-        fusion_cl_dir=base_dirs + "im_" + im_dir +  "/Regul_Fusion/Fusion/Classified"
+        fusion_cl_dir=base_dirs + "im_" + im_dir +  "/Binary/Fusion/Classified"
         for files in natsorted(os.listdir(fusion_cl_dir)):
             # load only raster layers
             if files.endswith(".visu.tif"):
@@ -55,10 +88,10 @@ def showFusion(index):
 def showRegulBin(index):
     # Fusion Classification
     # load raster layers
-    group_reg=root.insertGroup(index,"Regulation")
+    group_reg=root.insertGroup(index,"Regulation Binary")
     print im_dirs[0]
     for im_dir in natsorted(im_dirs, reverse=True):
-        fusion_cl_dir=base_dirs + "im_" + im_dir +  "/Regul_Fusion/Regul"
+        fusion_cl_dir=base_dirs + "im_" + im_dir +  "/Binary/Regul"
         subgroup = group_reg.insertGroup(1, im_dir)
         for files in natsorted(os.listdir(fusion_cl_dir), reverse=True):
             # load only raster layers
@@ -123,7 +156,7 @@ def showOriginal(index): #Original S2 and S6 classifications
     orig_group = root.insertGroup(index, "Original Classification")
     for im_dir in natsorted(im_dirs):
         subgroup = orig_group.insertGroup(1, im_dir)
-        cl_dir=base_dirs + "im_" + im_dir + "/Regul_Fusion/Classified"
+        cl_dir=base_dirs + "im_" + im_dir + "/Binary/Classified"
         for files in natsorted(os.listdir(cl_dir)):
             # load only raster layers
             if files.endswith(".visu.tif"):
@@ -185,9 +218,11 @@ def main():
     
     # Groups
     root.removeAllChildren () # clean up
-    showRegul(1)
-    showFusion(2)
-    showOriginal(3)
-    showGT(4)    
+    showSegmentationBin(1)
+    showRegulBin(2)
+    showFusionBin(3)
+    showRegul(4)
+    showOriginal(5)
+    showGT(6)
 
 main()

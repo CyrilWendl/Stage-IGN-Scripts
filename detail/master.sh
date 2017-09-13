@@ -1,6 +1,6 @@
 ## Main script to use for fusion, regularization and evaluation
 # to be called as: sh master.sh [TILE_SPOT6] ([redo]) ([crop window])
-# tiles finistere: 41000_3000 39000_40000 39000_42000 41000_40000 41000_42000
+# tiles finistere: 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000
 # tiles gironde  : 24500_18500 26500_18500 24500_20500 26500_20500 28500_32500 30500_30500
 
 # Global variables

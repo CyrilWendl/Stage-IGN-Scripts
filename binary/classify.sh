@@ -1,5 +1,3 @@
-#!bash/bin
-
 # classify original probabilities (SPOT6, S2)
 cd $DIR_SAVE
 

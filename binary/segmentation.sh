@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 cd $DIR_SAVE
 
 mkdir -p Seg # temporary directory to save files
@@ -29,7 +27,7 @@ for seg_cut in ${seg_cuts[@]};do
 	# majority voting (labels of regulation within segmentation)
 	Pleiades VoteRegion maj test-$seg_cut.tif $REGUL_FUSION regul_seg_maj_$seg_cut.tif
 	# create visu.tif
-	$DIR_EXES/Legende label2RVB $DIR_SAVE/legende.txt regul_seg_maj_$seg_cut.tif regul_seg_maj_$seg_cut.visu.tif;
+	$DIR_EXES/Legende label2RVB $DIR_BASH/../legende.txt regul_seg_maj_$seg_cut.tif regul_seg_maj_$seg_cut.visu.tif;
 done
 
 cp $REGUL_FUSION regul.tif

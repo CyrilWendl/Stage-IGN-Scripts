@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 CASE=$1
 
 rm -Rf $DIR_SAVE

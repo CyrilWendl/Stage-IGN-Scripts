@@ -1,10 +1,12 @@
-# bash ~/DeveloppementBase/Scripts/detail/eval_all_zones.sh 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000
-
-REGION=finistere
+# bash ~/DeveloppementBase/Scripts/detail/eval_all_zones.sh [region] [tile1] [tile1] [tile1] [tile1] [tile1] [arguments]
+# tiles finistere: 41000_30000 39000_40000 39000_42000 41000_40000 41000_42000
+# tiles gironde  : 24500_18500 26500_18500 24500_20500 26500_20500 28500_32500 30500_30500
+REGION=$1
 DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
 DIR_EXES=$DIR_BASH/exes # Executables directory
 DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail # target directory to save S2 and
-
+TILES=${@:2:6} # TODO change argument positions for tiles
+echo "Tiles: $TILES"
 bold=$(tput bold)
 normal=$(tput sgr0)
 cd $DIR_SAVE
@@ -18,13 +20,13 @@ rm -rf $FNAME
 echo "Methode Kappa OA AA Fmoy F_bat" >> $FNAME
 
 # 1. METHOD LOOP
-cd $DIR_SAVE/im_$1
+cd $DIR_SAVE/im_$2
 rm -rf makefiletmp bashtmp.sh
 touch bashtmp.sh
 
 # convert rf, svm, svmt0 and GT to 5cl labels
 BASE=Fusion_all_weighted/Classified/classif_Fusion_
-for a in "${@:1:5}"; do # LOOP 5 first input arguments
+for a in $TILES; do # LOOP input arguments 2-6
 	cd $DIR_SAVE/im_$a
 	for file in train_tout ${BASE}rf ${BASE}svmt0 ${BASE}svmt2 Regul/regul_svmt2_G2_l1000_g70_e500_0_0_0; do
 		Ech_noif Format $file.rle $file.tif # create tif for gdal_calc.py
@@ -44,8 +46,7 @@ for CLASSIFICATION_DIR in Classified Fusion_all_weighted/Classified Fusion_all/C
 		echo -n "echo -n \"${CLASSIF_NAME##classif_Fusion_} \" >> $FNAME;" >> bashtmp.sh
 		# 2. TILES LOOP (get addresses for one method)
 		M_GT=""
-		for a in "${@:1:5}" # LOOP 5 first input arguments
-		do
+		for a in $TILES; do # LOOP 5 first input arguments
 			GT="$DIR_SAVE/im_$a/train_tout.rle"
 			M="$DIR_SAVE/im_$a/$CLASSIFICATION_DIR/$CLASSIF_NAME.rle"
 			M_GT="$M_GT$M $GT "

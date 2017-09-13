@@ -1,12 +1,7 @@
-# input: 
-# 1: tile number 
+REGION=$1
+TILE_SPOT6=$2
 
-if [ $# -lt 1 ]
-  then
-    return "At least one  argument expected: tile number"
-fi
-
-BDIR="/home/cyrilwendl/fusion/im_$1"
+BDIR="/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6"
 cd $BDIR
 
 ## CONVERSION BINAIRE
