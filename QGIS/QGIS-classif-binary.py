@@ -8,9 +8,11 @@ import qgis
 root = QgsProject.instance().layerTreeRoot()
 
 # global parametersc
-base_dirs = '/media/cyrilwendl/15BA65E227EC1B23/finistere/detail/'
-im_dirs = ["41000_30000"]
+base_dirs = '/media/cyrilwendl/15BA65E227EC1B23/gironde/detail/'
+#im_dirs = ["41000_30000"]
 #im_dirs = ["im_41000_30000", "im_39000_40000","im_39000_42000", "im_41000_40000", "im_41000_42000"]
+im_dirs = ["24500_18500,26500_18500,28500_32500,38500_32500,10500_34500,24500_20500,26500_20500,30500_30500"]
+
 
 Fusion_Ouvert=True
 Fusion_Sub_Ouvert=False

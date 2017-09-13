@@ -10,7 +10,7 @@
 - Faire de nouveaux test
 
 # Tâche urbaine
-- En utilisant la méthode svmt2
+- En utilisant la méthode svmt2 / rf
 - Batiments proba moy. après la fusion avec erosion sur le masque
 
 # Rapport

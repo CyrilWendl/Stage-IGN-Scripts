@@ -13,10 +13,6 @@ export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
 export DIR_IN=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6
 export DIR_SAVE=$DIR_IN/Binary
 
-rm -rf $DIR_SAVE
-mkdir -p $DIR_SAVE
-cd $DIR_SAVE
-exit
 echo "${bold}I. FUSION PREPARATION${normal}"
 bash $DIR_BASH/fusion_prep.sh 2 # create input probabilities
 
