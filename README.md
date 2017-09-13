@@ -3,11 +3,12 @@ A series of scripts for fusion of two classifications probabilities.
 Folder structure of required files in folder-structure.txt
 
 ## Files to use
-- _detail_/master.sh: fusion on a tile with all fusion methods
+- _detail_/master.sh: fusion on a tile with all fusion methods, calls:
+  - _binary_/master.sh: binary fusion and regulation for artificialized area on tiles produced by _detail_/master.sh
+  - _tools_/: various generic scripts (gdal, etc.)
 - _all_tiles_/master.sh: fusion of all tiles in memory
+  - _binary_all_/master.sh: binary fusion and regulation for artificialized area on all tiles
 - _Sentinel-2_: initial classification of Sentinel-2 image using RF
-- _bomary_/master.sh: binary fusion and regulation for artificialized area on tiles produced by _detail_/master.sh
-- _binary_all_/master.sh: binary fusion and regulation for artificialized area on all tiles
 - _QGIS_/: scripts for visualization of results of /detail/master.sh
 
 ## System Requirements
