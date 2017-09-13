@@ -49,7 +49,7 @@ ec	echo ""; echo "${bold}II. COPY IMAGES ${normal}"
 	bash $DIR_BASH/copy_images.sh $TILE_SPOT6
 
 	echo ""; echo "${bold}III. FUSION${normal}"
-	bash $DIR_BASH/fusion.sh 4 $TILE_SPOT6 # Fusion (all weighted)
+	bash $DIR_BASH/fusion.sh $TILE_SPOT6 # Fusion (all weighted)
 	
 	echo ""; echo "${bold}V. CLASSIFICATION ${normal}"
 	bash $DIR_BASH/classify.sh $TILE_SPOT6 weighted # Classify fusion probabilities

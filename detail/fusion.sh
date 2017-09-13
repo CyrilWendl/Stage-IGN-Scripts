@@ -29,6 +29,14 @@ for method in Min Max Compromis CompromisWO Prior1 Prior2 "Marge:Max" "Marge:Som
 	echo "$DIR_EXES/FusProb Fusion:$method $DIR_SAVE/proba_SPOT6.tif $DIR_SAVE/proba_S2.tif $OUTDIR/proba_Fusion_$savename.tif" >> bashtmp.sh
 	cp $DIR_SAVE/proba_SPOT6.tfw $OUTDIR/proba_Fusion_$savename.tfw
 done
+
+for method in Prior1 Prior2; do
+	echo "$DIR_EXES/FusProb Fusion:$method $DIR_SAVE/proba_S2_weighted.tif $DIR_SAVE/proba_SPOT6_weighted.tif $DIR_SAVE/Fusion_all_weighted/proba_Fusion_${method}_inv_weighted.tif" >> bashtmp.sh
+	cp $DIR_SAVE/proba_SPOT6.tfw $DIR_SAVE/Fusion_all_weighted/proba_Fusion_${method}_inv_weighted.tfw
+	echo "$DIR_EXES/FusProb Fusion:$method $DIR_SAVE/proba_S2.tif $DIR_SAVE/proba_SPOT6.tif $DIR_SAVE/Fusion_all/proba_Fusion_${method}_inv.tif" >> bashtmp.sh
+	cp $DIR_SAVE/proba_SPOT6.tfw $DIR_SAVE/Fusion_all/proba_Fusion_${method}_inv.tfw
+done
+
 $DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
 make -f makefiletmp -j 16
 rm makefiletmp bashtmp.sh

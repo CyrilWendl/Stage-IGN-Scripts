@@ -59,11 +59,19 @@ for n in 3 8 15 20 30; do
 done
 
 # ground truth
-for method in bdtopo_original bdtopo oso osm; do
+for method in bdtopo oso osm; do
 	convert $DIR_SAVE/gt/train_$method.jpg -resize 1000X1000 $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_gt_$method.jpg
 	#overlay map
 	composite -blend 50% $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_Im_SPOT6_resized.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_gt_$method.jpg overlay_T${TILE_SPOT6}_gt_$method.jpg
 	mv overlay_T${TILE_SPOT6}_gt_$method.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_gt_$method.jpg
+	#binary evaluation
+	convert $DIR_SAVE/gt/eval/regul_seg_maj_8/${REGION}_T${TILE_SPOT6}_$method-regul_seg_maj_8.jpg -resize 1000X1000 $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_gt_eval_$method-regul_seg_maj_8.jpg
+	composite -blend 50% $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_Im_SPOT6_resized.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_gt_eval_$method-regul_seg_maj_8.jpg overlay_${REGION}_T${TILE_SPOT6}_$method-regul_seg_maj_8.jpg
+	mv overlay_${REGION}_T${TILE_SPOT6}_$method-regul_seg_maj_8.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_gt_eval_$method-regul_seg_maj_8.jpg
+	
 done
+
+
+
 
 

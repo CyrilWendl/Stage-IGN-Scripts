@@ -1,4 +1,4 @@
-nonurbain_g 0 255 150 150
-nonurbain_b 1 150 255 150
-urbain_b 2 0 255 0
-urbain_g 3 255 0 0
+nonurbain_g 0 100 255 100
+nonurbain_b 1 0 0 255
+urbain_b 2 255 0 0
+urbain_g 3 0 255 0
