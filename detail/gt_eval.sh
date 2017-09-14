@@ -16,8 +16,8 @@ for compare in Regul/regul_proba_Fusion_Min_100_1000_100_0_100_70_100_200_0_0_0 
 	#resize to resolution of tile
 	gdal_translate -outsize 2069 2069 -of GTiff $FILE_IM.tif $DIR_SPOT6/gt/eval/$(basename $compare)-resized.tif
 	# same labels (0, 1)
-	gdal_calc.py  -A $DIR_SPOT6/gt/eval/$(basename $compare)-resized.tif --calc='-(A-1)+1' --outfile="$DIR_SPOT6/gt/eval/$(basename $compare)-resized-1.tif" 
-	mv $DIR_SPOT6/gt/eval/$(basename $compare)-resized-1.tif $DIR_SPOT6/gt/eval/$(basename $compare)-resized.tif
+	gdal_calc.py -A $DIR_SPOT6/gt/eval/$(basename $compare)-resized.tif --calc='-(A/2)+1' --outfile="$DIR_SPOT6/gt/eval/$(basename $compare)-resized-1.tif" 
+	cp $DIR_SPOT6/gt/eval/$(basename $compare)-resized-1.tif $DIR_SPOT6/gt/eval/$(basename $compare)-resized.tif
 	FILE_IM=$DIR_SPOT6/gt/eval/$(basename $compare)-resized
 	for methode in bdtopo oso osm; do
 		FILE_GT=$DIR_SPOT6/gt/train_$methode
