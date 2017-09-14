@@ -14,13 +14,13 @@ mkdir -p $DIR_SAVE
 # extract ground truths
 
 echo "BDTOPO"
-bash $DIR_BASH/all/rasterisation_gt.sh
-bash $DIR_BASH/all/gt_bdtopo.sh
+#bash $DIR_BASH/all/rasterisation_gt.sh
+#bash $DIR_BASH/all/gt_bdtopo.sh
 echo "OSO"
 #bash $DIR_BASH/all/gt_oso.sh
 echo "OSM"
 #bash $DIR_BASH/all/gt_osm.sh
-exit
+
 echo "VISUALIZE"
 cd $DIR_SAVE
 for gt in osm oso bdtopo_dilat bdtopo; do
