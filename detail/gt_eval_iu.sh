@@ -55,6 +55,10 @@ rm -rf eval-bin.txt
 echo "Classif GT F-Score_bat Kappa OA"  >> eval-bin.txt
 for CLASSIF in regul_seg_maj_8 regul_proba_Fusion_Min_100_1000_100_0_100_70_100_200_0_0_0 classif_regul_urbain classif_S2_urbain classif_Fusion_Min classif_Fusion_Bayes ; do
 	for GT in train_bdtopo train_oso train_osm; do
+		# print IU data
+		echo "$CLASSIF, $GT"
+		cat $DIR_SAVE/Eval_bin/results/${GT}_new/${CLASSIF}_new/${CLASSIF}_new_IU_Score_1.txt | tail -n 1 |grep -oE "[0-9]*[.][0-9]*"	
+		continue
 		$DIR_OTB/otbcli_ComputeConfusionMatrix -in $CLASSIF.tif -out CM/${CLASSIF}_$GT.csv -ref raster -ref.raster.in $GT.tif >> CM/${CLASSIF}_$GT.csv
 		echo -n "$CLASSIF $GT "  >> eval-bin.txt
 		for INFORMATION in "F-score of class \[1\]" "Kappa" "Overall accuracy index"; do

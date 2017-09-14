@@ -23,12 +23,10 @@ export DIR_PROBA_SPOT6=$DIR_DATA/SPOT6_$REGION/proba/test_$TILE_SPOT6/classifica
 export DIR_PROBA_S2=$DIR_DATA/S2_$REGION # probability S2
 export DIR_GT=$DIR_DATA/GT/BDTOPO # Grond truth directory
 
-if [ $REGION = "finistere" ];
-	then
+if [ $REGION = "finistere" ]; then
 	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170525 # image S2
 	export DEPT=029 # Grond truth: department for RPG
-elif [ $REGION = "gironde" ];
-	then
+elif [ $REGION = "gironde" ]; then
 	export DIR_IM_S2=$DIR_DATA/S2_$REGION/20170618 # image S2
 	export DEPT=033 # Grond truth: department for RPG
 fi
