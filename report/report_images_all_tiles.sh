@@ -29,10 +29,12 @@ done
 CROP=20 # crop % with respect to SPOT6 image
 rm -rf bashtmp.sh makefiletmp
 touch bashtmp.sh
-for gt in bdtopo osm oso; do
-	continue
-	convert $DIR/gt/train_$gt.visu.tif $DIR/all_train_$gt.tif
+for gt in osm oso; do
+	convert $DIR/gt/train_$gt.visu.tif -resize 500 $DIR/all_train_$gt.tif
 done
+convert $DIR/gt/train_bdtopo.visu.tif -flip -resize 500 $DIR/all_train_bdtopo.tif
+
+exit
 
 for file in all_train_bdtopo all_train_osm all_train_oso all_classif_Fusion_Min all_regul_Min_l1000_g30_e500_0_0_0 $SEG ; do 
 	# Overlay SPOT6 on binary images
@@ -42,19 +44,20 @@ for file in all_train_bdtopo all_train_osm all_train_oso all_classif_Fusion_Min 
 	echo "rm -rf ${file}_o.jpg ${file}.jpg" >> bashtmp.sh
 done
 $DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
-make -f makefiletmp -j 3
+#make -f makefiletmp -j 3
 rm makefiletmp bashtmp.sh
 
 
 # 5 classes:
+rm -rf bashtmp.sh makefiletmp
 touch bashtmp.sh
-for file in all_regul_Min_weighted_G2_l1000_g70_e500_0_0_0 all_classif_SPOT6 all_classif_Fusion_Min_weighted all_classif_S2; do
-	echo "convert $DIR/$file.tif -resize 10% $file.jpg" >> bashtmp.sh
+for file in train.visu all_regul_Min_weighted_G2_l1000_g70_e500_0_0_0 all_classif_SPOT6 all_classif_Fusion_Min_weighted all_classif_S2; do
+	echo "convert $DIR/$file.tif -size 1000x $file.jpg" >> bashtmp.sh
 done
 $DIR_EXES/Bash2Make bashtmp.sh makefiletmp # MakeFile compilation
 x=$(free -m | awk 'FNR == 2 {print $7}') # get amount of free memory [mb]
 rampercore=2 # how much ram one core task needs
 cores=$(expr $x / 1024 / $rampercore) # how many cores can be allocated
 echo "Available cores: $cores"
-make -f makefiletmp -j $cores
+make -f makefiletmp -j 1
 rm makefiletmp bashtmp.sh

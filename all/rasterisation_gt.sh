@@ -1,25 +1,23 @@
-REGION=$1 # command line
+REGION=finistere # command line
 DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts/all
 DIR_EXES=$DIR_BASH/../exes
 DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data
 DIR_GT=$DIR_DATA/GT/BDTOPO # Grond truth directory
 DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/all
-
-if [ $REGION = "finistere" ]; then
-	DEPT=029 # Grond truth: department for RPG
-elif [ $REGION = "gironde" ]; then
-	DEPT=033 # Grond truth: department for RPG
-fi
-echo $DEPT
+DEPT=029 # Grond truth: department for RPG
 
 cd $DIR_SAVE
 
 # emprise
-listgeo -tfw all_regul_seg_maj_90.tif
-mv all_regul_seg_maj_90.tif emprise.tif 
-convert_ori tfw2ori emprise.tfw emprise.ori
+rm -rf *emprise*
+listgeo -tfw all_Im_SPOT6_resized.tif
+cp all_Im_SPOT6_resized.tfw emprise.tfw
+$DIR_EXES/convert_ori tfw2ori emprise.tfw emprise.ori
+$DIR_EXES/convert_ori tfw2ori all_Im_SPOT6_resized.tfw emprise.ori
+ls | grep emprise
 # rasterisation des fichiers vecteur
-mkdir mask
+rm -Rf mask
+mkdir -p mask
 
 # extraire rasters
 rm -rf makefiletmp bashtmp.sh # parallelization

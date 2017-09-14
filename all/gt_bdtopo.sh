@@ -5,8 +5,8 @@ $DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt ../train_tout.rle 1 t
 cp train_bdtopo.tif train_bdtopo_original.tif 
 
 # dilate
-SE_SIZE_DILAT=4
-SE_SIZE_EROD=3
+SE_SIZE_DILAT=3
+SE_SIZE_EROD=2
 #$DIR_EXES/Ech_noif Dilat train_bdtopo.tif 20 train_bdtopo.tif
 for i in {1..9}; do
 	$DIR_EXES/Ech_noif Dilat train_bdtopo.tif $SE_SIZE_DILAT train_bdtopo.tif
