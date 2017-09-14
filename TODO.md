@@ -1,7 +1,7 @@
 ## To do
 
 # Evaluation binaire
-- FScore, Intersection sur l'union (Clément) 
+- FScore, Intersection sur l'union (Clément)
 
 # Evaluation 5 classes
 - Evaluation sur la gironde
