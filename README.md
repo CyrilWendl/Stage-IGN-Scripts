@@ -43,7 +43,7 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 - `regularize.sh [method]`: Regularization using one of the fusion methods
 
 #### 2.2 Artificialized Area
-**`/binary_all/master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tiles
+**`/binary_all/master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tilesall
 **`/all_gt/gt_master.sh`**: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
 
 ### Tools
@@ -61,7 +61,7 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
   - Output classification extents to `$DIR_DATA/extent/`
 **`/exes/`**: executables (need dependencies to work)
 
-**`/QGIS/`**: scripts for visualization of results of `/detail/master.sh`
+**`/QGIS/`**: scripts for visualization of results of `/detail/master.sh`.
 -`QGIS-classif.py`: load ground truth, initial classification, fusion and regularization results
 -`QGIS-classif-binary.py`: load ground truth, binary input classifications, binary fusion and regularization
 
@@ -73,7 +73,6 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 - `report-txt-to-tex-eval-bin.sh [region]`: format accuracy measures as LaTeX table
 - `plot_pixelProbas.py` output a 4\*4 plot of probability values before and after weighting
   
-
 
 ## System Requirements
 The code was developed and tested on the following machine
