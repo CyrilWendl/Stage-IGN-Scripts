@@ -5,7 +5,7 @@ Folder structure of required files in folder-structure.txt
 Files marked as _optional_ can be outcommented in the files marked as **master files** according to the user needs. Scripts needs to be called on the command line as `bash [scriptname].sh [option_1] [option_2] ... [option_n]`
 ### 1. Main code: per-tile (saved in `[region]/im_[tile_number]/`)
 #### 1.1 Fusion and Regularization
-**detail/`master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Options are `[region]`=finistere|gironde, `[tile]`= a valid tile number. Calls the following scripts:
+**`/detail/master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Options are `[region]`=finistere|gironde, `[tile]`= a valid tile number. Calls the following scripts:
 - `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder 
 - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/im_[tile_number]/` (working in RAM for speed, needs sudo permissions)
 - `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/im_[tile_number]/`
@@ -18,14 +18,14 @@ Files marked as _optional_ can be outcommented in the files marked as **master f
 - _optional_ `../detail_binary/gt_master.sh [region] [tile number]`: execute main script for obtaining artificialized area ground truth (explained below)
 
 #### 1.2 Artificialized Area
-**detail_binary/`master.sh [region] [tile number]`**: binary fusion and regulation for artificialized area on tiles produced by _detail_/`master.sh`, all results saved in `$DIR_SAVE/im_[tile number]/Binary`
+**`/detail_binary/master.sh [region] [tile number]`**: binary fusion and regulation for artificialized area on tiles produced by _detail_/`master.sh`, all results saved in `$DIR_SAVE/im_[tile number]/Binary`
 - `fusion_prep.sh`:  Get binary probabilities from regularization result (distance dilatation) and Sentinel-2 classifier (`/Binary`)
 - `fusion.sh`: Fusion using the Min and Bayes rules (`/Binary/Fusion`)
 - `classify.sh`: Get class labels for input probabilities and fusion (`/Binary`,`/Binary/Fusion`)
 - `regularize.sh`: Regularization of fusion input (`/Binary/Regul`)
 - `segmentation.sh`: Refine regularization result using segmentation on the Sentinel-2 image (`/Binary/Seg`)
 
-**detail_binary/`gt_master.sh [region] [tile number]`**: get binary ground truth of artificialized area and evaluate binary 
+**`/detail_binary/gt_master.sh [region] [tile number]`**: get binary ground truth of artificialized area and evaluate binary 
 classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile number]/gt` Calls:
 - `gt_bdtopo.sh`: extract building labels from bdtopo, progressively dilate them by 20 m radius 
 - `gt_oso.sh`: extract urban labels by regrouping the [OSO](http://osr-cesbio.ups-tlse.fr/~oso/) classes corresponding to urbanized areas
@@ -35,7 +35,7 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 
 ### 2. Main Code: Several Tiles
 #### 2.1 Fusion and Regularization
-**all\_tiles/`master.sh [region] [tiles]`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all. Tiles can be obtained by calling `TILES=$(bash tools/overlapping_tiles.sh [region])`. The code works similar to detail/`master.sh` but does everything in main memory and saves the output to the HDD for speed reasons. Accuracy measures are not produced.
+**`/all_tiles/master.sh [region] [tiles]`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all. Tiles can be obtained by calling `TILES=$(bash tools/overlapping_tiles.sh [region])`. The code works similar to detail/`master.sh` but does everything in main memory and saves the output to the HDD for speed reasons. Accuracy measures are not produced.
 - `fusion_prep.sh`:  Extract SPOT6 and Sentinel-2 probabilities
 - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images
 - `fusion.sh`: Fusion using the Min and Bayes fusion schemes
@@ -43,8 +43,8 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 - `regularize.sh [method]`: Regularization using one of the fusion methods
 
 #### 2.2 Artificialized Area
-**_binary_all_/`master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tiles
-**_all_gt_/**: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
+**`/binary_all/master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tiles
+**`/all_gt/gt_master.sh`**: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
 
 ### Tools
 `/Sentinel-2/`: initial classification of Sentinel-2 image using RF
