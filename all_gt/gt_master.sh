@@ -1,7 +1,7 @@
 # create a few ground truth maps for a given tile
 export REGION=finistere
 export DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
-export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/all/gt
+export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/all_gt/gt
 export DIR_EXES=$DIR_BASH/exes
 export EXTENT=$DIR_SAVE/../all_Im_SPOT6_resized.tif
 export DIR_OSM=/media/cyrilwendl/15BA65E227EC1B23/data/OSM/$REGION

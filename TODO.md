@@ -1,12 +1,5 @@
 ## To do
 
-# Evaluation binaire
-- Intersection sur l'union (Clément)
-- Evaluation sur la gironde
-
-# Evaluation 5 classes
-- Evaluation sur la gironde
-
 # Tâche urbaine
 - Batiments proba moy. après la fusion avec erosion sur le masque
 

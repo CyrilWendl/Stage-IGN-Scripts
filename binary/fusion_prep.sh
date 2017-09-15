@@ -11,7 +11,7 @@ $DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt $DIR_IN/Regul/regul_s
 # dilater
 #Ech_noif Gaussf bati.tif bati_gauss_10.tif 10 3  # autre alternative?
 $DIR_EXES/Ech_noif Chamfrein bati.tif dist.tif
-$DIR_EXES/Pleiades PriorProb:f:c dist.tif 0 1 200 0 proba_regul_urbain.tif
+$DIR_EXES/Pleiades PriorProb:f dist.tif 0 1 200 0 proba_regul_urbain.tif
 mkdir -p Temp
 mv bati.tif Temp
 mv dist.tif Temp

@@ -1,5 +1,5 @@
 REGION=finistere # command line
-DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts/all
+DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts/all_gt
 DIR_EXES=$DIR_BASH/../exes
 DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data
 DIR_GT=$DIR_DATA/GT/BDTOPO # Grond truth directory
