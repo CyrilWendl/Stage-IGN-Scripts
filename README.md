@@ -47,8 +47,8 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 **_all_gt_/**: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
 
 ### Tools
-_Sentinel-2_: initial classification of Sentinel-2 image using RF
-_tools_/: various generic scripts (gdal, etc.)
+`/Sentinel-2/`: initial classification of Sentinel-2 image using RF
+`/tools/`: various generic scripts (gdal, etc.)
   - `xargs.sh`: parallelize certain script executions
   - `raster_crop.sh [big_raster] [small_raster] [out_raster]`: Crop a GTiff raster to the extent of a second GTiff raster
   - `resize_crop_raster.sh [big_raster] [small_raster] [out_raster]`: Crop resize a GTiff raster to the extent and resolution of a second GTiff raster
@@ -56,9 +56,9 @@ _tools_/: various generic scripts (gdal, etc.)
   - `gdalminmax.sh [folder]`: Will check the regularization result in a folder and return 1 if the regularization  has converged and 0 otherwise (all labels are the same), using the min/max pixel value info from gdalinfo.
   - `raster_extent.py`: Get the extent (xmin ymin xmax ymax) coordinates for a given raster.
   - `overlapping_tiles.sh [region]`: Get the tile names of all SPOT-6 tiles which overlap with the Sentinel-2 classification.
-_exes_/: executables
-_QGIS_/: scripts for visualization of results of `/detail/master.sh`
-_report_/: 
+`/exes/`: executables (need dependencies to work)
+`/QGIS/`: scripts for visualization of results of `/detail/master.sh`
+`/report/`: 
   - `report_images_all_tiles.sh`: create compressed JPEG images of all tiles
   - `report_images_resize.sh [region] [tile_number]`: get all images for one tile as JPEGs in /`[region]`/im_`[tile_number]`/web
   - `report_bati_dist.sh`: get figure of building distances in report
@@ -72,3 +72,10 @@ _report_/:
 The code was developed and tested on the following machine
 - OS: Ubuntu 16.04
 - 8 GB RAM, 16 cores processor
+
+
+## Supervisors
+- Arnaud Le-Bris, IGN, Matis
+- Nesrine Chehata, IGN, Matis
+- Frank de Morsier, EPFL
+- Anne Le-Puissant, LIVE, Université de Strassbourg
