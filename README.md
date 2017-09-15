@@ -61,12 +61,12 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
   - Output classification extents to `$DIR_DATA/extent/`
 **`/exes/`**: executables (need dependencies to work)
 
-**`/QGIS/`**: scripts for visualization of results of `/detail/master.sh`.
--`QGIS-classif.py`: load ground truth, initial classification, fusion and regularization results
--`QGIS-classif-binary.py`: load ground truth, binary input classifications, binary fusion and regularization
+**`/QGIS/`**: scripts for visualization of results of `/detail/master.sh`
+- `QGIS-classif.py`: load ground truth, initial classification, fusion and regularization results
+- `QGIS-classif-binary.py`: load ground truth, input data, fusion and regularization for artificialized area 
 
 **`/report/`**: 
-- `report_images_all_tiles.sh`: create compressed JPEG images of all tiles
+- `report_images_all_tiles.andsh`: create compressed JPEG images of all tiles
 - `report_images_resize.sh [region] [tile_number]`: get all images for one tile as JPEGs in /`[region]`/im_`[tile_number]`/web
 - `report_bati_dist.sh`: get figure of building distances in report
 - `report-txt-to-tex.sh`: get figure of building distances in report
