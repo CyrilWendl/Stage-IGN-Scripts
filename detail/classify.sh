@@ -10,7 +10,7 @@ cd ./Classified
 
 for methode in "S2" "SPOT6";do
 	$DIR_EXES/Pleiades Classer ../proba_$methode.tif classif_$methode.rle
-	$DIR_EXES/Legende label2RVB $DIR_BASH/../legende.txt classif_$methode.rle classif_$methode.visu.tif	
+	$DIR_EXES/Legende label2RVB $DIR_BASH/tools/legende.txt classif_$methode.rle classif_$methode.visu.tif	
 	cp ../proba_SPOT6.tfw classif_$methode.visu.tfw
 done
 
@@ -40,7 +40,7 @@ for DNAME in "$DIR_SAVE/Fusion_all" "$DIR_SAVE/Fusion_all_weighted";do
 		methode=${i%.tif}
 		methode=${methode##*/proba_Fusion_}
 		echo -n "$DIR_EXES/Pleiades Classer $DNAME/proba_Fusion_$methode.tif $DNAME/Classified/classif_Fusion_$methode.rle; " >> bashtmp.sh
-		echo -n "$DIR_EXES/Legende label2RVB $DIR_BASH/../tools/legende.txt $DNAME/Classified/classif_Fusion_$methode.rle $DNAME/Classified/classif_Fusion_$methode.visu.tif; ">> bashtmp.sh
+		echo -n "$DIR_EXES/Legende label2RVB $DIR_BASH/tools/legende.txt $DNAME/Classified/classif_Fusion_$methode.rle $DNAME/Classified/classif_Fusion_$methode.visu.tif; ">> bashtmp.sh
 		echo "cp $DNAME/../proba_SPOT6.tfw $DNAME/Classified/classif_Fusion_$methode.visu.tfw" >> bashtmp.sh
 	done 
 done

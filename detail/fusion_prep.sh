@@ -5,7 +5,7 @@ rm -Rf $DIR_SAVE
 mkdir $DIR_SAVE
 
 
-cp $DIR_BASH/../tools/legende.txt $DIR_SAVE/legende.txt # copy legend
+cp $DIR_BASH/tools/legende.txt $DIR_SAVE/legende.txt # copy legend
 
 echo "${bold}Extract files and obtain probabilities (SPOT 6)${normal}"
 cd $DIR_PROBA_SPOT6

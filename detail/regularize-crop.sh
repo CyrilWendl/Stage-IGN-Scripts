@@ -49,7 +49,7 @@ for FUSION_PROB in $FUSIONDIR/proba_Fusion_Min_weighted proba_SPOT6 ; do
 	echo -n "mv Regul/$FILENAME.tif Regul/$FILENAME_NEW.tif ; " >> bashtmp.sh
 	FILENAME=$FILENAME_NEW
 	echo -n "$DIR_EXES/Ech_noif Format Regul/$FILENAME.tif Regul/$FILENAME.rle ; " >> bashtmp.sh # RLE for Eval
-	echo -n "$DIR_EXES/Legende label2RVB $DIR_BASH/../tools/legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif; " >> bashtmp.sh
+	echo -n "$DIR_EXES/Legende label2RVB $DIR_BASH/tools/legende.txt Regul/$FILENAME.tif Regul/$FILENAME.visu.tif; " >> bashtmp.sh
 	echo -n "echo visualisation done ; "  >> bashtmp.sh
 	# coordinates
 	echo -n "cp $FUSION_PROB.tfw Regul/$FILENAME.tfw; " >> bashtmp.sh
