@@ -7,10 +7,11 @@ normal=$(tput sgr0)
 export REGION=$1
 export TILE_SPOT6=$2 # from command line
 
-export DIR_BASH=~/DeveloppementBase/Scripts/binary
-export DIR_BASH_TOOLS=~/DeveloppementBase/Scripts/tools # tools directory
-export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
-export DIR_IN=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6
+export DIR_BASH=~/DeveloppementBase/Scripts/detail_binary # TODO change this
+export DIR_IN=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6 # TODO change this
+
+export DIR_BASH_TOOLS=$DIR_BASH/../tools # tools directory
+export DIR_EXES=$DIR_BASH/../exes # Executables directory
 export DIR_SAVE=$DIR_IN/Binary
 
 echo "${bold}I. FUSION PREPARATION${normal}"
