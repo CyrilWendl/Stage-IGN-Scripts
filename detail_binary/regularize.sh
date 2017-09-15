@@ -25,6 +25,6 @@ do
 		cp ${FUSION_PROB}.tfw Regul/$FILENAME.visu.tfw
 	done
 	ls $DIR_SAVE/Regul
-	converge=$(bash $DIR_BASH_TOOLS/gdalminmax.sh $DIR_SAVE/Regul)
+	converge=$(bash $DIR_BASH/tools/gdalminmax.sh $DIR_SAVE/Regul)
 	echo "Converged: $converge"
 done

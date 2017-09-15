@@ -28,7 +28,7 @@ fi
 
 for file in proba_S2_urbain proba_regul_urbain; do
 	cp ../Im_S2.tfw $file.tfw
-	bash $DIR_BASH_TOOLS/raster_resize.sh $file.tif ../Im_S2.tif $file-resized.tif
+	bash $DIR_BASH/tools/raster_resize.sh $file.tif ../Im_S2.tif $file-resized.tif
 	mv $file.tif Temp
 	mv $file-resized.tif $file.tif
 	listgeo $file.tif -tfw

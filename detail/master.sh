@@ -33,7 +33,6 @@ elif [ $REGION = "gironde" ]; then
 	export DEPT=033 # Grond truth: department for RPG
 fi
 
-
 export bold=$(tput bold)
 export normal=$(tput sgr0)
 

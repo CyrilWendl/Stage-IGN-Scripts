@@ -40,6 +40,8 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile num
 - `gt_eval_label.sh`: create binary difference maps between all labels in `/im_[tile number]/gt/eval`
 - `gt_eval.sh`: get accuracy measures over all tiles (five for finistere), saved in `/[region]/Eval_bin/eval.txt`
 
+_not used_ `bdparcellaire.sh`: extract BD parcellaire for majority voting in segments
+
 ### 2. Main Code: Several Tiles  (saved in `[region]/all/`)
 #### 2.1 Fusion and Regularization
 **`/all_tiles/master.sh [region] [tiles]`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all. Tiles can be obtained by calling `TILES=$(bash tools/overlapping_tiles.sh [region])`. The code works similar to detail/`master.sh` but does everything in main memory and saves the output to the HDD for speed reasons. Accuracy measures are not produced.
