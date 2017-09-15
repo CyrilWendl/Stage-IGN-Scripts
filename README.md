@@ -39,7 +39,7 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile num
 - `gt_eval_label.sh`: create binary difference maps between all labels in `/im_[tile number]/gt/eval`
 - `gt_eval.sh`: get accuracy measures over all tiles (five for finistere), saved in `/[region]/Eval_bin/eval.txt`
 
-### 2. Main Code: Several Tiles
+### 2. Main Code: Several Tiles  (saved in `[region]/all/`)
 #### 2.1 Fusion and Regularization
 **`/all_tiles/master.sh [region] [tiles]`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all. Tiles can be obtained by calling `TILES=$(bash tools/overlapping_tiles.sh [region])`. The code works similar to detail/`master.sh` but does everything in main memory and saves the output to the HDD for speed reasons. Accuracy measures are not produced.
 - `fusion_prep.sh`:  Extract SPOT6 and Sentinel-2 probabilities
@@ -72,8 +72,8 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile num
 - `QGIS-classif-binary.py`: load ground truth, input data, fusion and regularization for artificialized area 
 
 **`/report/`**: 
-- `report_images_all_tiles.andsh`: create compressed JPEG images of all tiles
-- `report_images_resize.sh [region] [tile_number]`: get all images for one tile as JPEGs in /`[region]`/im_`[tile_number]`/web
+- `report_images_all_tiles.sh`: create compressed JPEG images of the results on all tiles in `/[region]/all/tiles'`
+- `report_images_resize.sh [region] [tile_number]`: create compressed JPEG images for one tile in /`[region]`/im_`[tile_number]`/web
 - `report_bati_dist.sh`: get figure of building distances in report
 - `report-txt-to-tex.sh`: format accuracy measures as LaTeX table
 - `report-txt-to-tex-eval-bin.sh [region]`: format binary accuracy measures as LaTeX table
