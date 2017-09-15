@@ -20,7 +20,7 @@ Files marked as _optional_ can be outcommented in the files marked as **master f
 
 Other scripts in `/detail/`:
 - `eval_all_zones.sh [region]`: evaluation of several tiles
-- `fusion_classification_model.sh [region]`: train RF, SVM t0 and SVM t2 classification models based on the ground truth of several tiles for fusion by classification 
+- `fusion_classification_model.sh [region]`: train RF, SVM t0 and SVM t2 classification models based on the ground truth of several tiles for fusion by classification. Is best exectued after `master.sh`, then `master.sh` can be executed again producing only fusion by classification with `fusion_classification.sh`.
 
 
 #### 1.2 Artificialized Area
