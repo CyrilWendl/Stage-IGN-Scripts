@@ -5,7 +5,7 @@ REGION=$1
 DIR_BASH=~/DeveloppementBase/Scripts # Script directory (where master.sh is located)
 DIR_EXES=$DIR_BASH/exes # Executables directory
 DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail # target directory to save S2 and
-TILES=${@:2:5} # TODO change argument positions for tiles
+TILES=${@:2:6} # TODO change argument positions for tiles
 echo "Tiles: $TILES"
 bold=$(tput bold)
 normal=$(tput sgr0)
