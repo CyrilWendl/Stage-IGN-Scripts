@@ -1,6 +1,6 @@
 # Stage-IGN-Scripts
-A series of scripts for fusion of two classifications probabilities.
-Folder structure of required files in folder-structure.txt
+A series of scripts to produce the artificialized area using fusion and regulation on two individual classifications on SPOT-6 and Sentinel-2 satellite images.
+
 ## Files Structure
 Files marked as _optional_ can be outcommented in the files marked as **master files** according to the user needs. Scripts needs to be called on the command line as `bash [scriptname].sh [option_1] [option_2] ... [option_n]`
 ### 1. Main code: per-tile (saved in `[region]/im_[tile_number]/`)
