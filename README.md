@@ -49,7 +49,7 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 - `regularize.sh [method]`: Regularization using one of the fusion methods
 
 #### 2.2 Artificialized Area
-**`/binary_all/master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tilesall
+**`/all_binary/master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tilesall
 **`/all_gt/gt_master.sh`**: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
 
 ### 3. Tools
