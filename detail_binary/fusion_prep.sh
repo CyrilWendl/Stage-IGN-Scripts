@@ -6,7 +6,7 @@ cd $DIR_SAVE
 
 # Proba preparation
 # extraire bati
-$DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt $DIR_IN/Regul/regul_svmt2_G2_l1000_g70_e500_0_0_0.rle 1 bati.tif # get binary mask of regulation (buildings)
+$DIR_EXES/Legende label2masqueunique $DIR_BASH/tools/legende.txt $DIR_IN/Regul/regul_svmt2_G2_l1000_g70_e500_0_0_0.rle 1 bati.tif # get binary mask of regulation (buildings)
 
 # dilater
 #Ech_noif Gaussf bati.tif bati_gauss_10.tif 10 3  # autre alternative?

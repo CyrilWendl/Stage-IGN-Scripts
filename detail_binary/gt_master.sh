@@ -29,6 +29,6 @@ bash $DIR_BASH/detail_binary/gt_eval.sh
 echo "VISUALIZE"
 cd $DIR_SAVE
 for gt in osm oso bdtopo bdtopo_original; do
-	Legende label2RVB $DIR_BASH/legende_agg_oso.txt train_$gt.tif train_$gt.visu.tif
+	Legende label2RVB $DIR_BASH/legende/legende_bin.txt train_$gt.tif train_$gt.visu.tif # TODO rename legende
 	convert train_$gt.visu.tif train_$gt.jpg
 done

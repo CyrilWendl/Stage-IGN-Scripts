@@ -1,7 +1,7 @@
 # extract buildings from BDTOPO
 cd $DIR_SAVE_GT
 
-$DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt ../train_tout.rle 1 train_bdtopo.tif # get binary mask of regulation (buildings)
+$DIR_EXES/Legende label2masqueunique $DIR_BASH/tools/legende.txt ../train_tout.rle 1 train_bdtopo.tif # get binary mask of regulation (buildings)
 cp train_bdtopo.tif train_bdtopo_original.tif 
 
 # dilate

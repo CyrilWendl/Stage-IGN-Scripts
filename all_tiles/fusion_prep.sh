@@ -4,7 +4,7 @@ DIR_TMP="$DIR_RAM/im_$TILE_SPOT6" # target directory
 mkdir $DIR_RAM/im_$TILE_SPOT6
 cd $DIR_TMP
 
-cp $DIR_BASH/legende.txt $DIR_RAM/im_$TILE_SPOT6/legende.txt # copy legend
+cp $DIR_BASH/tools/legende.txt $DIR_RAM/im_$TILE_SPOT6/legende.txt # copy legend
 
 echo "${bold}Extract files and obtain probabilities (SPOT 6)${normal}"
 cd $DIR_PROBA_SPOT6

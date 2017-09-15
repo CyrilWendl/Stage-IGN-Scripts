@@ -33,7 +33,7 @@ cp $DIR_RAM/im_$TILE_SPOT6/proba_SPOT6.tfw $OUTDIR/proba_Fusion_Min$WEIGHTED.tfw
 
 # Classification
 $DIR_EXES/Pleiades Classer $OUTDIR/proba_Fusion_Min$WEIGHTED.tif $DIR_RAM/classif_Fusion_Min$WEIGHTED$TILE_SPOT6.rle;
-$DIR_EXES/Legende label2RVB $DIR_RAM/im_$TILE_SPOT6/legende.txt $DIR_RAM/classif_Fusion_Min$WEIGHTED$TILE_SPOT6.rle $OUTDIR/classif_Fusion_Min$WEIGHTED.visu.tif
+$DIR_EXES/Legende label2RVB $DIR_RAM/im_$TILE_SPOT6/tools/legende.txt $DIR_RAM/classif_Fusion_Min$WEIGHTED$TILE_SPOT6.rle $OUTDIR/classif_Fusion_Min$WEIGHTED.visu.tif
 cp $DIR_RAM/im_$TILE_SPOT6/proba_SPOT6.tfw $OUTDIR/classif_Fusion_Min$WEIGHTED.visu.tfw
 rm $DIR_RAM/*$TILE_SPOT6*
 

@@ -7,5 +7,5 @@ $DIR_EXES/Classifieur Classify -d classification.model.path=./fusion_classif/mod
 cp im_$TILE_SPOT6/proba_SPOT6.tfw im_$TILE_SPOT6/Fusion_all_weighted/proba_Fusion_$METHODE.tfw ;
 
 #visualisation
-$DIR_EXES/Legende label2RVB $DIR_BASH/../legende_gt_6cl.txt im_$TILE_SPOT6/Fusion_all_weighted/Classified/classif_Fusion_$METHODE.rle im_$TILE_SPOT6/Fusion_all_weighted/Classified/classif_Fusion_$METHODE.visu.tif ;
+$DIR_EXES/Legende label2RVB $DIR_BASH/../tools/legende_gt_6cl.txt im_$TILE_SPOT6/Fusion_all_weighted/Classified/classif_Fusion_$METHODE.rle im_$TILE_SPOT6/Fusion_all_weighted/Classified/classif_Fusion_$METHODE.visu.tif ;
 cp im_$TILE_SPOT6/proba_SPOT6.tfw im_$TILE_SPOT6/Fusion_all_weighted/Classified/classif_Fusion_$METHODE.visu.tfw ;

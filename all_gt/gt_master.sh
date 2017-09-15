@@ -24,6 +24,6 @@ echo "OSM"
 echo "VISUALIZE"
 cd $DIR_SAVE
 for gt in osm oso bdtopo_dilat bdtopo; do
-	Legende label2RVB $DIR_BASH/legende_agg_oso.txt train_$gt.tif train_$gt.visu.tif
+	Legende label2RVB $DIR_BASH/tools/legende_bin.txt train_$gt.tif train_$gt.visu.tif
 	convert train_$gt.visu.tif train_$gt.jpg
 done

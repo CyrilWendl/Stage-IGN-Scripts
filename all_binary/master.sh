@@ -34,4 +34,4 @@ echo ""; echo "${bold}III. CLASSIFICATION ${normal}"
 bash $DIR_BASH/fusion_regul_all/classify.sh  # Classify fusion probabilities
 
 echo ""; echo "${bold}IV. REGULARIZATION ${normal}"
-#bash $DIR_BASH/fusion_regul_all/regularize.sh $FUSION_DIR # Regularize
+bash $DIR_BASH/fusion_regul_all/regularize.sh $FUSION_DIR # Regularize

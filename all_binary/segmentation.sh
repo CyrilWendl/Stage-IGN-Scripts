@@ -31,7 +31,7 @@ for seg_cut in ${seg_cuts[@]};do
 	# majority voting (labels of regulation within segmentation)
 	Pleiades VoteRegion maj test-$seg_cut.tif $REGUL_FUSION regul_seg_maj_$seg_cut.tif
 	# create visu.tif
-	~/DeveloppementBase/exes/Legende label2RVB ~/DeveloppementBase/Scripts/legende.txt regul_seg_maj_$seg_cut.tif regul_seg_maj_$seg_cut.visu.tif;
+	~/DeveloppementBase/exes/Legende label2RVB ~/DeveloppementBase/Scripts/tools/legende.txt regul_seg_maj_$seg_cut.tif regul_seg_maj_$seg_cut.visu.tif;
 	cp ../proba_S2_urbain.tfw regul_seg_maj_$seg_cut.visu.tfw
 done
 

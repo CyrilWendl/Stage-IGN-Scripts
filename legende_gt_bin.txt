@@ -1,2 +1,0 @@
-nonurbain 0 0
-urbain 1 1

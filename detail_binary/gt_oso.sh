@@ -21,7 +21,7 @@ $DIR_EXES/Legende label2masqueunique nomenclature_oso.txt OCS_2016_CESBIO_crop.t
 $DIR_EXES/Legende label2masqueunique nomenclature_oso.txt OCS_2016_CESBIO_crop.tif 11 12 31 32 34 36 45 46 51 53 211 221 222 44 masktmp/nonurbain.tif
 
 # merge labels
-$DIR_EXES/Legende masques2label $DIR_BASH/legende_agg_oso.txt masktmp/ train_oso.tif
+$DIR_EXES/Legende masques2label $DIR_BASH/tools/legende_bin.txt masktmp/ train_oso.tif
 rm -Rf *.log log.* *.xml *.wld masktmp/ *crop*
 mv train_oso* $DIR_SAVE_GT/
 cp $DIR_SAVE_GT/../Im_SPOT6.tfw train_oso.tfw

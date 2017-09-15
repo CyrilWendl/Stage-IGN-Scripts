@@ -55,12 +55,12 @@ mv mask/culture.tif mask/vegetation_autre.tif
 $DIR_EXES/Ech_noif Dilat mask/bati.tif 10 mask/bati_dilat.tif
 
 # fusionner tout
-$DIR_EXES/Legende masques2label $DIR_BASH/../legende_gt_6cl.txt mask/ train_tout.rle
-$DIR_EXES/Legende label2RVB $DIR_BASH/../legende_gt_6cl.txt train_tout.rle train.visu.tif # visualisation
+$DIR_EXES/Legende masques2label $DIR_BASH/../tools/legende_gt_6cl.txt mask/ train_tout.rle
+$DIR_EXES/Legende label2RVB $DIR_BASH/../tools/legende_gt_6cl.txt train_tout.rle train.visu.tif # visualisation
 cp emprise.tfw train.visu.tfw
 
 # masque binaire
-$DIR_EXES/Legende aggrege $DIR_BASH/../legende_agg_bin.txt train_tout.rle train_tout_bin.rle
+$DIR_EXES/Legende aggrege $DIR_BASH/../tools/legende_agg_bin.txt train_tout.rle train_tout_bin.rle
 rm -Rf ./mask/
 #$DIR_EXES/Ech_noif InverseBool masque_no_data.tif masque_no_data.tif 
 #$DIR_EXES/Ech_noif AppliqueMasque train_tout.rle masque_no_data.tif train.rle

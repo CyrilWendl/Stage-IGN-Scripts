@@ -14,8 +14,8 @@ export DIR_BASH=~/DeveloppementBase/Scripts/detail # TODO change to where you s
 export DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data # TODO change to where you have your data
 
 export DIR_SAVE=$DIR_DATA/../detail/im_$TILE_SPOT6 # target directory to save S2 and SPOT6 probabilities of tile
-export DIR_BASH_TOOLS=$DIR_BASH/tools # tools directory
-export DIR_EXES=$DIR_BASH/exes # Executables directory
+export DIR_BASH_TOOLS=$DIR_BASH/../tools # tools directory
+export DIR_EXES=$DIR_BASH/../exes # Executables directory
 export DIR_RAM=$DIR_SAVE/tmp # Temporary directory for work in RAM
 
 # Data

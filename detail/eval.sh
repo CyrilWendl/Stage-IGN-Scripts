@@ -32,7 +32,7 @@ for CLASSIFICATION_DIR in ./Classified ./$SUBFOLDER/Classified ./Fusion_all/Clas
 		CLASSIF_NAME=${i%.rle}
 		CLASSIF_NAME=${CLASSIF_NAME##*/}
 		echo -n "${CLASSIF_NAME##classif_Fusion_} " >> $FNAME
-		$DIR_EXES/Eval $i $GT ./Eval/bm_$CLASSIF_NAME.rle $DIR_BASH/legende.txt ./Eval/cf_$CLASSIF_NAME.txt --Kappa --OA --AA --FScore_moy --FScore_classe 1 >> $FNAME
+		$DIR_EXES/Eval $i $GT ./Eval/bm_$CLASSIF_NAME.rle $DIR_BASH/tools/legende.txt ./Eval/cf_$CLASSIF_NAME.txt --Kappa --OA --AA --FScore_moy --FScore_classe 1 >> $FNAME
 	done
 done
 

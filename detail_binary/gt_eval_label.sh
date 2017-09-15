@@ -20,7 +20,7 @@ for compare in Regul/regul_proba_Fusion_Min_100_1000_100_0_100_70_100_200_0_0_0 
 		compare=$(basename $compare)
 		gdal_calc.py -A $FILE_GT.tif -B $FILE_IM.tif --calc='A*2+B' --outfile="$DIR_IM/gt/eval/$methode-$compare.tif"
 		# visualize
-		$DIR_EXES/Legende label2RVB $DIR_BASH/legende_bin_eval.txt $DIR_IM/gt/eval/$methode-$compare.tif "$DIR_IM/gt/eval/$methode-$compare.visu.tif"
+		$DIR_EXES/Legende label2RVB $DIR_BASH/tools/legende_bin_eval.txt $DIR_IM/gt/eval/$methode-$compare.tif "$DIR_IM/gt/eval/$methode-$compare.visu.tif"
 		convert $DIR_IM/gt/eval/$methode-$compare.visu.tif $DIR_IM/gt/eval/${REGION}_T${TILE_SPOT6}_$methode-$compare.jpg
 		rm $DIR_IM/gt/eval/$methode-$compare.visu.tif
 		~/Documents/OTB/OTB-6.0.0-Linux64/bin/otbcli_TileFusion -il -out -cols 5 -rows 1 -out ^C

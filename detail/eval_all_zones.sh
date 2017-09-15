@@ -49,7 +49,7 @@ for CLASSIFICATION_DIR in Classified Fusion_all/Classified Fusion_all_weighted/C
 			M="$DIR_SAVE/im_$a/$CLASSIFICATION_DIR/$CLASSIF_NAME.rle"
 			M_GT="$M_GT$M $GT "
 		done
-		echo "$DIR_EXES/Eval $M_GT $DIR_BASH/legende.txt $DIR_SAVE/Eval_all/cf_$CLASSIF_NAME.txt --Kappa --OA --AA --FScore_moy --FScore_classe 1 >> $FNAME " >> bashtmp.sh
+		echo "$DIR_EXES/Eval $M_GT $DIR_BASH/tools/legende.txt $DIR_SAVE/Eval_all/cf_$CLASSIF_NAME.txt --Kappa --OA --AA --FScore_moy --FScore_classe 1 >> $FNAME " >> bashtmp.sh
 	done
 done
 
