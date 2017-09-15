@@ -1,10 +1,9 @@
 # get input probabilities and copy them to a target directory for fusion
-if [ "$1" = "redo" ]; 
-  then
-  echo "${bold}Prepare directory${normal}"
-  rm -Rf $DIR_SAVE
-  mkdir $DIR_SAVE
-fi
+
+echo "${bold}Prepare directory${normal}"
+rm -Rf $DIR_SAVE
+mkdir $DIR_SAVE
+
 
 cp $DIR_BASH/../legende.txt $DIR_SAVE/legende.txt # copy legend
 

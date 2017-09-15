@@ -2,13 +2,7 @@
 REGION=$1
 TILE_SPOT6=$2
 
-DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/gt
-DIR_EXTENT=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/
-DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
-DIR_EXES=$DIR_BASH/exes
-DIR_OSO=/media/cyrilwendl/15BA65E227EC1B23/data/OSO
-
-mkdir -p $DIR_SAVE
+mkdir -p $DIR_SAVE_GT
 cd $DIR_OSO
 rm -rf masktmp
 mkdir -p masktmp
@@ -18,7 +12,7 @@ mkdir -p masktmp
 
 # crop extent
 rm -rf *crop*
-bash $DIR_BASH/tools/raster_crop_resize.sh OCS_2016_CESBIO_nocolor.tif $DIR_EXTENT/proba_SPOT6.tif OCS_2016_CESBIO_crop_color.tif
+bash $DIR_BASH/tools/raster_crop_resize.sh OCS_2016_CESBIO_nocolor.tif $EXTENT OCS_2016_CESBIO_crop_color.tif
 # remove color table
 gdal_calc.py -A OCS_2016_CESBIO_crop_color.tif --outfile=OCS_2016_CESBIO_crop.tif --calc="A*1" --NoDataValue=0
 
@@ -29,5 +23,5 @@ $DIR_EXES/Legende label2masqueunique nomenclature_oso.txt OCS_2016_CESBIO_crop.t
 # merge labels
 $DIR_EXES/Legende masques2label $DIR_BASH/legende_agg_oso.txt masktmp/ train_oso.tif
 rm -Rf *.log log.* *.xml *.wld masktmp/ *crop*
-mv train_oso* $DIR_SAVE/
-cp $DIR_SAVE/../Im_SPOT6.tfw train_oso.tfw
+mv train_oso* $DIR_SAVE_GT/
+cp $DIR_SAVE_GT/../Im_SPOT6.tfw train_oso.tfw

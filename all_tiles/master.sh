@@ -1,6 +1,6 @@
 # Main script to use for fusion, regularization and evaluation
 # Difference wrt /Scrits: work only in RAM, then export images
-# time bash ~/DeveloppementBase/Scripts/all_tiles/master.sh ${TILES[@]} appart_rf_50000_L93
+# time bash master.sh [region] [tiles]
 # output: classif_min, classif_regul, classif_SPOT6, classif_S2
 
 # global variables
@@ -45,7 +45,6 @@ DNAME="$DIR_RAM/im_$TILE_SPOT6" # target directory
 	bash $DIR_BASH/fusion_prep.sh # extract probabilities from SPOT6 and S2, move both to target directory
 	
 ec	echo ""; echo "${bold}II. COPY IMAGES ${normal}"
-	bash $DIR_BASH/copy_images_prep.sh $TILE_SPOT6
 	bash $DIR_BASH/copy_images.sh $TILE_SPOT6
 
 	echo ""; echo "${bold}III. FUSION${normal}"

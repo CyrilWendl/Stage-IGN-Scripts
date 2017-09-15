@@ -1,15 +1,5 @@
-#!/usr/bin/env bash
-
-REGION=$1
-TILE_SPOT6=$2
-
-DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/gt
-DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
-DIR_EXES=$DIR_BASH/exes
-
 # extract buildings from BDTOPO
-mkdir -p $DIR_SAVE
-cd $DIR_SAVE
+cd $DIR_SAVE_GT
 
 $DIR_EXES/Legende label2masqueunique $DIR_BASH/legende.txt ../train_tout.rle 1 train_bdtopo.tif # get binary mask of regulation (buildings)
 cp train_bdtopo.tif train_bdtopo_original.tif 

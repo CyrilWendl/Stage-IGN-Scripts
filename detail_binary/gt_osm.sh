@@ -1,14 +1,4 @@
 # Extract ground truth for artificialized area from OpenStreetMaps
-REGION=$1
-TILE_SPOT6=$2
-DIR_OSM=/media/cyrilwendl/15BA65E227EC1B23/data/OSM/$REGION
-DIR_BASH=/home/cyrilwendl/DeveloppementBase/Scripts
-EXTENT=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/proba_SPOT6.tif
-DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6/gt
-
-rm -Rf $DIR_SAVE/*
-mkdir -p $DIR_SAVE
-
 cd $DIR_OSM
 rm -Rf *temp* *tmp* *landuse93* *OSM_residential*
 
@@ -21,7 +11,7 @@ ogr2ogr -sql "SELECT * FROM landuse93 WHERE fclass = 'residential'" -clipsrc tem
 # rasterize
 EXT=$(python $DIR_BASH/tools/raster_extent.py $EXTENT) # get raster extent
 
-gdal_rasterize -ot Byte -ts 2069 2069 -te $EXT -a_srs EPSG:2154 -burn 1 -l temp-landuse-crop temp-landuse-crop.shp $DIR_SAVE/train_osm.tif
+gdal_rasterize -ot Byte -ts 2069 2069 -te $EXT -a_srs EPSG:2154 -burn 1 -l temp-landuse-crop temp-landuse-crop.shp $DIR_SAVE_GT/train_osm.tif
 
 rm -Rf *temp* *tmp*
-cp $DIR_SAVE/../Im_SPOT6.tfw $DIR_SAVE/train_osm.tfw
+cp $DIR_SAVE_GT/../Im_SPOT6.tfw $DIR_SAVE_GT/train_osm.tfw

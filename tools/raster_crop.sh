@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Crop a GTiff raster to the extent of a second GTiff raster
 # raster_crop.sh [big_raster] [small_raster] [out_raster]
 

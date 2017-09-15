@@ -10,15 +10,15 @@ export TILE_SPOT6=$2
 export TILE_S2=appart_rf_50000_L93 # name of S2
 
 # Paths
-export DIR_BASH=~/DeveloppementBase/Scripts/detail # Script directory (where master.sh is located)
+export DIR_BASH=~/DeveloppementBase/Scripts/detail # TODO change to where you save the scripts 
+export DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data # TODO change to where you have your data
 
-export DIR_BASH_TOOLS=~/DeveloppementBase/Scripts/tools # tools directory
-export DIR_EXES=~/DeveloppementBase/Scripts/exes # Executables directory
-export DIR_RAM=/home/cyrilwendl/Documents/tmp # Temporary directory for work in RAM
-export DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6 # target directory to save S2 and SPOT6 probabilities of tile
+export DIR_SAVE=$DIR_DATA/../detail/im_$TILE_SPOT6 # target directory to save S2 and SPOT6 probabilities of tile
+export DIR_BASH_TOOLS=$DIR_BASH/tools # tools directory
+export DIR_EXES=$DIR_BASH/exes # Executables directory
+export DIR_RAM=$DIR_SAVE/tmp # Temporary directory for work in RAM
 
 # Data
-export DIR_DATA=/media/cyrilwendl/15BA65E227EC1B23/$REGION/data
 export DIR_PROBA_SPOT6=$DIR_DATA/SPOT6_$REGION/proba/test_$TILE_SPOT6/classification_results/preds # probability SPOT6
 export DIR_PROBA_S2=$DIR_DATA/S2_$REGION # probability S2
 export DIR_GT=$DIR_DATA/GT/BDTOPO # Grond truth directory
@@ -66,10 +66,10 @@ echo ""; echo "${bold}VIII. EVALUATION ${normal}"
 bash $DIR_BASH/eval.sh AA FBat # params (d) (AA) (OA) (Fmoy) (K)
 
 echo ""; echo "${bold}IX. URBAN FOOTPRINT ${normal}" 
-bash $DIR_BASH/../binary/master.sh $REGION $TILE_SPOT6
+bash $DIR_BASH/../detail_binary/master.sh $REGION $TILE_SPOT6
 
 echo ""; echo "${bold}X. BINARY GROUND TRUTH ${normal}" 
-bash $DIR_BASH/gt_master.sh $REGION $TILE_SPOT6
+bash $DIR_BASH/../detail_binary/gt_master.sh $REGION $TILE_SPOT6
 
 #bash $DIR_BASH/binary.sh $TILE_SPOT6
 #bash $DIR_BASH/eval_bin.sh $TILE_SPOT6 AA bat
