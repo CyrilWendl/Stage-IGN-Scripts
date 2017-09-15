@@ -3,6 +3,7 @@ A series of scripts to produce the artificialized area using fusion and regulati
 
 ## Files Structure
 Files marked as _optional_ can be outcommented in the files marked as **master files** according to the user needs. Scripts needs to be called on the command line as `bash [scriptname].sh [option_1] [option_2] ... [option_n]`
+
 ### 1. Main code: per-tile (saved in `[region]/im_[tile_number]/`)
 #### 1.1 Fusion and Regularization
 **`/detail/master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Options are `[region]`=finistere|gironde, `[tile]`= a valid tile number. Calls the following scripts:
@@ -55,9 +56,12 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile num
 
 ### 3. Tools
 **`/Sentinel-2/`**: initial classification of Sentinel-2 image using RF
+- `sentinel-2-resize.sh`: Resizing of bands 5, 6, 7, 8A, 11, 12 to 10m
+- `sentinel-2-gt.sh`: Extract GT for model training within Sentinel-2 image area
+- `sentinel-2-classif.sh`: Model and classification of Sentinel-2 image series
 
 **`/tools/`**: various generic scripts (gdal, etc.)
-- `xargs.sh`: parallelize certain script executions
+- `xargs.sh`: Parallelize certain script executions
 - `raster_crop.sh [big_raster] [small_raster] [out_raster]`: Crop a GTiff raster to the extent of a second GTiff raster
 - `resize_crop_raster.sh [big_raster] [small_raster] [out_raster]`: Crop resize a GTiff raster to the extent and resolution of a second GTiff raster
 - `resize_crop_raster.sh [raster_to_resize] [raster] [out_raster]`: Resize a GTiff raster to resolution of a second GTiff raster
@@ -65,7 +69,7 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile num
 - `raster_extent.py`: Get the extent (xmin ymin xmax ymax) coordinates for a given raster.
 - `overlapping_tiles.sh [region]`: Get the tile names of all SPOT-6 tiles which overlap with the Sentinel-2 classification, output classification extents to `$DIR_DATA/extent/`.
 
-**`/exes/`**: executables (need dependencies to work)
+**`/exes/`**: executables (need dependencies to work), usage of executables documented in `documentation.odt`
 
 **`/QGIS/`**: scripts for visualization of results of `/detail/master.sh`
 - `QGIS-classif.py`: load ground truth, initial classification, fusion and regularization results
@@ -77,9 +81,11 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile num
 - `report_bati_dist.sh`: get figure of building distances in report
 - `report-txt-to-tex.sh`: format accuracy measures as LaTeX table
 - `report-txt-to-tex-eval-bin.sh [region]`: format binary accuracy measures as LaTeX table
-- `plot_pixelProbas.py` output a 4\*4 plot of probability values before and after weighting
+- `plot_pixelProbas.py` output a PDF with a 4\*4 plot of probability values before and after weighting at a certain coordinate within a tile
 
-## System Requirements
+**`documentation.odt`**: Documentation of executables developted at the MATIS
+
+# System Requirements
 The code was developed and tested on the following machine:
 - OS: Ubuntu 16.04 LTS 64-bit
 - Processor: Intel® Xeon(R) CPU E5-2665 0 @ 2.40GHz × 16 cores
@@ -87,8 +93,10 @@ The code was developed and tested on the following machine:
 - RAM: 8 GB
 - Storage: 500 GB HDD
 
-## Supervisors
-- Arnaud Le-Bris, IGN, Matis
-- Nesrine Chehata, IGN, Matis
+# Supervisors
+- Arnaud Le-Bris, IGN, MATIS
+- Nesrine Chehata, IGN, MATIS
 - Frank de Morsier, EPFL
 - Anne Le-Puissant, LIVE, Université de Strassbourg
+
+Contact: [mailto:cyril.wendl@epfl.ch](Cyril Wendl)
