@@ -13,9 +13,15 @@ Files marked as _optional_ can be outcommented in the files marked as **master f
 - `classify.sh`: Produce label images of initial classification and fusion
 - _optional_ `fusion_classification.sh`: fusion by classification (rf, svmt2 and svmt0), requires having calculated classification models using `fusion_classification_model.sh [region]`
 - `regularize.sh [method]`: Regularize using one of the fusion methods (results in `/im_[tile_number]/Fusion_all_weighted`).
+- _optional_ `regularize-crop.sh`: same as `regularize.sh` but with a crop window (for trying various parameters in small zone)
 - `eval.sh [options]`: Evaluate all classifications. 
 - _optional_ `../detail_binary/master.sh [region] [tile number]`: execute main script for artificialized area (explained below)
 - _optional_ `../detail_binary/gt_master.sh [region] [tile number]`: execute main script for obtaining artificialized area ground truth (explained below)
+
+Other scripts in `/detail/`:
+- `eval_all_zones.sh [region]`: evaluation of several tiles
+- `fusion_classification_model.sh [region]`: train RF, SVM t0 and SVM t2 classification models based on the ground truth of several tiles for fusion by classification 
+
 
 #### 1.2 Artificialized Area
 **`/detail_binary/master.sh [region] [tile number]`**: binary fusion and regulation for artificialized area on tiles produced by _detail_/`master.sh`, all results saved in `$DIR_SAVE/im_[tile number]/Binary`
