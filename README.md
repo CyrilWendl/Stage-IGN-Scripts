@@ -3,7 +3,8 @@ A series of scripts for fusion of two classifications probabilities.
 Folder structure of required files in folder-structure.txt
 ## Files Structure
 Files marked as _optional_ can be outcommented in the files marked as **master files** according to the user needs. Scripts needs to be called on the command line as `bash [scriptname].sh [option_1] [option_2] ... [option_n]`
-### Main code: per-tile (`[region]/im_[tile_number]/`)
+### 1. Main code: per-tile (saved in `[region]/im_[tile_number]/`)
+#### 1.1 Fusion and Regularization
 **detail/`master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Options are `[region]`=finistere|gironde, `[tile]`= a valid tile number. Calls the following scripts:
 - `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder 
 - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/im_[tile_number]/` (working in RAM for speed, needs sudo permissions)
@@ -16,6 +17,7 @@ Files marked as _optional_ can be outcommented in the files marked as **master f
 - _optional_ `../detail_binary/master.sh [region] [tile number]`: execute main script for artificialized area (explained below)
 - _optional_ `../detail_binary/gt_master.sh [region] [tile number]`: execute main script for obtaining artificialized area ground truth (explained below)
 
+#### 1.2 Artificialized Area
 **detail_binary/`master.sh [region] [tile number]`**: binary fusion and regulation for artificialized area on tiles produced by _detail_/`master.sh`, all results saved in `$DIR_SAVE/im_[tile number]/Binary`
 - `fusion_prep.sh`:  Get binary probabilities from regularization result (distance dilatation) and Sentinel-2 classifier (`/Binary`)
 - `fusion.sh`: Fusion using the Min and Bayes rules (`/Binary/Fusion`)
@@ -31,24 +33,29 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 - `gt_eval_label.sh`: create binary difference maps between all labels in `/im_[tile number]/gt/eval`
 - `gt_eval.sh`: get accuracy measures over all tiles (five for finistere), saved in `/[region]/Eval_bin/eval.txt`
 
-### Main code: several tiles
+### 2. Main Code: Several Tiles
+#### 2.1 Fusion and Regularization
 **all\_tiles/`master.sh [region] [tiles]`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all. Tiles can be obtained by calling `TILES=$(bash tools/overlapping_tiles.sh [region])`. The code works similar to detail/`master.sh` but does everything in main memory and saves the output to the HDD for speed reasons. Accuracy measures are not produced.
 - `fusion_prep.sh`:  Extract SPOT6 and Sentinel-2 probabilities
 - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images
-- `fusion.sh`: Fusion using all fusion schemes, save them to folder `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
-- `classify.sh`: Produce label images of initial classification and fusion
-- _optional_ `fusion_classification`.sh: fusion by classification
-- `regularize.sh [method]`: Regularize using one of the fusion methods (results in `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted`).
-- `eval.sh [options]`: Evaluate all classifications. 
-- _optional_ `../binary/master.sh`: execute main script for artificialized area (explained below)
-- _optional_ `../binary/gt_master.sh`: execute main script for obtaining artificialized area ground truth (explained below)
+- `fusion.sh`: Fusion using the Min and Bayes fusion schemes
+- `classify.sh`: Produce classification labels
+- `regularize.sh [method]`: Regularization using one of the fusion methods
 
-**_binary_all_/`master.sh`**: binary fusion and regulation for artificialized area on all tiles
+#### 2.2 Artificialized Area
+**_binary_all_/`master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tiles
 **_all_gt_/**: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
 
 ### Tools
 _Sentinel-2_: initial classification of Sentinel-2 image using RF
 _tools_/: various generic scripts (gdal, etc.)
+  - `xargs.sh`: parallelize certain script executions
+  - `raster_crop.sh [big_raster] [small_raster] [out_raster]`: Crop a GTiff raster to the extent of a second GTiff raster
+  - `resize_crop_raster.sh [big_raster] [small_raster] [out_raster]`: Crop resize a GTiff raster to the extent and resolution of a second GTiff raster
+  - `resize_crop_raster.sh [raster_to_resize] [raster] [out_raster]`: Resize a GTiff raster to resolution of a second GTiff raster
+  - `gdalminmax.sh [folder]`: Will check the regularization result in a folder and return 1 if the regularization  has converged and 0 otherwise (all labels are the same), using the min/max pixel value info from gdalinfo.
+  - `raster_extent.py`: Get the extent (xmin ymin xmax ymax) coordinates for a given raster.
+  - `overlapping_tiles.sh [region]`: Get the tile names of all SPOT-6 tiles which overlap with the Sentinel-2 classification.
 _exes_/: executables
 _QGIS_/: scripts for visualization of results of `/detail/master.sh`
 _report_/: 
@@ -57,7 +64,8 @@ _report_/:
   - `report_bati_dist.sh`: get figure of building distances in report
   - `report-txt-to-tex.sh`: get figure of building distances in report
   - `report-txt-to-tex-eval-bin.sh [region]`: format accuracy measures as LaTeX table
-  
+  - `plot_pixelProbas.py` output a 4\*4 plot of probability values before and after weighting
+  
 
 
 ## System Requirements
