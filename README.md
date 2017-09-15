@@ -5,18 +5,17 @@ Folder structure of required files in folder-structure.txt
 ## Files Structure
 Files marked as _optional_ can be outcommented in the files marked as **main files** according to the user needs.
 ### Main code: per-tile
-- _detail_/
- - **`master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Calls the following scripts:
-    - `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder /_$DIR_SAVE_/im_`[tile_number]`/
-    - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/$DIR_SAVE/im_[tile_number]/`
-    - `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/_$DIR_SAVE_/im_[tile_number]/`
-    - `fusion.sh`: Fusion using all fusion schemes, save them to folder `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
-    - `classify.sh`: Produce label images of initial classification and fusion
-    - _optional_: `fusion_classification`.sh: fusion by classification
-    - `regularize.sh [method]`: Regularize using one of the fusion methods (results in `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted`).
-    - `eval.sh [options]`: Evaluate all classifications. 
-    - _optional_: `../binary/master.sh`: execute main script for artificialized area (explained below)
-    - _optional_: `../binary/gt_master.sh`: execute main script for obtaining artificialized area ground truth (explained below)
+- _detail_/**`master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Calls the following scripts:
+  - `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder ```/$DIR_SAVE_/im_[tile_number]/```
+  - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/$DIR_SAVE/im_[tile_number]/`
+  - `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/_$DIR_SAVE_/im_[tile_number]/`
+  - `fusion.sh`: Fusion using all fusion schemes, save them to folder `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
+  - `classify.sh`: Produce label images of initial classification and fusion
+  - _optional_ `fusion_classification`.sh: fusion by classification
+  - `regularize.sh [method]`: Regularize using one of the fusion methods (results in `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted`).
+  - `eval.sh [options]`: Evaluate all classifications. 
+  - _optional_ `../binary/master.sh`: execute main script for artificialized area (explained below)
+  - _optional_ `../binary/gt_master.sh`: execute main script for obtaining artificialized area ground truth (explained below)
    
 
 
