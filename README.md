@@ -2,16 +2,44 @@
 A series of scripts for fusion of two classifications probabilities.
 Folder structure of required files in folder-structure.txt
 
-## Files to use
-- _detail_/master.sh: fusion on a tile with all fusion methods, calls:
-  - _binary_/master.sh: binary fusion and regulation for artificialized area on tiles produced by _detail_/master.sh
-  - _tools_/: various generic scripts (gdal, etc.)
-- _all_tiles_/master.sh: fusion of all tiles in main memory, output saved to /\[region\]/all
-  - _binary_all_/master.sh: binary fusion and regulation for artificialized area on all tiles
-	- _all_gt_/: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)  
+## Files Structure
+Files marked as _optional_ can be outcommented in the files marked as **main files** according to the user needs.
+### Main code: per-tile
+- _detail_/
+ - **`master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Calls the following scripts:
+    - `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder /_$DIR_SAVE_/im_`[tile_number]`/
+    - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/$DIR_SAVE/im_[tile_number]/`
+    - `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/_$DIR_SAVE_/im_[tile_number]/`
+    - `fusion.sh`: Fusion using all fusion schemes, save them to folder `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
+    - `classify.sh`: Produce label images of initial classification and fusion
+    - _optional_: `fusion_classification`.sh: fusion by classification
+    - `regularize.sh [method]`: Regularize using one of the fusion methods (results in `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted`).
+    - `eval.sh [options]`: Evaluate all classifications. 
+    - _optional_: `../binary/master.sh`: execute main script for artificialized area (explained below)
+    - _optional_: `../binary/gt_master.sh`: execute main script for obtaining artificialized area ground truth (explained below)
+   
+
+
+- _binary_/
+  - **`master.sh`**: binary fusion and regulation for artificialized area on tiles produced by _detail_/`master.sh`
+
+### Main code: several tiles
+- _all_tiles_/**`master.sh`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all
+- _binary_all_/`master.sh`: binary fusion and regulation for artificialized area on all tiles
+- _all_gt_/: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
+
+### Tools
 - _Sentinel-2_: initial classification of Sentinel-2 image using RF
-- _QGIS_/: scripts for visualization of results of /detail/master.sh
-- _report_/:
+- _tools_/: various generic scripts (gdal, etc.)
+- _exes_/: executables
+- _QGIS_/: scripts for visualization of results of `/detail/master.sh`
+- _report_/: 
+  - `report_images_all_tiles.sh`: create compressed JPEG images of all tiles
+  - `report_images_resize.sh [region] [tile_number]`: get all images for one tile as JPEGs in /`[region]`/im_`[tile_number]`/web
+  - `report_bati_dist.sh`: get figure of building distances in report
+  - `report-txt-to-tex.sh`: get figure of building distances in report
+  - `report-txt-to-tex-eval-bin.sh [region]`: format accuracy measures as LaTeX table
+  
 
 
 ## System Requirements
