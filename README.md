@@ -56,9 +56,8 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 - `resize_crop_raster.sh [raster_to_resize] [raster] [out_raster]`: Resize a GTiff raster to resolution of a second GTiff raster
 - `gdalminmax.sh [folder]`: Will check the regularization result in a folder and return 1 if the regularization  has converged and 0 otherwise (all labels are the same), using the min/max pixel value info from gdalinfo.
 - `raster_extent.py`: Get the extent (xmin ymin xmax ymax) coordinates for a given raster.
-- `overlapping_tiles.sh [region]`: 
-  - Get the tile names of all SPOT-6 tiles which overlap with the Sentinel-2 classification
-  - Output classification extents to `$DIR_DATA/extent/`
+- `overlapping_tiles.sh [region]`: Get the tile names of all SPOT-6 tiles which overlap with the Sentinel-2 classification, output classification extents to `$DIR_DATA/extent/`.
+
 **`/exes/`**: executables (need dependencies to work)
 
 **`/QGIS/`**: scripts for visualization of results of `/detail/master.sh`
@@ -69,10 +68,9 @@ classifications. Requires BDTOPO, OSO and OSM data to be saved in `/im_[tile nu
 - `report_images_all_tiles.andsh`: create compressed JPEG images of all tiles
 - `report_images_resize.sh [region] [tile_number]`: get all images for one tile as JPEGs in /`[region]`/im_`[tile_number]`/web
 - `report_bati_dist.sh`: get figure of building distances in report
-- `report-txt-to-tex.sh`: get figure of building distances in report
-- `report-txt-to-tex-eval-bin.sh [region]`: format accuracy measures as LaTeX table
+- `report-txt-to-tex.sh`: format accuracy measures as LaTeX table
+- `report-txt-to-tex-eval-bin.sh [region]`: format binary accuracy measures as LaTeX table
 - `plot_pixelProbas.py` output a 4\*4 plot of probability values before and after weighting
-  
 
 ## System Requirements
 The code was developed and tested on the following machine
