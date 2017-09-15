@@ -1,29 +1,30 @@
 # Stage-IGN-Scripts
 A series of scripts for fusion of two classifications probabilities.
 Folder structure of required files in folder-structure.txt
-
 ## Files Structure
 Files marked as _optional_ can be outcommented in the files marked as **main files** according to the user needs.
 ### Main code: per-tile
-- _detail_/**`master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Calls the following scripts:
-  - `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder ```/$DIR_SAVE_/im_[tile_number]/```
-  - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/$DIR_SAVE/im_[tile_number]/`
-  - `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/_$DIR_SAVE_/im_[tile_number]/`
-  - `fusion.sh`: Fusion using all fusion schemes, save them to folder `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
-  - `classify.sh`: Produce label images of initial classification and fusion
-  - _optional_ `fusion_classification`.sh: fusion by classification
-  - `regularize.sh [method]`: Regularize using one of the fusion methods (results in `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted`).
-  - `eval.sh [options]`: Evaluate all classifications. 
-  - _optional_ `../binary/master.sh`: execute main script for artificialized area (explained below)
-  - _optional_ `../binary/gt_master.sh`: execute main script for obtaining artificialized area ground truth (explained below)
-   
+**detail/`master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Calls the following scripts:
+- `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder 
+- `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `$DIR_SAVE/im_[tile_number]/`
+- `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/_$DIR_SAVE_/im_[tile_number]/`
+- `fusion.sh`: Fusion using all fusion schemes, save them to folder `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
+- `classify.sh`: Produce label images of initial classification and fusion
+- _optional_ `fusion_classification`.sh: fusion by classification
+- `regularize.sh [method]`: Regularize using one of the fusion methods (results in `/$DIR_SAVE/im_[tile_number]/Fusion_all_weighted`).
+- `eval.sh [options]`: Evaluate all classifications. 
+- _optional_ `../binary/master.sh`: execute main script for artificialized area (explained below)
+- _optional_ `../binary/gt_master.sh`: execute main script for obtaining artificialized area ground truth (explained below)
 
-
-- _binary_/
-  - **`master.sh`**: binary fusion and regulation for artificialized area on tiles produced by _detail_/`master.sh`
+**binary/`master.sh`**: binary fusion and regulation for artificialized area on tiles produced by _detail_/`master.sh`
+- `fusion_prep.sh`:  Get binary probabilities from regularization result (distance dilatation) and Sentinel-2 classifier
+- `fusion.sh`: Fusion using the Min and Bayes rules
+- `classify.sh`: Get class labels for input probabilities and fusion
+- `regularize.sh`: Regularization of fusion input
+- `segmentation.sh`: Refine regularization using segmentation
 
 ### Main code: several tiles
-- _all_tiles_/**`master.sh`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all
+**all\_tiles/`master.sh`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all
 - _binary_all_/`master.sh`: binary fusion and regulation for artificialized area on all tiles
 - _all_gt_/: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
 
