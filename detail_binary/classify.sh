@@ -18,7 +18,7 @@ for DNAME in "$DIR_SAVE" "$DIR_SAVE/Fusion";do
 		methode=${i%.tif}
 		methode=${methode##*/proba_}
 		echo -n "$DIR_EXES/Pleiades Classer $i $DNAME/Classified/classif_$methode.rle; " >> bashtmp.sh
-		echo -n "$DIR_EXES/Legende label2RVB $DIR_SAVE/../tools/legende.txt $DNAME/Classified/classif_$methode.rle $DNAME/Classified/classif_$methode.visu.tif; ">> bashtmp.sh
+		echo -n "$DIR_EXES/Legende label2RVB $DIR_BASH/tools/legende_agg_bin.txt $DNAME/Classified/classif_$methode.rle $DNAME/Classified/classif_$methode.visu.tif; ">> bashtmp.sh
 		echo "cp $DIR_SAVE/proba_S2_urbain.tfw $DNAME/Classified/classif_$methode.visu.tfw" >> bashtmp.sh
 	done 
 done

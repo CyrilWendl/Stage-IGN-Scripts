@@ -11,6 +11,7 @@ export DIR_IN=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_$TILE_SPOT6 #
 
 export DIR_EXES=$DIR_BASH/exes # Executables directory
 export DIR_SAVE=$DIR_IN/Binary
+
 SUBDIR=detail_binary
 
 echo "${bold}I. FUSION PREPARATION${normal}"

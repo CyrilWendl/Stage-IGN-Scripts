@@ -1,7 +1,7 @@
 # produce validity maps for each binary classification and GT pair
 
-mkdir -p $DIR_IM/gt/eval
-cd $DIR_IM/gt/eval
+mkdir -p $DIR_SAVE_GT/eval
+cd $DIR_SAVE_GT/eval
 rm -rf * ../*resized*
 
 for compare in Regul/regul_proba_Fusion_Min_100_1000_100_0_100_70_100_200_0_0_0 Seg/regul_seg_maj_8 Classified/classif_regul_urbain Classified/classif_S2_urbain Fusion/Classified/classif_Fusion_Min Fusion/Classified/classif_Fusion_Bayes ; do

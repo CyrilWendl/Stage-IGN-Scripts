@@ -1,6 +1,6 @@
 # intersection over union: copy masks to folder Eval_bin
-# put all images in one 
 REGION=$1
+
 if [ $REGION = "finistere" ]; then
 	TILES=(41000_30000 39000_40000 39000_42000 41000_40000 41000_42000)
 elif [ $REGION = "gironde" ]; then
@@ -13,7 +13,7 @@ cd $DIR_SAVE
 #rm -Rf $DIR_SAVE/Eval_bin/*
 mkdir -p $DIR_SAVE/Eval_bin
 
-
+# merge all five tiles
 cd $DIR_SAVE/Eval_bin
 for TRAIN in train_bdtopo train_oso train_osm; do
 	FILES=""
@@ -59,13 +59,10 @@ rm -rf eval-bin.txt
 echo "Classif GT F-Score_bat Kappa OA IoU_b"  >> eval-bin.txt
 for CLASSIF in classif_regul_urbain classif_S2_urbain classif_Fusion_Min regul_proba_Fusion_Min_100_1000_100_0_100_70_100_200_0_0_0 regul_seg_maj_8; do
 	for GT in train_bdtopo train_oso train_osm; do
-		# print IU data
-		#echo "$CLASSIF, $GT"
-		#cat $DIR_SAVE/Eval_bin/results/${GT}_new/${CLASSIF}_new/${CLASSIF}_new_IU_Score_1.txt | tail -n 1 |grep -oE "[0-9]*[.][0-9]*"	
-		#continue
-		
+		# Confusion Matrix
 		$DIR_OTB/otbcli_ComputeConfusionMatrix -in $CLASSIF.tif -out CM/${CLASSIF}_$GT.csv -ref raster -ref.raster.in $GT.tif >> CM/${CLASSIF}_$GT.csv
-		echo -n "$CLASSIF $GT "  >> eval-bin.txt
+
+		echo -n "$CLASSIF $GT " >> eval-bin.txt
 		for INFORMATION in "F-score of class \[1\]" "Kappa" "Overall accuracy index"; do
 			echo -n "$(cat CM/${CLASSIF}_$GT.csv | grep "$INFORMATION" |grep -oE "[0-9][.][0-9]*") " >> eval-bin.txt
 		done

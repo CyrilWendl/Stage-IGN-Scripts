@@ -37,6 +37,15 @@ fi
 export bold=$(tput bold)
 export normal=$(tput sgr0)
 
+###
+echo ""; echo "${bold}IX. URBAN FOOTPRINT ${normal}" 
+bash $DIR_BASH/detail_binary/master.sh $REGION $TILE_SPOT6
+
+echo ""; echo "${bold}X. BINARY GROUND TRUTH ${normal}" 
+bash $DIR_BASH/detail_binary/gt_master.sh $REGION $TILE_SPOT6
+exit
+###
+
 echo "${bold}I. FUSION PREPARATION${normal}"
 bash $DIR_BASH/detail/fusion_prep.sh $3 $4 $5 $6 $7 $8 $9 # [redo] [crop] [x y dx dy]
 
