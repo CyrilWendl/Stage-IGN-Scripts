@@ -14,6 +14,10 @@ export DIR_SAVE=$DIR_IN/Binary
 
 SUBDIR=detail_binary
 
+rm -Rf $DIR_SAVE
+mkdir -p $DIR_SAVE
+cd $DIR_SAVE
+
 echo "${bold}I. FUSION PREPARATION${normal}"
 bash $DIR_BASH/$SUBDIR/fusion_prep.sh 2 # create input probabilities
 

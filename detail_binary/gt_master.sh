@@ -15,13 +15,9 @@ export DIR_SAVE_GT=$DIR_IM/gt
 
 export EXTENT=$DIR_IM/proba_SPOT6.tif
 
-#rm -Rf $DIR_SAVE_GT/*
+rm -Rf $DIR_SAVE_GT/*
 mkdir -p $DIR_SAVE_GT
 cd $DIR_SAVE_GT
-
-echo "EVALUATION"
-bash $DIR_BASH/detail_binary/gt_eval_label.sh $REGION
-exit
 
 echo "OSM"
 bash $DIR_BASH/detail_binary/gt_osm.sh
@@ -35,5 +31,5 @@ for gt in osm oso bdtopo bdtopo_original; do
 	Legende label2RVB $DIR_BASH/tools/legende_bin.txt train_$gt.tif train_$gt.visu.tif
 	convert train_$gt.visu.tif train_$gt.jpg
 done
-
-
+echo "EVALUATION"
+bash $DIR_BASH/detail_binary/gt_eval_label.sh $REGION

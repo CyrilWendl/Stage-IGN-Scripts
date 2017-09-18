@@ -1,4 +1,0 @@
-- gdalwarp -s_srs EPSG:32630 -t_srs EPSG:2154 /media/cyrilwendl/15BA65E227EC1B23/finistere/data/S2_finistere/20170525/B2.tif /home/cyrilwendl/Documents/tmp/B2.tif
-- gdalwarp -s_srs EPSG:32630 -t_srs EPSG:2154 /media/cyrilwendl/15BA65E227EC1B23/finistere/data/S2_finistere/20170525/B3.tif /home/cyrilwendl/Documents/tmp/B3.tif
-- gdalwarp -s_srs EPSG:32630 -t_srs EPSG:2154 /media/cyrilwendl/15BA65E227EC1B23/finistere/data/S2_finistere/20170525/B4.tif /home/cyrilwendl/Documents/tmp/B4.tif
-- gdalwarp -s_srs EPSG:32630 -t_srs EPSG:2154 /media/cyrilwendl/15BA65E227EC1B23/finistere/data/S2_finistere/20170525/B8.tif /home/cyrilwendl/Documents/tmp/B8.tif
