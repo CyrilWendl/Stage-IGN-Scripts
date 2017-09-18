@@ -1,9 +1,11 @@
 # Ligne de commande
 ## Rasterisation, Vectorisation
 **ManipVecteur** (contient aide)
+
 Pour rasteriser un fichier vectoriel
 
 _Polygones_
+
 `ManipVecteur LectureGenerale [shape_in].SHP [emprise].ori [out].[tif/rle]`
 ` ManipVecteur LectureBool [shape_in].SHP [emprise].ori [out].[tif/rle] ; `
 Rastériser fiches vecteurs et créer masque pour l’emprise contenue dans emprise.ori.
@@ -11,6 +13,7 @@ Rastériser fiches vecteurs et créer masque pour l’emprise contenue dans empr
 - `LectureBool` : rasteriser shapefile en 0 et 1
 
 _Lignes_
+
 `LecturLignesLargeurBool`, largeur en 3ème argument = colonne du fichier entrée
 
 `ManipVecteur LectureLignesLargeurBool adresse_vecteur [shp| adresse_ori adresse_enregistrement_raster [tif][numero_champ_largeur] [facteur_multiplicatif_largeur]`
@@ -21,8 +24,10 @@ Pour vectoriser un fichier raster :
 
 ## Visualisation, labels
 **Legende** (contient aide)
+
 `Legende RVB2label legende.txt test.tif test_label.tif`
 Crate labels (1, 2, 3...) from classified image, legend.txt:
+
 `[Class name ][Class number ] [RGB values]`
 e.g.,
 `Road 1 255 255 0`
@@ -57,10 +62,12 @@ Le fichier `bati.tif` en sortie contient des flottants (1.0f et 0.0f), pour le c
 Conversion d’un fichier tif au format rle 
 
 **convert_ori** (contient aide)
+
 conversion du système de projection .tfw en .ori (IGN-internal)
 classif_test_41000_30000.visu.tfw > Proba.tfw
 `convert_ori tfw2ori proba.tfw proba.ori`
 `> more proba.ori`
+
 ```
 CARTO
 174825750.000000 6837074250.000000 //left top corner
@@ -70,6 +77,7 @@ CARTO
 ```
 
 `Ech_noif Gaussf [image_in].tif [image_out].g2.tif x y`
+
 `Ech_noif Gaussf Im_SPOT6.tif Im_SPOT6.g2.tif 2 3`
 
 Pour lisser une image (filtre gaussien), `x`=déviation standard (p.ex. 2), `y` = paramètre de traitement des bords (1=noir, 3=mirroir)
@@ -78,7 +86,9 @@ Pour lisser une image (filtre gaussien), `x`=déviation standard (p.ex. 2), `y` 
 **Decoupage**
 
 `Decoupage Fsuperposable [adresse_orientation_orthoimage] [adresse_orientation_image_entrée] [adresse_image_entrée] [adresse_sauvegarde_image_sortie]`
+
 `Decoupage Fsuperposable proba.ori ~/Documents/Classif_Sentinel2_5dates_Finistere/proba_L93.ori ~/Documents/Classif_Sentinel2_5dates_Finistere/proba_L93.tif proba_S2.tif`
+
 Recalcule une image float superposable à l'orthoimage dont l'orientation est donnée en entrée 
 
 Sauvegarder la partie de l’image S2 (`proba_L93.tif`) qui correspond à l’étendue de l’image SPOT6 en (décrite par `proba.ori`) dans `proba_S2.tif`.
@@ -94,22 +104,29 @@ Pour fusionner deux sources de données
 
 # Classification, regions, morphological operators, détection de changement
 **Pleiades** (contient aide)
+
 `Pleiades Classer proba_fusion_DS_MasseSomme.tif classif_fusion_DS_MasseSomme.rle`
+
 Pour classifier (maximum de la probabilité)
 
 `Pleiades Pixels2Regions adresse_masque adresse_enregistrement_imagelabel`
+
 Adresse masque binaire pour sortir une image raster avec des objets de pixels de la même classe adjacentes contenant un même identifiant (16 bit)
 
 `Pleiades Pixels2RegionsInt adresse_masque adresse_enregistrement_imagelabel`
+
 Adresse masque binaire pour sortir une image raster avec des objets de pixels de la même classe adjacentes contenant un même identifiant (32 bit, long format)
 
 `Pleiades DetectionChangementBD bati_classif.tif bati_bd.tif bati_nouveau.tif bati_nouveau.rle bati_detruit.tif bati_detruit.rle 5`
+
 Detecter le changement avec un fichier automatique, 5=taille d’érosion du contour de différence
 
 `Pleiades PriorProb:f:c adresse_mesure xmin Pxmin xmax Pxmax adresse_enregistrement_proba`
+
 Auréole de probabilité autour d'objets (`adresse_image_amorces`) dans en applicant une fonction linéaire allant de Pxmin (valeur) dans xmin (distance) à Pxmax dans xmax.
 
 `Pleiades PriorProbFromAmorces adresse_image_amorces adresse_image_proba_amorces adresse_export_proba_finale [distance_max=200]`
+
 Auréole de probabilité autour d'objets (`adresse_image_amorces`) en calculant la moyenne de leur probabilité d'appartenance à une classe (`adresse_image_proba_amorces`).
 
 ## gdal
@@ -120,10 +137,13 @@ Auréole de probabilité autour d'objets (`adresse_image_amorces`) en calculant 
 Rérarranger des bandes d’un fichier, p.ex. copier la 1ère bande après la 5ème 
 
 `gdal_translate -srcwin 0 1000 1000 1069 $FUSION_PROB.tif $FUSION_PROB\_crop_0_1000.tif`
+
 Découper une image, par les paramètres `[xoffset yoffset xwidth ywidth fichier_in fichier_out]`
 
 **gdal_mergy.py**
+
 `gdal_merge.py -of GTiff -o $FILENAME_REASSEMBLED.tif $FILENAMES_CROP # regularization`
+
 Merge geotiff files (`$_CROPFILENAMES`) in an output file `$FILENAME_REASSEMBLED`
 
 ## Fusion
@@ -158,6 +178,7 @@ Paralléliser des tâches en sauvegardant des commandes dans un fichier `bashtmp
 **Eval** (contient aide)
 
 `Eval [classif_methode.rle] [gt.rle] bm.rle legende.txt cf.txt --Kappa --OA --AA --Fscore_moy`
+
 Evaluer la classification par rapport à un fichier de vérité de terrain (`gt.rle`), save image of well / badly classified pixels in `bm.rle`, accuracy measures in `cf.txt`.
 
 ## Segmentation
@@ -165,6 +186,7 @@ Evaluer la classification par rapport à un fichier de vérité de terrain (`gt.
 **pyram** (contient aide)
 
 `praym param.txt`
+
 Faire la segmentation avec un fichier txt :
 ```
 IMAGEFILE nom-du-fichier-image
@@ -178,4 +200,5 @@ CUTS valeur nom-du-fichier
 [CUTS valeur nom-du-fichier]
 ```
 **sxs**
+
 Outil graphique pour visualiser la segmentation 
