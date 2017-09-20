@@ -7,7 +7,7 @@ Files marked as _optional_ can be outcommented in the files marked as **master f
 ### 1. Main code: per-tile (saved in `[region]/im_[tile_number]/`)
 #### 1.1 Fusion and Regularization
 **`/detail/master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Options are `[region]` = finistere|gironde, `[tile]` = a valid tile number. Calls the following scripts:
-- `fusion_prep.sh`:  Extract SPOT6 and Sentinel-2 membership probabilities, save them to `/im_[tile_number]/`
+- `fusion_prep.sh`:  Extract SPOT-6 and Sentinel-2 membership probabilities, save them to `/im_[tile_number]/`
 - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/im_[tile_number]/` (working in RAM for speed, needs sudo permissions)
 - `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/im_[tile_number]/`
 - `fusion.sh`: Fusion using all fusion schemes, save them to folder `/im_[tile_number]/` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
@@ -45,14 +45,14 @@ _not used_ `bdparcellaire.sh`: extract BD parcellaire for majority voting in seg
 ### 2. Main Code: Several Tiles  (saved in `[region]/all/`)
 #### 2.1 Fusion and Regularization
 **`/all_tiles/master.sh [region] [tiles]`**: fusion of all tiles covered by both classifiers in main memory, output saved to /`[region]`/all. Tiles can be obtained by calling `TILES=$(bash tools/overlapping_tiles.sh [region])`. The code works similar to detail/`master.sh` but does everything in main memory and saves the output to the HDD for speed reasons. Accuracy measures are not produced.
-- `fusion_prep.sh`:  Extract SPOT6 and Sentinel-2 probabilities
+- `fusion_prep.sh`:  Extract SPOT-6 and Sentinel-2 probabilities
 - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images
 - `fusion.sh`: Fusion using the Min and Bayes fusion schemes
 - `classify.sh`: Produce classification labels
 - `regularize.sh [method]`: Regularization using one of the fusion methods
 
 #### 2.2 Artificialized Area
-**`/all_binary/master.sh [region] [tile SPOT6]`**: binary fusion, regulation and segmentation for artificialized area on all tilesall
+**`/all_binary/master.sh [region] [tile SPOT-6]`**: binary fusion, regulation and segmentation for artificialized area on all tilesall
 
 **`/all_gt/gt_master.sh`**: get BDTOPO ground truths and binary ground truths for entire covered zone (Finistère only)
 
