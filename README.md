@@ -7,7 +7,7 @@ Files marked as _optional_ can be outcommented in the files marked as **master f
 ### 1. Main code: per-tile (saved in `[region]/im_[tile_number]/`)
 #### 1.1 Fusion and Regularization
 **`/detail/master.sh [region] [tile_number]`**: Fusion and regulation in the extent of a SPOT-6 tile with all fusion methods. Parameters to set are `$DIR_DATA`, the input data path and `$DIR_BASH`, the path where the scripts are saved. Options are `[region]`=finistere|gironde, `[tile]`= a valid tile number. Calls the following scripts:
-- `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder 
+- `fusion_prep.sh`:  Extract SPOT6 probability, extract and crop Sentinel-2 probability save them to folder `/im_[tile_number]/`
 - `copy_images.sh`: Extract SPOT-6 and Sentinel-2 original images, save them to  folder `/im_[tile_number]/` (working in RAM for speed, needs sudo permissions)
 - `rasterisation_gt.sh`: Rasterize ground truth and add a sixth buffer class, save it to  folder `/im_[tile_number]/`
 - `fusion.sh`: Fusion using all fusion schemes, save them to folder `/im_[tile_number]/` for weighted fusion and `/$DIR_SAVE/im_[tile_number]/Fusion_all` for non-weighted fusion
@@ -97,7 +97,7 @@ The code was developed and tested on the following machine:
 
 # Supervisors
 - Arnaud Le-Bris, IGN, MATIS
-- Nesrine Chehata, IGN, MATIS
+- Nesrine Chehata, EA Géoressources & Environnement, Université Bordeaux Montaigne / Bordeaux INP
 - Frank de Morsier, EPFL
 - Anne Le-Puissant, LIVE, Université de Strassbourg
 
