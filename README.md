@@ -85,7 +85,7 @@ _not used_ `bdparcellaire.sh`: extract BD parcellaire for majority voting in seg
 - `report-txt-to-tex-eval-bin.sh [region]`: format binary accuracy measures as LaTeX table
 - `plot_pixelProbas.py` output a PDF with a 4\*4 plot of probability values before and after weighting at a certain coordinate within a tile
 
-**`documentation.odt`**: Documentation of executables developted at the MATIS
+**`documentation.md`**: Documentation of MATIS executables
 
 # System Requirements
 The code was developed and tested on the following machine:
