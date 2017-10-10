@@ -10,7 +10,7 @@ Y=$4
 DX=$5
 DY=$6
 
-DIR_SAVE=/media/cyrilwendl/15BA65E227EC1B23/$REGION/detail/im_${TILE_SPOT6} # target directory to save probability
+DIR_SAVE=/Users/cyrilwendl/Documents/Stages/IGN/Data/$REGION/detail/im_${TILE_SPOT6} # target directory to save probability
 cd $DIR_SAVE
 rm -rf web/*
 mkdir -p web
@@ -31,13 +31,13 @@ convert $DIR_SAVE/Im_SPOT6.jpg -fill red -stroke red -strokewidth 3 -draw "fill-
 
 
 # artificialized area steps
-for filename in 1_bati 2_dist 3_bati-dist 4_proba_regul_urbain; do
-	convert $DIR_SAVE/Binary/Temp/binary_$filename.jpg -resize 1000X1000 $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_binary_$filename.jpg
+#for filename in 1_bati 2_dist 3_bati-dist 4_proba_regul_urbain; do
+#	convert $DIR_SAVE/Binary/Temp/binary_$filename.jpg -resize 1000X1000 $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_binary_$filename.jpg
 	#overlay map
-	composite -blend 20% $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_Im_SPOT6_resized.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_binary_$filename.jpg overlay_${REGION}_T${TILE_SPOT6}_binary_$filename.jpg
-	mv overlay_${REGION}_T${TILE_SPOT6}_binary_$filename.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_binary_$filename.jpg
-done
-exit ###
+#	composite -blend 20% $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_Im_SPOT6_resized.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_binary_$filename.jpg overlay_${REGION}_T${TILE_SPOT6}_binary_$filename.jpg
+#	mv overlay_${REGION}_T${TILE_SPOT6}_binary_$filename.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_binary_$filename.jpg
+#done
+#exit ###
 
 # 5 class classifications
 for subdir in "./Classified" "./Fusion_all/Classified" "./Fusion_all_weighted/Classified" "./Regul" ; do
@@ -48,7 +48,7 @@ for subdir in "./Classified" "./Fusion_all/Classified" "./Fusion_all_weighted/Cl
 		convert $i -crop ${DX}"X"${DY}+${X}+${Y}  $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_${i%.visu.tif}.jpg  # copy and crop original image [widthXXwidthY+startposx+startposy]
 		
 		# comment out the following lines to not show background
-		composite -blend 5% $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_Im_SPOT6_crop.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_${i%.visu.tif}.jpg overlay_T${TILE_SPOT6}_${i%.visu.tif}.jpg
+		composite -blend 50% $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_Im_SPOT6_crop.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_${i%.visu.tif}.jpg overlay_T${TILE_SPOT6}_${i%.visu.tif}.jpg
 		mv overlay_T${TILE_SPOT6}_${i%.visu.tif}.jpg $DIR_SAVE/web/${REGION}_T${TILE_SPOT6}_${i%.visu.tif}.jpg
 	done
 done
